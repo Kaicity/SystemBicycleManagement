@@ -48,6 +48,8 @@ public class HomePage {
 		frame.setBounds(100, 100, 840, 453);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(frame);
+
 		
 		Panel panel = new Panel();
 		panel.setBackground(Color.ORANGE);
@@ -107,7 +109,10 @@ public class HomePage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				Bicycle bic = new Bicycle();
+				bic.frame.setVisible(true);
 				
+				frame.setVisible(false);
 			}
 		});
 		

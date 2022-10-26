@@ -43,6 +43,7 @@ public class Rent {
 					window.frmThu.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
 				}
 			}
 		});

@@ -29,18 +29,18 @@ public class Login {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.frmLogin.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Login window = new Login();
+//					window.frmLogin.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -89,8 +89,23 @@ public class Login {
 				
 				String user = tfUserLogin.getText();
 				String pass = String.valueOf(tfPass.getPassword());
-				if( "admin".equals(user) && "123".equals(pass)) {
+				if(user.trim().equals("") || pass.trim().equals("")){
+					JOptionPane.showMessageDialog(frmLogin,
+						    "Chưa nhập đầy đủ thông tin",
+						    "Thông báo",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+				else if( "admin".equals(user) && "123".equals(pass)) {
 					HomePage home = new HomePage();
+					home.frame.setVisible(true);
+					
+					frmLogin.setVisible(false);
+					
+				}
+				else if("user".equals(user) && "1".equals(pass)) {
+	 				UserHomePage home = new UserHomePage();
 					home.frame.setVisible(true);
 					
 					frmLogin.setVisible(false);

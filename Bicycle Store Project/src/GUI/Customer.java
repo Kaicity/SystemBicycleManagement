@@ -56,7 +56,7 @@ public class Customer {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 867, 491);
+		frame.setBounds(100, 100, 980, 491);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -119,8 +119,9 @@ public class Customer {
 		
 		
 		
+		
 		JScrollPane sc = new JScrollPane(tableCus);
-		sc.setBounds(385, 74, 458, 266);
+		sc.setBounds(385, 74, 571, 266);
 		frame.getContentPane().add(sc);
 		
 		modelCus.addRow(new Object[] {
@@ -164,7 +165,7 @@ public class Customer {
 				frame.setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(754, 379, 89, 30);
+		btnNewButton.setBounds(867, 379, 89, 30);
 		frame.getContentPane().add(btnNewButton);
 	}
 }
