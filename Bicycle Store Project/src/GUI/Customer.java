@@ -56,11 +56,11 @@ public class Customer {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 980, 491);
+		frame.setBounds(100, 100, 853, 432);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Khách hàng ID");
+		JLabel lblNewLabel = new JLabel("CCCD/CMND");
 		lblNewLabel.setBounds(67, 75, 92, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
@@ -72,12 +72,7 @@ public class Customer {
 		lblNewLabel_2.setBounds(67, 203, 49, 14);
 		frame.getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Địa chỉ");
-		lblNewLabel_3.setBounds(67, 260, 49, 14);
-		frame.getContentPane().add(lblNewLabel_3);
-		
 		tfCusID = new JTextField();
-		tfCusID.setEditable(false);
 		tfCusID.setBounds(172, 72, 191, 20);
 		frame.getContentPane().add(tfCusID);
 		tfCusID.setColumns(10);
@@ -101,10 +96,6 @@ public class Customer {
 		textArea.setBounds(197, 275, -30, 22);
 		frame.getContentPane().add(textArea);
 		
-		JTextArea tfCusAddress = new JTextArea();
-		tfCusAddress.setBounds(172, 255, 191, 85);
-		frame.getContentPane().add(tfCusAddress);
-		
 		tableCus = new JTable();
 		tableCus.setLayout(null);
 		frame.getContentPane().add(tableCus);
@@ -121,7 +112,7 @@ public class Customer {
 		
 		
 		JScrollPane sc = new JScrollPane(tableCus);
-		sc.setBounds(385, 74, 571, 266);
+		sc.setBounds(385, 74, 437, 266);
 		frame.getContentPane().add(sc);
 		
 		modelCus.addRow(new Object[] {
@@ -131,19 +122,19 @@ public class Customer {
 		
 		
 		JButton btnCusAdd = new JButton("Thêm");
-		btnCusAdd.setBounds(67, 379, 89, 30);
+		btnCusAdd.setBounds(70, 267, 89, 30);
 		frame.getContentPane().add(btnCusAdd);
 		
 		JButton btnCusEdit = new JButton("Sửa ");
-		btnCusEdit.setBounds(185, 379, 89, 30);
+		btnCusEdit.setBounds(172, 267, 89, 30);
 		frame.getContentPane().add(btnCusEdit);
 		
 		JButton btnCusRemove = new JButton("Xóa");
-		btnCusRemove.setBounds(305, 379, 89, 30);
+		btnCusRemove.setBounds(70, 310, 89, 30);
 		frame.getContentPane().add(btnCusRemove);
 		
 		JButton btnCusReset = new JButton("Reset");
-		btnCusReset.setBounds(432, 379, 89, 30);
+		btnCusReset.setBounds(172, 310, 89, 30);
 		frame.getContentPane().add(btnCusReset);
 		
 		tfCusSeach = new JTextField();
@@ -165,7 +156,7 @@ public class Customer {
 				frame.setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(867, 379, 89, 30);
+		btnNewButton.setBounds(733, 351, 89, 30);
 		frame.getContentPane().add(btnNewButton);
 	}
 }

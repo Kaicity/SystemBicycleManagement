@@ -17,6 +17,8 @@ public class HomePage {
 
 	public JFrame frame;
 	JButton btnMenuRent, btnMenuReturn, btnMenuCus, btnMenuBicycle, btnMenuStore, btnMenuLogout;
+	public JLabel textAdmin;
+	private JLabel lblNewLabel_2;
 	/**
 	 * Launch the application.
 	 */
@@ -67,7 +69,17 @@ public class HomePage {
 		lblNewLabel_1.setBounds(54, 196, 195, 42);
 		panel.add(lblNewLabel_1);
 		
-		btnMenuRent = new JButton("Thuê xe");
+		textAdmin = new JLabel("");
+		textAdmin.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		textAdmin.setBounds(101, 75, 113, 34);
+		panel.add(textAdmin);
+		
+		lblNewLabel_2 = new JLabel("Xin chào");
+		lblNewLabel_2.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblNewLabel_2.setBounds(91, 30, 123, 42);
+		panel.add(lblNewLabel_2);
+		
+		btnMenuRent = new JButton("Quản lý thuê xe ");
 		btnMenuRent.setBackground(Color.WHITE);
 		btnMenuRent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnMenuRent.setBounds(306, 11, 252, 125);
@@ -126,7 +138,9 @@ public class HomePage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				Store st = new Store();
+				st.frame.setVisible(true);
+				frame.setVisible(false);
 			}
 		});
 		

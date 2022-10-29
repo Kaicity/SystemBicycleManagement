@@ -1,9 +1,9 @@
 package GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Panel;
@@ -45,7 +45,7 @@ public class UserHomePage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 840, 376);
+		frame.setBounds(100, 100, 840, 342);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(frame);
@@ -53,7 +53,7 @@ public class UserHomePage {
 		
 		Panel panel = new Panel();
 		panel.setBackground(Color.ORANGE);
-		panel.setBounds(10, 10, 290, 317);
+		panel.setBounds(10, 10, 290, 280);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -85,24 +85,42 @@ public class UserHomePage {
 			}
 		});
 		
-		btnMenuLogout = new JButton("Đăng xuất");
+		btnMenuLogout = new JButton("Quản lý chung");
 		btnMenuLogout.setBackground(Color.WHITE);
 		btnMenuLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login log = new Login();
-				log.frmLogin.setVisible(true);
 				
-				frame.setVisible(false);
+				int result = JOptionPane.showConfirmDialog(frame, "Chức năng quản lý chỉ sử dụng cho nhân viên",
+						"Thông báo",JOptionPane.YES_NO_OPTION ,JOptionPane.INFORMATION_MESSAGE);
+				if(result == JOptionPane.YES_OPTION) {
+					Login log = new Login();
+					log.frmLogin.setVisible(true);
+					
+					frame.setVisible(false);
+				}
+				
+				
 			}
 		});
 		btnMenuLogout.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnMenuLogout.setBounds(614, 185, 202, 142);
+		btnMenuLogout.setBounds(497, 185, 181, 105);
 		frame.getContentPane().add(btnMenuLogout);
 		
-		JButton btnLchSThu = new JButton("Lịch sử thuê");
+		JButton btnLchSThu = new JButton("Lịch sử giao dịch");
 		btnLchSThu.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnLchSThu.setBackground(Color.WHITE);
-		btnLchSThu.setBounds(306, 185, 298, 142);
+		btnLchSThu.setBounds(306, 185, 181, 105);
 		frame.getContentPane().add(btnLchSThu);
+		
+		JButton btnThoatUserHome = new JButton("Thoát");
+		btnThoatUserHome.setBackground(Color.WHITE);
+		btnThoatUserHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnThoatUserHome.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnThoatUserHome.setBounds(688, 185, 128, 105);
+		frame.getContentPane().add(btnThoatUserHome);
 	}
 }

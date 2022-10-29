@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-16.0.2">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Manage Travel Tour Project/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="/Manage Travel Tour Project/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="/Manage Travel Tour Project/jgoodies-forms-1.8.0.jar" sourcepath="/Manage Travel Tour Project/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="/Manage Travel Tour Project/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="/Manage Travel Tour Project/miglayout15-swing.jar" sourcepath="/Manage Travel Tour Project/miglayout-src.zip"/>
+	<classpathentry kind="lib" path="/Manage Travel Tour Project/miglayout-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -7,8 +7,8 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login window = new Login();
-					window.frmLogin.setVisible(true);
+					UserHomePage openPage = new UserHomePage();
+					openPage.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

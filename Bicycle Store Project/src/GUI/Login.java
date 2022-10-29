@@ -100,14 +100,7 @@ public class Login {
 				else if( "admin".equals(user) && "123".equals(pass)) {
 					HomePage home = new HomePage();
 					home.frame.setVisible(true);
-					
-					frmLogin.setVisible(false);
-					
-				}
-				else if("user".equals(user) && "1".equals(pass)) {
-	 				UserHomePage home = new UserHomePage();
-					home.frame.setVisible(true);
-					
+					home.textAdmin.setText(user);
 					frmLogin.setVisible(false);
 					
 				}
@@ -121,26 +114,27 @@ public class Login {
 				}
 			}
 		});
-		btnLogin.setBounds(301, 165, 106, 29);
+		btnLogin.setBounds(180, 168, 106, 29);
 		frmLogin.getContentPane().add(btnLogin);
-		
-		JButton btnNewButton = new JButton("Đăng ký");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Register re = new Register();
-				re.frame.setVisible(true);
-				
-				frmLogin.setVisible(false);
-			}
-		});
-		btnNewButton.setBounds(180, 165, 94, 29);
-		frmLogin.getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel_2 = new JLabel("Hệ thống thuê xe đạp ");
 		lblNewLabel_2.setForeground(Color.BLUE);
 		lblNewLabel_2.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		lblNewLabel_2.setBounds(146, 11, 248, 37);
 		frmLogin.getContentPane().add(lblNewLabel_2);
+		
+		JButton btnExitLogin = new JButton("Thoát");
+		btnExitLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			 frmLogin.setVisible(false);
+			 
+			 UserHomePage back = new UserHomePage();
+			 back.frame.setVisible(true);
+			 
+			}
+		});
+		btnExitLogin.setBounds(318, 168, 89, 29);
+		frmLogin.getContentPane().add(btnExitLogin);
 		
 		rdMenuLogin = new ButtonGroup();
 		
