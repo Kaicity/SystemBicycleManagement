@@ -21,7 +21,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import com.toedter.calendar.JDateChooser;
+
 
 public class Rent {
 
@@ -173,18 +173,13 @@ public class Rent {
 		lblNewLabel_1_2_1_1.setBounds(10, 324, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(128, 324, 150, 28);
-		frmThu.getContentPane().add(dateChooser);
 		
 		JLabel lblNewLabel_1_2_1_1_1 = new JLabel("Ngày trả");
 		lblNewLabel_1_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_1_1_1.setBounds(10, 381, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(128, 381, 150, 28);
-		frmThu.getContentPane().add(dateChooser_1);
+		
 		
 		eventRent();
 	}
