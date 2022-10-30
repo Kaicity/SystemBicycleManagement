@@ -65,7 +65,7 @@ public class Customer {
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Tên khách hàng");
-		lblNewLabel_1.setBounds(67, 142, 92, 14);
+		lblNewLabel_1.setBounds(67, 136, 92, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("SDT");
@@ -78,7 +78,7 @@ public class Customer {
 		tfCusID.setColumns(10);
 		
 		tfCusName = new JTextField();
-		tfCusName.setBounds(172, 139, 191, 20);
+		tfCusName.setBounds(172, 133, 191, 20);
 		frame.getContentPane().add(tfCusName);
 		tfCusName.setColumns(10);
 		
@@ -138,7 +138,7 @@ public class Customer {
 		frame.getContentPane().add(btnCusReset);
 		
 		tfCusSeach = new JTextField();
-		tfCusSeach.setBackground(Color.LIGHT_GRAY);
+		tfCusSeach.setBackground(Color.WHITE);
 		tfCusSeach.setBounds(385, 39, 133, 20);
 		frame.getContentPane().add(tfCusSeach);
 		tfCusSeach.setColumns(10);
