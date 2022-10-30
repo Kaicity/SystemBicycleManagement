@@ -1,13 +1,15 @@
 package DTO;
 
 public class Bicycle {
+	private Store st;
     private String id;
     private String type;
     private String name;
     private Double pricePerH;
     private String status;
 
-    public Bicycle(String id, String type, String name, Double pricePerHour, String status) {
+    public Bicycle(Store st, String id, String type, String name, Double pricePerH, String status) {
+    	this.st = st;
         this.id = id;
         this.type = type;
         this.name = name;
@@ -17,8 +19,18 @@ public class Bicycle {
 
     public Bicycle() {
     }
+    
+    
 
-    public String getId() {
+    public Store getSt() {
+		return st;
+	}
+
+	public void setSt(Store st) {
+		this.st = st;
+	}
+
+	public String getId() {
         return id;
     }
 
@@ -42,15 +54,16 @@ public class Bicycle {
         this.name = name;
     }
 
-    public Double getPricePerHour() {
-        return pricePerH;
-    }
+   
+    public Double getPricePerH() {
+		return pricePerH;
+	}
 
-    public void setPricePerHour(Double pricePerHour) {
-        this.pricePerH = pricePerHour;
-    }
+	public void setPricePerH(Double pricePerH) {
+		this.pricePerH = pricePerH;
+	}
 
-    public String getStatus() {
+	public String getStatus() {
         return status;
     }
 
