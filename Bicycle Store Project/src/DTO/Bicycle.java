@@ -4,14 +4,14 @@ public class Bicycle {
     private String id;
     private String type;
     private String name;
-    private Double pricePerDay;
+    private Double pricePerH;
     private String status;
 
     public Bicycle(String id, String type, String name, Double pricePerHour, String status) {
         this.id = id;
         this.type = type;
         this.name = name;
-        this.pricePerDay = pricePerDay;
+        this.pricePerH = pricePerH;
         this.status = status;
     }
 
@@ -43,11 +43,11 @@ public class Bicycle {
     }
 
     public Double getPricePerHour() {
-        return pricePerDay;
+        return pricePerH;
     }
 
     public void setPricePerHour(Double pricePerHour) {
-        this.pricePerDay = pricePerHour;
+        this.pricePerH = pricePerHour;
     }
 
     public String getStatus() {
@@ -57,4 +57,7 @@ public class Bicycle {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    
+    
 }
