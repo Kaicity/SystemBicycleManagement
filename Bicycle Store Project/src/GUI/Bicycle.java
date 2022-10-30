@@ -111,7 +111,7 @@ public class Bicycle {
 		
 		JLabel lblNewLabel_5 = new JLabel("Quản lý xe đạp cho thuê");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_5.setBounds(82, 34, 283, 41);
+		lblNewLabel_5.setBounds(82, 0, 283, 41);
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		table = new JTable();
@@ -128,7 +128,7 @@ public class Bicycle {
 		modelBicycle.addColumn("Giá thuê");
 		
 		JScrollPane sc = new JScrollPane(table);
-		sc.setBounds(385, 107, 571, 211);
+		sc.setBounds(385, 87, 571, 234);
 		frame.getContentPane().add(sc);
 		
 		modelBicycle.addRow(new Object[] {
@@ -136,12 +136,12 @@ public class Bicycle {
 		});
 		
 		seachBicycle = new JTextField();
-		seachBicycle.setBounds(385, 76, 171, 20);
+		seachBicycle.setBounds(385, 60, 171, 20);
 		frame.getContentPane().add(seachBicycle);
 		seachBicycle.setColumns(10);
 		
 		JButton btnSeachBicycle = new JButton("Tìm kiếm ");
-		btnSeachBicycle.setBounds(566, 73, 97, 23);
+		btnSeachBicycle.setBounds(566, 59, 97, 23);
 		frame.getContentPane().add(btnSeachBicycle);
 		
 		JButton btnAddBicycle = new JButton("Thêm");
@@ -163,6 +163,14 @@ public class Bicycle {
 		JButton btnExitBicycle = new JButton("Thoát");
 		btnExitBicycle.setBounds(867, 368, 89, 33);
 		frame.getContentPane().add(btnExitBicycle);
+		
+		JLabel lblCaHng = new JLabel("Cửa hàng");
+		lblCaHng.setBounds(82, 62, 80, 17);
+		frame.getContentPane().add(lblCaHng);
+		
+		JComboBox cbStorebike = new JComboBox();
+		cbStorebike.setBounds(163, 59, 202, 22);
+		frame.getContentPane().add(cbStorebike);
 		btnExitBicycle.addActionListener(new ActionListener() {
 			
 			@Override

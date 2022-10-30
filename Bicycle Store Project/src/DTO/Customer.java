@@ -1,57 +1,42 @@
 package DTO;
 
-public class Customer extends Account {
-    private String id;
+public class Customer {
+    private String cccd;
     private String name;
     private String phone;
-    private String address;
+    
+	public Customer(String cccd, String name, String phone) {
+		this.cccd = cccd;
+		this.name = name;
+		this.phone = phone;
+	}
+	
+	public Customer() {}
 
-    public Customer(String id, String name, String phone, String address){
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-    }
+	public String getCccd() {
+		return cccd;
+	}
 
-    public Customer(String id, String name, String phone, String address, String username, String password){
-        super(username, password);
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-    }
+	public void setCccd(String cccd) {
+		this.cccd = cccd;
+	}
 
-    public Customer() { }
+	public String getName() {
+		return name;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	
+    
 }
