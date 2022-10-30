@@ -88,7 +88,7 @@ public class HomePage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Rent openRent = new Rent();
+				RentBike openRent = new RentBike();
 				openRent.frmThu.setVisible(true);
 				
 				frame.setVisible(false);
@@ -106,7 +106,10 @@ public class HomePage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				ReturnBike returnBike = new ReturnBike();
+				returnBike.frmThu.setVisible(true);
+				
+				frame.setVisible(false);
 				
 			}
 		});

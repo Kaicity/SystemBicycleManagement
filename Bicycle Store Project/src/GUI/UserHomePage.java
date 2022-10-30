@@ -76,7 +76,7 @@ public class UserHomePage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Rent openRent = new Rent();
+				RentBike openRent = new RentBike();
 				openRent.frmThu.setVisible(true);
 				
 				frame.setVisible(false);
