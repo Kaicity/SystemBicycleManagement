@@ -26,7 +26,7 @@ public class BicycleDAL {
 					Bicycle bike = new Bicycle();
 					bike.setId(rs.getString("id"));
 					bike.setName(rs.getString("tenxedap"));
-					bike.setPricePerHour(rs.getDouble("giathue"));
+					bike.setPricePerH(rs.getDouble("giathue"));
 					bike.setStatus(rs.getString("tinhtrang"));
 					bike.setType(rs.getString("loaixe"));
 					
@@ -57,7 +57,7 @@ public class BicycleDAL {
 				pr.setString(2, bike.getName());
 				pr.setString(3, bike.getType());
 				pr.setString(4, bike.getStatus());
-				pr.setDouble(5, bike.getPricePerHour());
+				pr.setDouble(5, bike.getPricePerH());
 				
 				if(pr.executeUpdate() >= 1) {
 					result = true;
@@ -130,7 +130,7 @@ public class BicycleDAL {
 					object.setName(rs.getString("tenxedap"));
 					object.setType(rs.getString("loaixe"));
 					object.setStatus(rs.getString("trangthai"));
-					object.setPricePerHour(rs.getDouble("giathue"));
+					object.setPricePerH(rs.getDouble("giathue"));
 				}
 				
 			} catch (SQLException e) {

@@ -44,20 +44,19 @@ public class StoreDAL {
 		return list;
 	}
 	
-	//Them xe dap
-	public Boolean addBicycle(Bicycle bike) {
+	//Them cua hang
+	public Boolean addBicycle(Store st) {
 		Boolean result = false;
 		if(DB.openConection()) {
-			String query = "INSERT INTO bicycle VALUES(?,?,?,?,?)";
+			String query = "INSERT INTO store VALUES(?,?,?,?)";
 			PreparedStatement pr;
 			
 			try {
 				pr = DB.con.prepareStatement(query);
-				pr.setString(1, bike.getId());
-				pr.setString(2, bike.getName());
-				pr.setString(3, bike.getType());
-				pr.setString(4, bike.getStatus());
-				pr.setDouble(5, bike.getPricePerHour());
+				pr.setString(1, st.getId());
+				pr.setString(2, st.getName());
+				pr.setString(3, st.getAddress());
+				pr.setString(4, st.getTax());
 				
 				if(pr.executeUpdate() >= 1) {
 					result = true;
@@ -73,15 +72,15 @@ public class StoreDAL {
 	}
 	
 	//kiem tra id id xe dap
-	public Boolean checkId(String bikeId) {
+	public Boolean checkId(String id) {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM bicycle WHERE id =?";
+			String query = "SELECT * FROM store WHERE id =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
-				pr.setString(1, bikeId);
+				pr.setString(1, id);
 				
 				ResultSet rs = pr.executeQuery();
 				result = rs.next();
@@ -97,7 +96,7 @@ public class StoreDAL {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "DELETE FROM bicycle WHERE id =?";
+			String query = "DELETE FROM store WHERE id =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
@@ -118,7 +117,7 @@ public class StoreDAL {
 		Boolean result = false;
 		Bicycle object = new Bicycle();
 		if(DB.openConection()) {
-			String query = "SELECT * FROM bicycle WHERE id =?";
+			String query = "SELECT * FROM store WHERE id =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
@@ -127,10 +126,9 @@ public class StoreDAL {
 				ResultSet rs = pr.executeQuery();
 				while(rs.next()) {
 					object.setId(rs.getString("id"));
-					object.setName(rs.getString("tenxedap"));
-					object.setType(rs.getString("loaixe"));
-					object.setStatus(rs.getString("trangthai"));
-					object.setPricePerHour(rs.getDouble("giathue"));
+					object.setName(rs.getString("tencuahang"));
+					object.setType(rs.getString("diachi"));
+					object.setStatus(rs.getString("tax"));
 				}
 				
 			} catch (SQLException e) {

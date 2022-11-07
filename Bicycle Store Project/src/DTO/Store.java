@@ -2,20 +2,18 @@ package DTO;
 
 public class Store {
     private String id;
+    private String name;
     private String address;
-    private String phone;
-    private String fax;
+    private String tax;
+	public Store(String id, String name, String address, String tax) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.tax = tax;
+	}
 
-    public Store(String id, String address, String phone, String fax) {
-        this.id = id;
-        this.address = address;
-        this.phone = phone;
-        this.fax = fax;
-    }
-
-    public Store() {
-       
-    }
+    public Store() {}
 
 	public String getId() {
 		return id;
@@ -23,6 +21,14 @@ public class Store {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAddress() {
@@ -33,21 +39,14 @@ public class Store {
 		this.address = address;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getTax() {
+		return tax;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setTax(String tax) {
+		this.tax = tax;
 	}
-
-	public String getFax() {
-		return fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
+    
     
     
 }
