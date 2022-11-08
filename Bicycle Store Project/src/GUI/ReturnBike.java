@@ -1,4 +1,4 @@
-package GUI;
+package src.GUI;
 
 import java.awt.EventQueue;
 
@@ -71,7 +71,7 @@ public class ReturnBike {
 		JLabel lblNewLabel = new JLabel("Trả xe");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(43, 11, 686, 35);
+		lblNewLabel.setBounds(10, 11, 895, 35);
 		frmThu.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Mã cửa hàng");
@@ -79,7 +79,7 @@ public class ReturnBike {
 		lblNewLabel_1_1.setBounds(10, 138, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2_1 = new JLabel("Cửa hàng");
+		JLabel lblNewLabel_1_2_1 = new JLabel("Trả Cửa hàng");
 		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_1.setBounds(10, 199, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1);
