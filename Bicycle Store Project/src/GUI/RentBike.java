@@ -64,7 +64,7 @@ public class RentBike {
 	private void initialize() {
 		frmThu = new JFrame();
 		frmThu.setTitle("THUÊ");
-		frmThu.setBounds(100, 100, 929, 496);
+		frmThu.setBounds(100, 100, 929, 516);
 		frmThu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThu.getContentPane().setLayout(null);
 		
@@ -112,7 +112,7 @@ public class RentBike {
 	
 		
 		JScrollPane sp1 = new JScrollPane(table);
-		sp1.setBounds(299, 81, 606, 328);
+		sp1.setBounds(299, 81, 606, 327);
 	    frmThu.getContentPane().add(sp1);
 	    
 	    tableModel.addRow(new Object[] {
@@ -126,7 +126,7 @@ public class RentBike {
 		
 		exitBtn = new JButton("Thoát");
 		exitBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
-		exitBtn.setBounds(826, 413, 79, 35);
+		exitBtn.setBounds(826, 431, 79, 35);
 		frmThu.getContentPane().add(exitBtn);
 		exitBtn.addActionListener(new ActionListener() {
 			
@@ -146,7 +146,7 @@ public class RentBike {
 			}
 		});
 		rentBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
-		rentBtn.setBounds(681, 413, 135, 35);
+		rentBtn.setBounds(681, 431, 135, 35);
 		frmThu.getContentPane().add(rentBtn);
 		
 		phoneTxt = new JTextField();
@@ -187,6 +187,10 @@ public class RentBike {
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(128, 381, 150, 28);
 		frmThu.getContentPane().add(dateChooser_1);
+		
+		JButton btnNewButton = new JButton("Xem danh sách xe ");
+		btnNewButton.setBounds(10, 431, 268, 35);
+		frmThu.getContentPane().add(btnNewButton);
 		
 		
 		

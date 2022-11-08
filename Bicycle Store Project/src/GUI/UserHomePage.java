@@ -45,6 +45,7 @@ public class UserHomePage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Trang chính");
 		frame.setBounds(100, 100, 840, 342);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
