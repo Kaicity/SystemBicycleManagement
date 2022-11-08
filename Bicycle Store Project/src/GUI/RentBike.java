@@ -94,7 +94,8 @@ public class RentBike {
 		frmThu.getContentPane().add(nameTxt);
 		nameTxt.setColumns(10);
 		
-		JComboBox storeCb = new JComboBox();
+		String listCuaHang[] = {"cua hang 1", "cua hang 2", "cua hang 3"};
+		JComboBox storeCb = new JComboBox(listCuaHang);
 		storeCb.setBounds(128, 267, 150, 28);
 		frmThu.getContentPane().add(storeCb);
 		
@@ -187,10 +188,6 @@ public class RentBike {
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(128, 381, 150, 28);
 		frmThu.getContentPane().add(dateChooser_1);
-		
-		JButton btnNewButton = new JButton("Xem danh sách xe ");
-		btnNewButton.setBounds(10, 431, 268, 35);
-		frmThu.getContentPane().add(btnNewButton);
 		
 		
 		
