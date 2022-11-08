@@ -139,4 +139,35 @@ public class BicycleDAL {
 		}
 		return object;
 	}
+	
+	//tiem kiem 1 danh sach xe dap = ten
+	public Vector<Bicycle> SeachBicycleByName (String name) {
+		Boolean result = false;
+		Vector<Bicycle> list = new Vector<Bicycle>();
+		if(DB.openConection()) {
+			String query = "SELECT * FROM bicycle WHERE id =?";
+			
+			try {
+				PreparedStatement pr = DB.con.prepareStatement(query);
+				pr.setString(1, name);
+				
+				ResultSet rs = pr.executeQuery();
+				while(rs.next()) {
+					Bicycle bike = new Bicycle();
+					bike.setId(rs.getString("id"));
+					bike.setName(rs.getString("tenxedap"));
+					bike.setType(rs.getString("loaixe"));
+					bike.setStatus(rs.getString("trangthai"));
+					bike.setPricePerH(rs.getDouble("giathue"));
+					
+					list.add(bike);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 }
