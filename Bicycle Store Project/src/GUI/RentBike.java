@@ -15,6 +15,8 @@ import java.awt.Frame;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.Color;
@@ -31,7 +33,15 @@ public class RentBike {
 	private JTable table;
 	private JTextField phoneTxt;
 	private JButton rentBtn, exitBtn;
-	private DefaultTableModel tableModel = new DefaultTableModel();
+	private DefaultTableModel tableModel = new DefaultTableModel() {
+		@Override
+	    public boolean isCellEditable(int row, int column) {
+	       //all cells false
+	       return false;
+	    }
+	};
+	
+	
 	private JTextField cccdTxt;
 
 	/**
@@ -61,6 +71,7 @@ public class RentBike {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	private void initialize() {
 		frmThu = new JFrame();
 		frmThu.setTitle("THUÊ");
@@ -110,12 +121,17 @@ public class RentBike {
 		tableModel.addColumn("Loại Xe");
 		tableModel.addColumn("Giá thuê");
 		tableModel.addColumn("Tình Trạng");
-	
+		
+		
+		
+		
 		
 		JScrollPane sp1 = new JScrollPane(table);
 		sp1.setBounds(299, 81, 606, 327);
 	    frmThu.getContentPane().add(sp1);
 	    
+	  
+	     
 	    tableModel.addRow(new Object[] {
 	    		"###", "FE8FH", "Xe Đạp 1 bánh", "Racingboy", "500.19", "Chưa thuê"
 	    });
@@ -123,6 +139,8 @@ public class RentBike {
 	    tableModel.addRow(new Object[] {
 	    		"###", "FE8FH", "Xe Đạp ghế tình yêu", "Nhún cực mạnh", "999.99", "Đã thuê"
 	    });
+	    
+	    
 	    
 		
 		exitBtn = new JButton("Thoát");
@@ -193,6 +211,7 @@ public class RentBike {
 		
 		eventRent();
 	}
+	
 
 	private void eventRent() {
 		rentBtn.addActionListener(new ActionListener() {
@@ -206,4 +225,10 @@ public class RentBike {
 		});
 		
 	}
-}
+	
+	
+	
+
+};
+
+
