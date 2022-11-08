@@ -1,4 +1,4 @@
-package DTO;
+package src.DTO;
 
 public class Bicycle {
 	private Store st;

@@ -1,9 +1,11 @@
-package BLL;
+package src.BLL;
 
 import java.util.Vector;
 
-import DAL.BicycleDAL;
-import DTO.Bicycle;
+
+
+import src.DAL.BicycleDAL;
+import src.DTO.Bicycle;
 
 public class BicycleBLL {
 	

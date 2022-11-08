@@ -1,13 +1,14 @@
-package DAL;
+package src.DAL;
 
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import DTO.Bicycle;
-import DTO.Store;
+import src.DTO.Bicycle;
+import src.DTO.Store;
 
 public class StoreDAL {
    ConnectDatabase DB = new ConnectDatabase();
