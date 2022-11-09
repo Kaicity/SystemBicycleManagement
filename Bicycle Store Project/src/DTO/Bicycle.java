@@ -1,15 +1,15 @@
 package src.DTO;
 
 public class Bicycle {
-	private Store st;
+	private String storeId;
     private String id;
     private String type;
     private String name;
     private Double pricePerH;
     private String status;
 
-    public Bicycle(Store st, String id, String type, String name, Double pricePerH, String status) {
-    	this.st = st;
+    public Bicycle(String storeId, String id, String type, String name, Double pricePerH, String status) {
+    	this.storeId = storeId;
         this.id = id;
         this.type = type;
         this.name = name;
@@ -22,12 +22,12 @@ public class Bicycle {
     
     
 
-    public Store getSt() {
-		return st;
+    public String getStoreID() {
+		return storeId;
 	}
 
-	public void setSt(Store st) {
-		this.st = st;
+	public void setSt(String storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getId() {

@@ -93,6 +93,31 @@ public class BicycleDAL {
 		}
 		return result;
 	}
+	// sua xe dap 
+	public boolean editCustomer(Bicycle bike) {
+		boolean result = false;
+		if(DB.openConection()) {
+			String sql = "UPDATE customers SET tenxe =?, ngaysinh =?, phai =?, sdt =?, diachi =?, matour =? WHERE makhachhang =?";
+			try {
+				PreparedStatement pr = DB.con.prepareStatement(sql);
+				pr.setString(1, bike.getName());
+				pr.setString(2, bike.getType());
+				pr.setString(3, bike.getPricePerH().toString());
+				pr.setString(4, bike.getStoreID());
+				pr.setString(5, bike.getStatus());
+				pr.setString(6, bike.getId());
+				if(pr.executeUpdate() >= 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DB.closeConection();
+			}
+		}
+		return result;
+	}
+	
 	//Xoa xe dap  khoi danh sach
 	public Boolean RemoveBicycle(String id) {
 		Boolean result = false;

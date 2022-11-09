@@ -13,6 +13,7 @@ public class CustomerDAL {
 	
 	ConnectDatabase DB = new ConnectDatabase();
 	//Lay du lieu thu danh sach
+	
 	public Vector<Customer> getCustomerList(){
 		Vector<Customer> list = new Vector<Customer>();
 		if(DB.openConection()) {
@@ -84,9 +85,36 @@ public class CustomerDAL {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			finally {
+				DB.closeConection();
+			}
 		}
 		return result;
 	}
+	
+	// sua khach hang co id la cmnd
+	public boolean editCustomer(Customer cus) {
+		boolean result = false;
+		if(DB.openConection()) {
+			String sql = "UPDATE customers ten =?, sdt =? WHERE cmnd =?";
+			try {
+				PreparedStatement pr = DB.con.prepareStatement(sql);
+				pr.setString(1, cus.getName());
+				pr.setString(2, cus.getPhone());
+				pr.setString(3, cus.getCccd());
+				
+				if(pr.executeUpdate() >= 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DB.closeConection();
+			}
+		}
+		return result;
+	}
+	
 	//Xoa khach hang khoi danh sach
 	public Boolean RemoveCustomer(String cccd) {
 		Boolean result = false;
