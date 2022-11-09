@@ -33,6 +33,8 @@ public class ReturnBike {
 	private JTextField tfRentID;
 	private JTextField tfDateRent;
 	private JTextField tfDateReturn;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -64,7 +66,7 @@ public class ReturnBike {
 	private void initialize() {
 		frmThu = new JFrame();
 		frmThu.setTitle("THUÊ");
-		frmThu.setBounds(100, 100, 929, 458);
+		frmThu.setBounds(100, 100, 929, 512);
 		frmThu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThu.getContentPane().setLayout(null);
 		
@@ -84,6 +86,8 @@ public class ReturnBike {
 		lblNewLabel_1_2_1.setBounds(10, 199, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1);
 		
+		
+		String storeReturn[] = {"Cua hang 1", "Cua hang 2", "Cua hang 3" };
 		JComboBox tfNameStore = new JComboBox();
 		tfNameStore.setBounds(128, 201, 150, 28);
 		frmThu.getContentPane().add(tfNameStore);
@@ -93,14 +97,17 @@ public class ReturnBike {
 		table.setRowHeight(30);
 		frmThu.getContentPane().add(table);
 		table.setModel(tableModel);
-		tableModel.addColumn("Mã phiếu thuê");
-		tableModel.addColumn("Tên cửa hàng");
+		tableModel.addColumn("Mã xe");
+		tableModel.addColumn("Tên xe");
 		tableModel.addColumn("Ngày thuê");
 		tableModel.addColumn("Ngày trả");
+		tableModel.addColumn("Tình trạng");
+		
+		
 	
 		
 		JScrollPane sp1 = new JScrollPane(table);
-		sp1.setBounds(299, 81, 606, 284);
+		sp1.setBounds(299, 81, 606, 323);
 	    frmThu.getContentPane().add(sp1);
 	    
 	    tableModel.addRow(new Object[] {
@@ -111,7 +118,7 @@ public class ReturnBike {
 		
 		exitBtn = new JButton("Thoát");
 		exitBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
-		exitBtn.setBounds(826, 376, 79, 35);
+		exitBtn.setBounds(826, 429, 79, 35);
 		frmThu.getContentPane().add(exitBtn);
 		exitBtn.addActionListener(new ActionListener() {
 			
@@ -127,7 +134,7 @@ public class ReturnBike {
 		
 		returnBike = new JButton("Trả xe");
 		returnBike.setFont(new Font("Tahoma", Font.BOLD, 14));
-		returnBike.setBounds(685, 376, 135, 35);
+		returnBike.setBounds(682, 429, 135, 35);
 		frmThu.getContentPane().add(returnBike);
 		
 		tfStoreID = new JTextField();
@@ -136,7 +143,7 @@ public class ReturnBike {
 		tfStoreID.setBounds(128, 140, 150, 28);
 		frmThu.getContentPane().add(tfStoreID);
 		
-		JLabel lblNewLabel_2 = new JLabel("Danh sách phiếu thuê");
+		JLabel lblNewLabel_2 = new JLabel("Danh sách xe ");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_2.setBounds(299, 57, 168, 17);
 		frmThu.getContentPane().add(lblNewLabel_2);
@@ -159,7 +166,7 @@ public class ReturnBike {
 		
 		JLabel lblNewLabel_1_2_1_1_1 = new JLabel("Ngày trả");
 		lblNewLabel_1_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_1_1_1.setBounds(10, 326, 108, 28);
+		lblNewLabel_1_2_1_1_1.setBounds(10, 316, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
 		tfDateRent = new JTextField();
@@ -171,8 +178,19 @@ public class ReturnBike {
 		tfDateReturn = new JTextField();
 		tfDateReturn.setEditable(false);
 		tfDateReturn.setColumns(10);
-		tfDateReturn.setBounds(128, 329, 150, 26);
+		tfDateReturn.setBounds(128, 319, 150, 26);
 		frmThu.getContentPane().add(tfDateReturn);
+		
+		JLabel lblNewLabel_1_2_1_1_1_1 = new JLabel("Tình trạng");
+		lblNewLabel_1_2_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_2_1_1_1_1.setBounds(10, 376, 108, 28);
+		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1_1);
+		
+		String status[] = {"Đang thuê", "Chưa thuê", "Mất xe" };
+		
+		JComboBox comboBox = new JComboBox(status);
+		comboBox.setBounds(128, 374, 150, 30);
+		frmThu.getContentPane().add(comboBox);
 		
 		
 		
