@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 
@@ -33,6 +35,7 @@ public class RentBike {
 	private JTable table;
 	private JTextField phoneTxt;
 	private JButton rentBtn, exitBtn;
+	
 	private DefaultTableModel tableModel = new DefaultTableModel() {
 		@Override
 	    public boolean isCellEditable(int row, int column) {
@@ -40,9 +43,10 @@ public class RentBike {
 	       return false;
 	    }
 	};
-	
-	
 	private JTextField cccdTxt;
+	
+	
+	
 
 	/**
 	 * Launch the application.
@@ -78,6 +82,7 @@ public class RentBike {
 		frmThu.setBounds(100, 100, 929, 516);
 		frmThu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThu.getContentPane().setLayout(null);
+		
 		
 		JLabel lblNewLabel = new JLabel("Thuê Xe");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -123,9 +128,6 @@ public class RentBike {
 		tableModel.addColumn("Tình Trạng");
 		
 		
-		
-		
-		
 		JScrollPane sp1 = new JScrollPane(table);
 		sp1.setBounds(299, 81, 606, 327);
 	    frmThu.getContentPane().add(sp1);
@@ -159,6 +161,7 @@ public class RentBike {
 			}
 		});
 		
+		 
 		rentBtn = new JButton("Thuê");
 		rentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -212,7 +215,6 @@ public class RentBike {
 		eventRent();
 	}
 	
-
 	private void eventRent() {
 		rentBtn.addActionListener(new ActionListener() {
 			
