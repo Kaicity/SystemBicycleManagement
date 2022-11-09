@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Invoice {
+public class DetailRentBike {
 
 	public JFrame frmHoadon;
 	private JTable table;
@@ -49,7 +49,7 @@ public class Invoice {
 	/**
 	 * Create the application.
 	 */
-	public Invoice() {
+	public DetailRentBike() {
 		initialize();
 	}
 
@@ -59,7 +59,7 @@ public class Invoice {
 	private void initialize() {
 		frmHoadon = new JFrame();
 		frmHoadon.setTitle("HoaDon");
-		frmHoadon.setBounds(100, 100, 453, 551);
+		frmHoadon.setBounds(100, 100, 479, 551);
 		frmHoadon.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frmHoadon.getContentPane().setLayout(null);
 		frmHoadon.setLocationRelativeTo(frmHoadon);
@@ -106,7 +106,7 @@ public class Invoice {
 		dTable.insertRow(0, new Object[] {"PKL001","PKL","100.000","200.000"});
 		
 		JScrollPane sp1 = new JScrollPane(table);
-		sp1.setBounds(10, 282, 419, 129);
+		sp1.setBounds(10, 282, 445, 129);
 	    frmHoadon.getContentPane().add(sp1);
 		
 		JLabel lblNewLabel_1_3_1 = new JLabel("Thành Tiền");
@@ -115,8 +115,8 @@ public class Invoice {
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_1);
 	
 		
-		JButton btnNewButton = new JButton("Đặt");
-		btnNewButton.setBounds(165, 464, 132, 39);
+		JButton btnNewButton = new JButton("Đặt xe");
+		btnNewButton.setBounds(175, 464, 132, 39);
 		frmHoadon.getContentPane().add(btnNewButton);
 		
 		JButton btnHy = new JButton("Hủy");
@@ -131,7 +131,7 @@ public class Invoice {
 				
 			}
 		});
-		btnHy.setBounds(307, 464, 122, 39);
+		btnHy.setBounds(333, 464, 122, 39);
 		frmHoadon.getContentPane().add(btnHy);
 		
 		JLabel lblNewLabel_2 = new JLabel("100.000.000 VND");
@@ -171,5 +171,14 @@ public class Invoice {
 		txtFuwefwg.setBounds(123, 68, 132, 20);
 		frmHoadon.getContentPane().add(txtFuwefwg);
 		txtFuwefwg.setColumns(10);
+		
+		JButton btnInPhiu = new JButton("In phiếu");
+		btnInPhiu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frmHoadon, "Chưa kết nối máy in","",JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		btnInPhiu.setBounds(10, 464, 142, 39);
+		frmHoadon.getContentPane().add(btnInPhiu);
 	}
 }

@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.font.OpenType;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class UserHomePage {
 
@@ -45,16 +46,19 @@ public class UserHomePage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setBackground(Color.DARK_GRAY);
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ACER\\Desktop\\pngicon\\folder-users-icon.png"));
 		frame.setTitle("Trang chính");
-		frame.setBounds(100, 100, 840, 342);
+		frame.setBounds(100, 100, 840, 410);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(frame);
 
 		
 		Panel panel = new Panel();
+		panel.setForeground(Color.WHITE);
 		panel.setBackground(Color.ORANGE);
-		panel.setBounds(10, 10, 290, 280);
+		panel.setBounds(10, 10, 290, 353);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -69,9 +73,9 @@ public class UserHomePage {
 		panel.add(lblNewLabel_1);
 		
 		btnMenuRent = new JButton("Thuê xe");
-		btnMenuRent.setBackground(Color.WHITE);
+		btnMenuRent.setBackground(new Color(255, 235, 205));
 		btnMenuRent.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnMenuRent.setBounds(306, 11, 510, 163);
+		btnMenuRent.setBounds(306, 11, 510, 148);
 		frame.getContentPane().add(btnMenuRent);
 		btnMenuRent.addActionListener(new ActionListener() {
 			
@@ -87,7 +91,8 @@ public class UserHomePage {
 		});
 		
 		btnMenuLogout = new JButton("Quản lý chung");
-		btnMenuLogout.setBackground(Color.WHITE);
+		btnMenuLogout.setForeground(new Color(255, 255, 255));
+		btnMenuLogout.setBackground(new Color(0, 0, 255));
 		btnMenuLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -104,24 +109,25 @@ public class UserHomePage {
 			}
 		});
 		btnMenuLogout.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnMenuLogout.setBounds(497, 185, 181, 105);
+		btnMenuLogout.setBounds(565, 170, 251, 120);
 		frame.getContentPane().add(btnMenuLogout);
 		
 		JButton btnLchSThu = new JButton("Lịch sử giao dịch");
+		btnLchSThu.setForeground(new Color(255, 255, 255));
 		btnLchSThu.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnLchSThu.setBackground(Color.WHITE);
-		btnLchSThu.setBounds(306, 185, 181, 105);
+		btnLchSThu.setBackground(new Color(0, 0, 255));
+		btnLchSThu.setBounds(306, 170, 249, 120);
 		frame.getContentPane().add(btnLchSThu);
 		
 		JButton btnThoatUserHome = new JButton("Thoát");
-		btnThoatUserHome.setBackground(Color.WHITE);
+		btnThoatUserHome.setBounds(306, 301, 510, 62);
+		frame.getContentPane().add(btnThoatUserHome);
+		btnThoatUserHome.setBackground(Color.GRAY);
 		btnThoatUserHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
 		btnThoatUserHome.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnThoatUserHome.setBounds(688, 185, 128, 105);
-		frame.getContentPane().add(btnThoatUserHome);
 	}
 }

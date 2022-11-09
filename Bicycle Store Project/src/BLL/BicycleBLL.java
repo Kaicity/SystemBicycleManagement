@@ -17,18 +17,20 @@ public class BicycleBLL {
 	
 	public String addBike(Bicycle b) {
 		if(bike.checkId(b.getId())) {
-			return "id da ton tai";
+			return "exist";
 		}
-		else
-			return "addthanhcong";
+	    if(bike.addBicycle(b)) {
+	    	return "success";
+	    }
+	    return "addthanhcong";
 	}
 	
-	public String delBike(Bicycle b) {
-		if(bike.checkId(b.getId())) {
-			return "xoa thanh cong";
+	public String delBike(String bikeid) {
+		if(bike.RemoveBicycle(bikeid)) {
+			return "success";
 		}
 		else
-			return "xoa that bai";
+			return "failed";
 	}
 	
 	public Bicycle searchBikeID(String id){

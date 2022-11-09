@@ -4,13 +4,16 @@ public class Store {
     private String id;
     private String name;
     private String address;
-    private String tax;
-	public Store(String id, String name, String address, String tax) {
+    private String fax;
+    private String phone;
+    
+	public Store(String id, String name, String address, String fax, String phone) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.tax = tax;
+		this.fax = fax;
+		this.phone = phone;
 	}
 
     public Store() {}
@@ -39,14 +42,23 @@ public class Store {
 		this.address = address;
 	}
 
-	public String getTax() {
-		return tax;
+	public String getFax() {
+		return fax;
 	}
 
-	public void setTax(String tax) {
-		this.tax = tax;
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
     
     
     
+
 }

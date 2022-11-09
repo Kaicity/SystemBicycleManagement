@@ -8,6 +8,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Frame;
@@ -127,6 +128,8 @@ public class RentBike {
 		tableModel.addColumn("Giá thuê");
 		tableModel.addColumn("Tình Trạng");
 		
+		table.setRowSelectionAllowed(true);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		JScrollPane sp1 = new JScrollPane(table);
 		sp1.setBounds(299, 81, 606, 327);
@@ -134,6 +137,20 @@ public class RentBike {
 	    
 	  
 	     
+	    tableModel.addRow(new Object[] {
+	    		"###", "FE8FH", "Xe Đạp 1 bánh", "Racingboy", "500.19", "Chưa thuê"
+	    });
+	    
+	    tableModel.addRow(new Object[] {
+	    		"###", "FE8FH", "Xe Đạp ghế tình yêu", "Nhún cực mạnh", "999.99", "Đã thuê"
+	    });
+	    tableModel.addRow(new Object[] {
+	    		"###", "FE8FH", "Xe Đạp 1 bánh", "Racingboy", "500.19", "Chưa thuê"
+	    });
+	    
+	    tableModel.addRow(new Object[] {
+	    		"###", "FE8FH", "Xe Đạp ghế tình yêu", "Nhún cực mạnh", "999.99", "Đã thuê"
+	    });
 	    tableModel.addRow(new Object[] {
 	    		"###", "FE8FH", "Xe Đạp 1 bánh", "Racingboy", "500.19", "Chưa thuê"
 	    });
@@ -220,7 +237,7 @@ public class RentBike {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Invoice inv = new Invoice();
+				DetailRentBike inv = new DetailRentBike();
 				inv.frmHoadon.setVisible(true);
 				
 			}

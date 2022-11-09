@@ -8,23 +8,33 @@ public class Rent{
 	
     private Customer customer;
     private Bicycle bicycle;
+    private Store store;
     
     private String id;
-    private Double deposit;
-    private String rentDate;
-    private String howDate;
+    private int deposit;
+    private Date rentDate;
+    private Date returnDate;
     
-	public Rent(Customer customer, Bicycle bicycle, String id, Double deposit, String rentDate,
-			String howDate) {
+    
+	public Rent(Customer customer, Bicycle bicycle,Store store, String id, int deposit, Date rentDate,
+			Date returnDate) {
 		super();
 		this.customer = customer;
 		this.bicycle = bicycle;
+		this.store = store;
 		this.id = id;
-		this.deposit = deposit;
 		this.rentDate = rentDate;
-		this.howDate = howDate;
+		this.returnDate = returnDate;
 	}
 	
+	
+	public Rent(Bicycle bicycle, String id) {
+		super();
+		this.bicycle = bicycle;
+		this.id = id;
+	}
+
+
 	public Rent() {}
 	
 
@@ -52,29 +62,38 @@ public class Rent{
 		this.id = id;
 	}
 
-	public Double getDeposit() {
+	public int getDeposit() {
 		return deposit;
 	}
 
-	public void setDeposit(Double deposit) {
+	public void setDeposit(int deposit) {
 		this.deposit = deposit;
 	}
 
-	public String getRentDate() {
+	public Date getRentDate() {
 		return rentDate;
 	}
 
-	public void setRentDate(String rentDate) {
+	public void setRentDate(Date rentDate) {
 		this.rentDate = rentDate;
 	}
 
-	public String getHowDate() {
-		return howDate;
+	public Date getReturnDate() {
+		return returnDate;
 	}
 
-	public void setHowDate(String howDate) {
-		this.howDate = howDate;
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
 	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+	
 	
 	
 	

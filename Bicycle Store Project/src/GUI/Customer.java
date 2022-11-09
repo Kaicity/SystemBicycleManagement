@@ -103,10 +103,9 @@ public class Customer {
 		tableCus.setModel(modelCus);
 		
 		modelCus.addColumn("STT");
-		modelCus.addColumn("Mã khách hàng");
+		modelCus.addColumn("CCCD");
 		modelCus.addColumn("Tên khách hàng");
 		modelCus.addColumn("Số điện thoại");
-		modelCus.addColumn("Địa chỉ");
 		
 		
 		

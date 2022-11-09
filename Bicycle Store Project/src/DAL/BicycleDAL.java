@@ -18,18 +18,20 @@ public class BicycleDAL {
 		Vector<Bicycle> list = new Vector<Bicycle>();
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM bicycle";
+			String query = "SELECT * FROM xedap";
 			try {
 				Statement st = DB.con.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				
 				while(rs.next()) {
 					Bicycle bike = new Bicycle();
-					bike.setId(rs.getString("id"));
-					bike.setName(rs.getString("tenxedap"));
-					bike.setPricePerH(rs.getDouble("giathue"));
-					bike.setStatus(rs.getString("tinhtrang"));
-					bike.setType(rs.getString("loaixe"));
+					bike.setId(rs.getString("bikeid"));
+					bike.setName(rs.getString("name"));
+					bike.setType(rs.getString("type"));
+					bike.setPricePerH(rs.getInt("priceh"));
+					bike.setStoreId(rs.getString("storeid"));
+					bike.setStatus(rs.getString("status"));
+					
 					
 					list.add(bike);
 				}
@@ -49,7 +51,7 @@ public class BicycleDAL {
 	public Boolean addBicycle(Bicycle bike) {
 		Boolean result = false;
 		if(DB.openConection()) {
-			String query = "INSERT INTO bicycle VALUES(?,?,?,?,?)";
+			String query = "INSERT INTO xedap VALUES(?,?,?,?,?,?)";
 			PreparedStatement pr;
 			
 			try {
@@ -57,10 +59,12 @@ public class BicycleDAL {
 				pr.setString(1, bike.getId());
 				pr.setString(2, bike.getName());
 				pr.setString(3, bike.getType());
-				pr.setString(4, bike.getStatus());
-				pr.setDouble(5, bike.getPricePerH());
+				pr.setString(4, bike.getStoreId());
+				pr.setInt(5, bike.getPricePerH());
+				pr.setString(6, bike.getStatus());
+			
 				
-				if(pr.executeUpdate() >= 1) {
+				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
 			}catch(SQLException e) {
@@ -78,7 +82,7 @@ public class BicycleDAL {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM bicycle WHERE id =?";
+			String query = "SELECT * FROM xedap WHERE bikeid =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
@@ -97,14 +101,16 @@ public class BicycleDAL {
 	public boolean editCustomer(Bicycle bike) {
 		boolean result = false;
 		if(DB.openConection()) {
-			String sql = "UPDATE customers SET tenxe =?, ngaysinh =?, phai =?, sdt =?, diachi =?, matour =? WHERE makhachhang =?";
+			String sql = "UPDATE xedap SET name =?, type =?, storeid =?, priceh =?, status =? WHERE bikeid =?";
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(sql);
 				pr.setString(1, bike.getName());
 				pr.setString(2, bike.getType());
-				pr.setString(3, bike.getPricePerH().toString());
-				pr.setString(4, bike.getStoreID());
+				pr.setString(3, bike.getStoreId());
+				pr.setInt(4, bike.getPricePerH());
 				pr.setString(5, bike.getStatus());
+				
+				//where
 				pr.setString(6, bike.getId());
 				if(pr.executeUpdate() >= 0) {
 					result = true;
@@ -118,16 +124,16 @@ public class BicycleDAL {
 		return result;
 	}
 	
-	//Xoa xe dap  khoi danh sach
+	//Xoa xe dap khoi danh sach
 	public Boolean RemoveBicycle(String id) {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "DELETE FROM bicycle WHERE id =?";
+			String query = "DELETE FROM xedap WHERE bikeid =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
-				if(pr.executeUpdate() >= 1) {
+				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
 			} catch (SQLException e) {
@@ -144,7 +150,7 @@ public class BicycleDAL {
 		Boolean result = false;
 		Bicycle object = new Bicycle();
 		if(DB.openConection()) {
-			String query = "SELECT * FROM bicycle WHERE id =?";
+			String query = "SELECT * FROM xedap WHERE bikeid =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
@@ -152,11 +158,12 @@ public class BicycleDAL {
 				
 				ResultSet rs = pr.executeQuery();
 				while(rs.next()) {
-					object.setId(rs.getString("id"));
-					object.setName(rs.getString("tenxedap"));
-					object.setType(rs.getString("loaixe"));
-					object.setStatus(rs.getString("trangthai"));
-					object.setPricePerH(rs.getDouble("giathue"));
+					object.setId(rs.getString("bikeid"));
+					object.setName(rs.getString("name"));
+					object.setType(rs.getString("type"));
+					object.setStoreId(rs.getString("storeid"));
+					object.setPricePerH(rs.getInt("priceh"));
+					object.setStatus(rs.getString("status"));
 				}
 				
 			} catch (SQLException e) {
@@ -167,7 +174,7 @@ public class BicycleDAL {
 	}
 	
 	//tiem kiem 1 danh sach xe dap = ten
-	public Vector<Bicycle> SeachBicycleByName (String name) {
+	public Vector<Bicycle> SeachBicycleByName (String id) {
 		Boolean result = false;
 		Vector<Bicycle> list = new Vector<Bicycle>();
 		if(DB.openConection()) {
@@ -175,16 +182,17 @@ public class BicycleDAL {
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
-				pr.setString(1, name);
+				pr.setString(1, id);
 				
 				ResultSet rs = pr.executeQuery();
 				while(rs.next()) {
 					Bicycle bike = new Bicycle();
-					bike.setId(rs.getString("id"));
-					bike.setName(rs.getString("tenxedap"));
-					bike.setType(rs.getString("loaixe"));
-					bike.setStatus(rs.getString("trangthai"));
-					bike.setPricePerH(rs.getDouble("giathue"));
+					bike.setId(rs.getString("bikeid"));
+					bike.setName(rs.getString("name"));
+					bike.setType(rs.getString("type"));
+					bike.setStoreId(rs.getString("storeid"));
+					bike.setPricePerH(rs.getInt("priceh"));
+					bike.setStatus(rs.getString("status"));
 					
 					list.add(bike);
 				}

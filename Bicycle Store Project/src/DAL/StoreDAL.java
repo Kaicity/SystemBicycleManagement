@@ -8,30 +8,31 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import src.DTO.Bicycle;
+import src.DTO.Customer;
 import src.DTO.Store;
 
 public class StoreDAL {
    ConnectDatabase DB = new ConnectDatabase();
 	
-	//Lay du lieu tu danh cua hang 
-	public Vector<Store> getBicycleList(){
+	//Lay du lieu tu danh sach cua hang 
+	public Vector<Store> getStoreList(){
 		Vector<Store> list = new Vector<Store>();
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM store";
+			String query = "SELECT * FROM cuahang";
 			try {
 				Statement st = DB.con.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				
 				while(rs.next()) {
-//					Store st = new Store();
-//					st.setId(rs.getString("id"));
-//					st.setName(rs.getString("tenxedap"));
-//					st.setPricePerHour(rs.getDouble("giathue"));
-//					st.setStatus(rs.getString("tinhtrang"));
-//					st.setType(rs.getString("loaixe"));
-//					
-//					list.add(bike);
+					Store sto = new Store();
+					sto.setId(rs.getString("storeid"));
+					sto.setName(rs.getString("name"));
+					sto.setAddress(rs.getString("address"));
+					sto.setFax(rs.getString("fax"));
+					sto.setPhone(rs.getString("phone"));
+					
+					list.add(sto);
 				}
 				
 			}catch(SQLException e) {
@@ -46,10 +47,10 @@ public class StoreDAL {
 	}
 	
 	//Them cua hang
-	public Boolean addBicycle(Store st) {
+	public Boolean addStore(Store st) {
 		Boolean result = false;
 		if(DB.openConection()) {
-			String query = "INSERT INTO store VALUES(?,?,?,?)";
+			String query = "INSERT INTO cuahang VALUES(?,?,?,?,?)";
 			PreparedStatement pr;
 			
 			try {
@@ -57,9 +58,10 @@ public class StoreDAL {
 				pr.setString(1, st.getId());
 				pr.setString(2, st.getName());
 				pr.setString(3, st.getAddress());
-				pr.setString(4, st.getTax());
+				pr.setString(4, st.getFax());
+				pr.setString(5, st.getPhone());
 				
-				if(pr.executeUpdate() >= 1) {
+				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
 			}catch(SQLException e) {
@@ -72,12 +74,12 @@ public class StoreDAL {
 		return result;
 	}
 	
-	//kiem tra id id xe dap
-	public Boolean checkId(String id) {
+	//kiem tra id id cua hang 
+	public Boolean checkStoreId(String id) {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM store WHERE id =?";
+			String query = "SELECT * FROM cuahang WHERE storeid =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
@@ -92,16 +94,44 @@ public class StoreDAL {
 		}
 		return result;
 	}
-	//Xoa xe dap  khoi danh sach
-	public Boolean RemoveBicycle(String id) {
+	
+	
+	// sua cua hang co id la cmnd
+		public boolean editStore(Store st) {
+			boolean result = false;
+			if(DB.openConection()) {
+				String sql = "UPDATE cuahang name =?, address =?, fax =?, phone =? WHERE storeid =?";
+				try {
+					PreparedStatement pr = DB.con.prepareStatement(sql);
+					pr.setString(1, st.getName());
+					pr.setString(2, st.getAddress());
+					pr.setString(3, st.getFax());
+					pr.setString(4, st.getPhone());
+					pr.setString(5, st.getId());
+					
+					if(pr.executeUpdate() >= 0) {
+						result = true;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					DB.closeConection();
+				}
+			}
+			return result;
+		}
+		
+		
+	//Xoa cua hang khoi danh sach
+	public Boolean RemoveStore(String id) {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "DELETE FROM store WHERE id =?";
+			String query = "DELETE FROM cuahang WHERE storeid =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
-				if(pr.executeUpdate() >= 1) {
+				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
 			} catch (SQLException e) {
@@ -113,29 +143,4 @@ public class StoreDAL {
 		return result;
 	}
 	
-	//Tiem kiem xe dap trong danh sach tra ve mot object
-	public Bicycle SeachBicycle(String id) {
-		Boolean result = false;
-		Bicycle object = new Bicycle();
-		if(DB.openConection()) {
-			String query = "SELECT * FROM store WHERE id =?";
-			
-			try {
-				PreparedStatement pr = DB.con.prepareStatement(query);
-				pr.setString(1, id);
-				
-				ResultSet rs = pr.executeQuery();
-				while(rs.next()) {
-					object.setId(rs.getString("id"));
-					object.setName(rs.getString("tencuahang"));
-					object.setType(rs.getString("diachi"));
-					object.setStatus(rs.getString("tax"));
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return object;
-	}
 }

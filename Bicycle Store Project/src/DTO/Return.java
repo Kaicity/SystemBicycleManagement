@@ -1,14 +1,15 @@
 package src.DTO;
 
 public class Return {
+	
     private Rent rent;
     private int returnDays;
-    private Double violation;
+    private int violation;
 
-    public Return(Rent rent, int returnDays, Double violation) {
+    public Return(Rent rent, int returnDays, int violation) {
         this.rent = rent;
         this.returnDays = returnDays;
-        this.violation = 1.0;
+        this.violation = 1;
     }
 
     public Return() {
@@ -31,20 +32,20 @@ public class Return {
         this.returnDays = returnDays;
     }
 
-    public Double getViolation() {
+    public int getViolation() {
         return violation;
     }
 
-    public void setViolation(Double violation) {
+    public void setViolation(int violation) {
         this.violation = violation;
     }
 
-    public Double returnDeposit(){
-        return rent.getDeposit();
+    public int handlingViolation(){
+    
+        return (violation * returnDays * 100) - rent.getDeposit();
     }
-
-    public Double HandlingViolation(){
-        // compare date violations
-        return violation * returnDays * 100;
+    
+    public int returnDeposit() {
+    	return rent.getDeposit() + handlingViolation();
     }
 }

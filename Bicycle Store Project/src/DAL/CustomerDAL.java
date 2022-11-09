@@ -17,7 +17,7 @@ public class CustomerDAL {
 	public Vector<Customer> getCustomerList(){
 		Vector<Customer> list = new Vector<Customer>();
 		if(DB.openConection()) {
-			String query = "SELECT * FROM customer";
+			String query = "SELECT * FROM khachhang";
 			try {
 				Statement st = DB.con.createStatement();
 				ResultSet rs = st.executeQuery(query);
@@ -25,7 +25,7 @@ public class CustomerDAL {
 				while(rs.next()) {
 					Customer cus = new Customer();
 					cus.setCccd(rs.getString("cccd"));
-					cus.setName(rs.getString("tenkhachhang"));
+					cus.setName(rs.getString("name"));
 					cus.setPhone(rs.getString("sdt"));
 					
 					list.add(cus);
@@ -55,7 +55,7 @@ public class CustomerDAL {
 				pr.setString(2, cus.getName());
 				pr.setString(3, cus.getPhone());
 				
-				if(pr.executeUpdate() >= 1) {
+				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
 			}catch(SQLException e) {
@@ -73,7 +73,7 @@ public class CustomerDAL {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM customer WHERE cccc =?";
+			String query = "SELECT * FROM customer WHERE cccd =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
@@ -96,11 +96,14 @@ public class CustomerDAL {
 	public boolean editCustomer(Customer cus) {
 		boolean result = false;
 		if(DB.openConection()) {
-			String sql = "UPDATE customers ten =?, sdt =? WHERE cmnd =?";
+			String sql = "UPDATE khachhang ten =?, sdt =? WHERE cccd =?";
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(sql);
 				pr.setString(1, cus.getName());
 				pr.setString(2, cus.getPhone());
+				
+				
+			    //where
 				pr.setString(3, cus.getCccd());
 				
 				if(pr.executeUpdate() >= 0) {
@@ -120,11 +123,11 @@ public class CustomerDAL {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "DELETE FROM custome WHERE cccd =?";
+			String query = "DELETE FROM khachhang WHERE cccd =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
-				if(pr.executeUpdate() >= 1) {
+				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
 			} catch (SQLException e) {
@@ -150,7 +153,7 @@ public class CustomerDAL {
 				ResultSet rs = pr.executeQuery();
 				while(rs.next()) {
 					object.setCccd(rs.getString("cccd"));
-					object.setName(rs.getString("tenkhachhang"));
+					object.setName(rs.getString("name"));
 					object.setPhone(rs.getString("sdt"));
 				}
 				
