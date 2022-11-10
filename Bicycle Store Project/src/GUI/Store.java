@@ -28,7 +28,7 @@ import javax.swing.JTextArea;
 public class Store {
 
 	public JFrame frame;
-	private JTextField tfSroreID;
+	private JTextField tfStoreID;
 	private JTextField tfStoreName;
 	private JTextField tfStorePhone;
 	JTextArea tfStoreAddress;
@@ -73,6 +73,7 @@ public class Store {
 	
 	public void loadDataStore() {
 		Vector<src.DTO.Store> arr = stoBLL.getStoreList();
+		int count = 1;
 		for(int i = 0;i < arr.size(); i++) {
 			src.DTO.Store sto = arr.get(i);
 			String id = sto.getId();
@@ -82,13 +83,15 @@ public class Store {
 			String phone = sto.getPhone();
 			
 			modelStore.addRow(new Object[] {
-					i+1, id, name, address, fax, phone
+					count++, id, name, address, fax, phone
 			});
 		}
 		
 	}
 	
 	private void eventStore() {
+		
+		//THEM MOI CUA HANG XE DAP 
 		
 		JButton btnAddStore = new JButton("Thêm");
 		btnAddStore.setBounds(82, 368, 89, 33);
@@ -98,18 +101,18 @@ public class Store {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if(tfSroreID.getText().trim().equals("")||tfStoreName.getText().trim().equals("")||
+				if(tfStoreID.getText().trim().equals("")||tfStoreName.getText().trim().equals("")||
 						tfStoreAddress.getText().trim().equals("") || tfStorefax.getText().trim().equals("") || 
 						tfStorePhone.getText().trim().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Vui lòng nhập đầy đủ thông tin");
 				}
-				else if(tfSroreID.getText().length() > 20) {
+				else if(tfStoreID.getText().length() > 20) {
 					JOptionPane.showMessageDialog(frame, "Mã chỉ chứa đa 20 kí tự");
 				}
 				else {
 					src.DTO.Store sto = new src.DTO.Store();
 					
-					sto.setId(tfSroreID.getText());
+					sto.setId(tfStoreID.getText());
 					sto.setName(tfStoreName.getText());
 					sto.setAddress(tfStoreAddress.getText());
 					sto.setFax(tfStorefax.getText());
@@ -120,12 +123,10 @@ public class Store {
 					JOptionPane.showMessageDialog(frame, result);
 					
 					System.out.println(result);
-					int count = 1;
-					
+				
 					if(result.equals("success")) {
-						count++;
 						modelStore.addRow(new Object[] {
-								count ,sto.getId(), sto.getName(), sto.getAddress(), 
+								"*" ,sto.getId(), sto.getName(), sto.getAddress(), 
 								sto.getFax(), sto.getPhone()
 						});
 					}
@@ -133,7 +134,7 @@ public class Store {
 			}
 				
 		});
-		//-------------------------------------
+		//-------------------------------------CAP NHAT SUA THONG TIN CUA HANG
 		
 		JButton btnEditStore = new JButton("Sửa ");
 		btnEditStore.setBounds(199, 368, 89, 33);
@@ -143,31 +144,39 @@ public class Store {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-//				int i = table5.getSelectedRow();
-//				if(i >= 0) {
-//					Hotel h = new Hotel();
-//					h.setHotelCode(tfHotelCode.getText());
-//					h.setHotelName(tfHotelName.getText());
-//					h.setAddress(tfAddress.getText());
-//					
-//					int ques = JOptionPane.showConfirmDialog(contentPane, "Xác nhận sửa thông tin khách sạn");
-//					if(ques == JOptionPane.YES_OPTION) {
-//						String result = hotelBLL.editHotel(h);
-//						JOptionPane.showMessageDialog(contentPane, result);
-//						if(result.equals("Cập nhật thành công")) {
-//							model5.setValueAt(h.getHotelCode(), i, 1);
-//							model5.setValueAt(h.getHotelName(), i, 2);
-//							model5.setValueAt(h.getAddress(), i, 3);
-//						}
-//					}
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(contentPane, "Vui lòng chọn dòng dữ liệu để cập nhật");
-//				}
+				int i = table.getSelectedRow();
+				if(i >= 0) {
+					src.DTO.Store sto = new src.DTO.Store();
+					sto.setId(tfStoreID.getText());
+					sto.setName(tfStoreName.getText());
+					sto.setAddress(tfStoreAddress.getText());
+					sto.setFax(tfStorefax.getText());
+					sto.setPhone(tfStorePhone.getText());
+					
+					int ques = JOptionPane.showConfirmDialog(frame, "Xác nhận sửa thông tin cửa hàng");
+					if(ques == JOptionPane.YES_OPTION) {
+						String result = stoBLL.editStore(sto);
+						
+						JOptionPane.showMessageDialog(frame, result);
+						if(result.equals("success")) {
+							modelStore.setValueAt(sto.getId(), i, 1);
+							modelStore.setValueAt(sto.getName(), i, 2);
+							modelStore.setValueAt(sto.getAddress(), i, 3);
+							modelStore.setValueAt(sto.getFax(), i, 4);
+							modelStore.setValueAt(sto.getPhone(), i, 5);
+							
+							
+						}
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(frame, "Vui lòng chọn dòng dữ liệu để cập nhật không thì khỏi làm");
+					
+				}
 				
 			}
 		});
-		//-------------------------------------
+		//-------------------------------------XOA CUA HANG XE DAP 
 		
 		JButton btnRemoveStore = new JButton("Xóa");
 		btnRemoveStore.setBounds(326, 368, 89, 33);
@@ -177,24 +186,39 @@ public class Store {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-//				int i = table5.getSelectedRow();
-//				if(i >= 0) {
-//					int ques = JOptionPane.showConfirmDialog(contentPane, "Xác nhận xóa thông tin khách sạn");
-//					if(ques == JOptionPane.YES_OPTION) {
-//						String result = hotelBLL.removeHotel(model5.getValueAt(i, 1).toString());
-//						JOptionPane.showMessageDialog(contentPane, result);
-//						if(result.equals("Xóa thành công")) {
-//							model5.removeRow(i);
-//						}
-//					}
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(contentPane, "Vui lòng chọn dòng dữ liệu để xóa");
-//				}
+				int i = table.getSelectedRow();
+				if(i >= 0) {
+					int ques = JOptionPane.showConfirmDialog(frame, "Xác nhận xóa thông tin cửa hàng");
+					if(ques == JOptionPane.YES_OPTION) {
+						String result = stoBLL.delstore(modelStore.getValueAt(i, 1).toString());
+						System.out.println(modelStore.getValueAt(i, 1).toString());
+						JOptionPane.showMessageDialog(frame, result);
+						if(result.equals("success")) {
+							modelStore.removeRow(i);
+						}
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(frame, "Vui lòng chọn dòng dữ liệu để xóa không thì khỏi xóa");
+				}
 			}
 				
 		});
-		//-------------------------------------
+		//-------------------------------------MOUSE CLICK TABLE
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int i = table.getSelectedRow();
+				if(i >= 0) {
+					tfStoreID.setEditable(false);
+					
+					tfStoreID.setText(modelStore.getValueAt(i, 1).toString());
+					tfStoreName.setText(modelStore.getValueAt(i, 2).toString());
+					tfStoreAddress.setText(modelStore.getValueAt(i, 3).toString());
+					tfStorefax.setText(modelStore.getValueAt(i, 4).toString());
+					tfStorePhone.setText(modelStore.getValueAt(i, 5).toString());
+				}
+			}
+		});
 		
 		
 		JButton btnResetStore = new JButton("Reset");
@@ -204,7 +228,8 @@ public class Store {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tfSroreID.setText("");
+				tfStoreID.setEditable(true);
+				tfStoreID.setText("");
 				tfStoreName.setText("");
 				tfStoreAddress.setText("");
 				tfStorefax.setText("");
@@ -259,10 +284,10 @@ public class Store {
 		lblNewLabel_4.setBounds(82, 304, 80, 17);
 		frame.getContentPane().add(lblNewLabel_4);
 		
-		tfSroreID = new JTextField();
-		tfSroreID.setBounds(163, 104, 202, 20);
-		frame.getContentPane().add(tfSroreID);
-		tfSroreID.setColumns(10);
+		tfStoreID = new JTextField();
+		tfStoreID.setBounds(163, 104, 202, 20);
+		frame.getContentPane().add(tfStoreID);
+		tfStoreID.setColumns(10);
 		
 		tfStoreName = new JTextField();
 		tfStoreName.setBounds(163, 148, 202, 20);

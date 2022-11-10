@@ -92,7 +92,7 @@ public class UserHomePage {
 		
 		btnMenuLogout = new JButton("Quản lý chung");
 		btnMenuLogout.setForeground(new Color(255, 255, 255));
-		btnMenuLogout.setBackground(new Color(0, 0, 255));
+		btnMenuLogout.setBackground(new Color(65, 105, 225));
 		btnMenuLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -115,7 +115,7 @@ public class UserHomePage {
 		JButton btnLchSThu = new JButton("Lịch sử giao dịch");
 		btnLchSThu.setForeground(new Color(255, 255, 255));
 		btnLchSThu.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnLchSThu.setBackground(new Color(0, 0, 255));
+		btnLchSThu.setBackground(new Color(65, 105, 225));
 		btnLchSThu.setBounds(306, 170, 249, 120);
 		frame.getContentPane().add(btnLchSThu);
 		

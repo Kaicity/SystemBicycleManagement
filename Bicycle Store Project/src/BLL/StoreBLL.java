@@ -16,7 +16,7 @@ public class StoreBLL {
 	
 	public String addstore(Store st) {
 		if(sto.checkStoreId(st.getId())) {
-			return "exist";
+			return "exist" + " " +st.getId();
 		}
 		if(sto.addStore(st)) {
 			return "success";
@@ -26,19 +26,18 @@ public class StoreBLL {
 	
 	public String editStore(Store st) {
 		if(sto.editStore(st)) {
-			return "sucess";
+			return "success";
 		}
-		else
 			return "failed";
 	}
 	
-	public String delstore(String storeid) {
-		if(sto.RemoveStore(storeid)) {
-			return "sucess";
+	public String delstore(String id) {
+		if(sto.removeStore(id)) {
+			return "success";
 		}
-		else
 			return "failed";
 	}
+	
 	
 	//seach 
 	public Vector<Store> searchstoName(){

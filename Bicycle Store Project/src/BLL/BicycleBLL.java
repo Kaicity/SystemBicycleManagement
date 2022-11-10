@@ -5,40 +5,58 @@ import java.util.Vector;
 
 
 import src.DAL.BicycleDAL;
+import src.DAL.StoreDAL;
 import src.DTO.Bicycle;
+import src.DTO.Store;
 
 public class BicycleBLL {
 	
-	BicycleDAL bike = new BicycleDAL();
+	BicycleDAL bikeBLL = new BicycleDAL();
+	StoreDAL stoBLL = new StoreDAL();
 	
-	public Vector<Bicycle> getBicyclesList(){
-		return bike.getBicycleList();
+	public Vector<Bicycle> getBicyclesList(String storeid){
+		return bikeBLL.getBicycleList(storeid);
 	}
 	
-	public String addBike(Bicycle b) {
-		if(bike.checkId(b.getId())) {
-			return "exist";
+	public Vector<Store> getStoreList(){
+		return stoBLL.getStoreList();
+	}
+	
+	public String addbikeBLL(Bicycle b) {
+		if(bikeBLL.checkId(b.getId())) {
+			return "exist" + " "+b.getId();
 		}
-	    if(bike.addBicycle(b)) {
-	    	return "success";
+		if(!(stoBLL.checkStoreId(b.getStoreId()))) {
+			return "Store not exist";
+		}
+	    if(stoBLL.checkStoreId(b.getStoreId())) {
+	    	if(bikeBLL.addBicycle(b)) {
+		    	return "success";
+		    }
 	    }
-	    return "addthanhcong";
+	    return "failed";
 	}
 	
-	public String delBike(String bikeid) {
-		if(bike.RemoveBicycle(bikeid)) {
+	public String delbikeBLL(String bikeid) {
+		if(bikeBLL.RemoveBicycle(bikeid)) {
 			return "success";
 		}
-		else
-			return "failed";
+		return "failed";
 	}
 	
-	public Bicycle searchBikeID(String id){
-		return bike.SeachBicycle(id);
+	public String editbikeBLL(Bicycle bike) {
+		if(bikeBLL.editBicycle(bike)) {
+			return "success";
+		}
+		return "failed";
 	}
 	
-	public Vector<Bicycle> searchBikeName(String name){
-		return bike.SeachBicycleByName(name);
+	public Bicycle searchbikeBLLID(String id){
+		return bikeBLL.SeachBicycle(id);
+	}
+	
+	public Vector<Bicycle> searchbikeBLLName(String name){
+		return bikeBLL.SeachBicycleByName(name);
 	}
 	
 }

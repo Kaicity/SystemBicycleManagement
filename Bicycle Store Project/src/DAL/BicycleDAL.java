@@ -14,14 +14,15 @@ public class BicycleDAL {
 	ConnectDatabase DB = new ConnectDatabase();
 	
 	//Lay du lieu tu danh sach xe dap
-	public Vector<Bicycle> getBicycleList(){
+	public Vector<Bicycle> getBicycleList(String storeid){
 		Vector<Bicycle> list = new Vector<Bicycle>();
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM xedap";
+			String query = "SELECT * FROM xedap, cuahang WHERE storeid =?";
 			try {
-				Statement st = DB.con.createStatement();
-				ResultSet rs = st.executeQuery(query);
+				PreparedStatement pr = DB.con.prepareStatement(query);
+				ResultSet rs = pr.executeQuery(query);
+				pr.setString(1, storeid);
 				
 				while(rs.next()) {
 					Bicycle bike = new Bicycle();
@@ -98,7 +99,7 @@ public class BicycleDAL {
 		return result;
 	}
 	// sua xe dap 
-	public boolean editCustomer(Bicycle bike) {
+	public boolean editBicycle(Bicycle bike) {
 		boolean result = false;
 		if(DB.openConection()) {
 			String sql = "UPDATE xedap SET name =?, type =?, storeid =?, priceh =?, status =? WHERE bikeid =?";

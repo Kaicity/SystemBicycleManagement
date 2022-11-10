@@ -100,15 +100,15 @@ public class StoreDAL {
 		public boolean editStore(Store st) {
 			boolean result = false;
 			if(DB.openConection()) {
-				String sql = "UPDATE cuahang name =?, address =?, fax =?, phone =? WHERE storeid =?";
+				String sql = "UPDATE cuahang SET name =?, address =?, fax =?, phone =? WHERE storeid =?";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(sql);
 					pr.setString(1, st.getName());
 					pr.setString(2, st.getAddress());
 					pr.setString(3, st.getFax());
 					pr.setString(4, st.getPhone());
-					pr.setString(5, st.getId());
 					
+					pr.setString(5, st.getId());
 					if(pr.executeUpdate() >= 0) {
 						result = true;
 					}
@@ -123,7 +123,7 @@ public class StoreDAL {
 		
 		
 	//Xoa cua hang khoi danh sach
-	public Boolean RemoveStore(String id) {
+	public Boolean removeStore(String id) {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
@@ -131,11 +131,11 @@ public class StoreDAL {
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
+				pr.setString(1, id);
 				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
