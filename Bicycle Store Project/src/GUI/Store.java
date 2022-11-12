@@ -33,7 +33,15 @@ public class Store {
 	private JTextField tfStorePhone;
 	JTextArea tfStoreAddress;
 	private JTable table;
-	private DefaultTableModel modelStore = new DefaultTableModel();
+	private DefaultTableModel modelStore = new DefaultTableModel() {
+		@Override
+	    public boolean isCellEditable(int row, int column) {
+	       //all cells false
+	       return false;
+	    }
+	};
+	
+	public int count = 1;
 	
 	final String[] typeBicycle = {"Xe phổ thông", "Xe đạp tình yêu", "Xe đạp leo núi",
 			"Xe đạp địa hình dốc", "Xe đạp điện", "Xe đạp Single"
@@ -73,7 +81,6 @@ public class Store {
 	
 	public void loadDataStore() {
 		Vector<src.DTO.Store> arr = stoBLL.getStoreList();
-		int count = 1;
 		for(int i = 0;i < arr.size(); i++) {
 			src.DTO.Store sto = arr.get(i);
 			String id = sto.getId();
@@ -123,10 +130,11 @@ public class Store {
 					JOptionPane.showMessageDialog(frame, result);
 					
 					System.out.println(result);
-				
+					
 					if(result.equals("success")) {
 						modelStore.addRow(new Object[] {
-								"*" ,sto.getId(), sto.getName(), sto.getAddress(), 
+								
+								count++ + "*" ,sto.getId(), sto.getName(), sto.getAddress(), 
 								sto.getFax(), sto.getPhone()
 						});
 					}
