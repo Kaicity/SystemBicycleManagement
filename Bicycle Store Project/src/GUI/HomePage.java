@@ -88,8 +88,8 @@ public class HomePage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RentBike openRent = new RentBike();
-				openRent.frmThu.setVisible(true);
+				RentManage rentManage = new RentManage();
+				rentManage.frmThu.setVisible(true);
 				
 				frame.setVisible(false);
 				

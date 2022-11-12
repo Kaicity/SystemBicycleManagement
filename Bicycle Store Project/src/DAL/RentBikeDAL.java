@@ -41,29 +41,34 @@ ConnectDatabase DB = new ConnectDatabase();
 		
 	//chon cua hang co tat ca xe dap trong cua hang do
 	public Vector<Bicycle> selectStoreHasBike(String storeid) {
-		Vector<Bicycle> list = new Vector<Bicycle>();	
+		Vector<Bicycle> list = new Vector<Bicycle>();
+		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM xedap WHERE xedap.storeid =?";
-			
+			String query = "SELECT * FROM `xedap` WHERE `xedap`.`storeid` = '"+storeid+"'";
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
-				pr.setString(1, storeid);
+				ResultSet rs = pr.executeQuery(query);
+			
 				
-				ResultSet rs = pr.executeQuery();
 				while(rs.next()) {
 					Bicycle bike = new Bicycle();
 					bike.setId(rs.getString("bikeid"));
 					bike.setName(rs.getString("name"));
 					bike.setType(rs.getString("type"));
+					bike.setStoreId(rs.getString("storeid"));
 					bike.setPricePerH(rs.getInt("priceh"));
 					bike.setStatus(rs.getString("status"));
 					
+					
 					list.add(bike);
-			}
+					
+				}
 				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+			}catch(SQLException e) {
 				e.printStackTrace();
+			}
+			finally {
+				DB.closeConection();
 			}
 		}
 		return list;

@@ -108,11 +108,15 @@ public class Bicycle {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				modelBicycle.getDataVector().removeAllElements();
+
 				String cbSelect = cbStorebike.getSelectedItem().toString();
+				System.out.println(cbSelect);
 				
 				Vector<src.DTO.Bicycle> arr = bikeBLL.getBicyclesList(cbSelect);
 				int count = 1;
 				for(int i = 0;i < arr.size(); i++) {
+					
 					src.DTO.Bicycle bike = arr.get(i);
 					String id = bike.getId();
 					String name = bike.getName();
@@ -298,6 +302,7 @@ public class Bicycle {
 		frame.setBounds(100, 100, 980, 490);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(frame);
 		
 		JLabel lblNewLabel = new JLabel("Xe Đạp ID");
 		lblNewLabel.setBounds(82, 107, 80, 17);

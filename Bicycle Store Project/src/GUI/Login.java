@@ -86,32 +86,27 @@ public class Login {
 		JButton btnLogin = new JButton("Đăng nhập");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/*
+				 * String user = tfUserLogin.getText(); String pass =
+				 * String.valueOf(tfPass.getPassword()); if(user.trim().equals("") ||
+				 * pass.trim().equals("")){ JOptionPane.showMessageDialog(frmLogin,
+				 * "Chưa nhập đầy đủ thông tin", "Thông báo", JOptionPane.ERROR_MESSAGE); }
+				 * 
+				 * 
+				 * else if( "admin".equals(user) && "123".equals(pass)) { HomePage home = new
+				 * HomePage(); home.frame.setVisible(true); home.textAdmin.setText(user);
+				 * frmLogin.setVisible(false);
+				 * 
+				 * } else { //custom title, warning icon JOptionPane.showMessageDialog(frmLogin,
+				 * "Tên đăng nhập mật khẩu sai", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+				 * 
+				 * }
+				 */
 				
-				String user = tfUserLogin.getText();
-				String pass = String.valueOf(tfPass.getPassword());
-				if(user.trim().equals("") || pass.trim().equals("")){
-					JOptionPane.showMessageDialog(frmLogin,
-						    "Chưa nhập đầy đủ thông tin",
-						    "Thông báo",
-						    JOptionPane.ERROR_MESSAGE);
-				}
-				
-				
-				else if( "admin".equals(user) && "123".equals(pass)) {
-					HomePage home = new HomePage();
-					home.frame.setVisible(true);
-					home.textAdmin.setText(user);
-					frmLogin.setVisible(false);
-					
-				}
-				else {
-					//custom title, warning icon
-					JOptionPane.showMessageDialog(frmLogin,
-					    "Tên đăng nhập mật khẩu sai",
-					    "Thông báo",
-					    JOptionPane.INFORMATION_MESSAGE);
-
-				}
+				HomePage home = new HomePage();
+				home.frame.setVisible(true);
+				home.textAdmin.setText("user");
+				frmLogin.setVisible(false);
 			}
 		});
 		btnLogin.setBounds(180, 168, 106, 29);

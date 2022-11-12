@@ -14,8 +14,8 @@ public class BicycleBLL {
 	BicycleDAL bikeBLL = new BicycleDAL();
 	StoreDAL stoBLL = new StoreDAL();
 	
-	public Vector<Bicycle> getBicyclesList(String storeid){
-		return bikeBLL.getBicycleList(storeid);
+	public Vector<Bicycle> getBicyclesList(String getStoreId){
+		return bikeBLL.getBicycleList(getStoreId);
 	}
 	
 	public Vector<Store> getStoreList(){
