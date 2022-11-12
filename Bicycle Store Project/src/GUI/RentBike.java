@@ -2,6 +2,7 @@ package src.GUI;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JTabbedPane;
@@ -44,6 +45,8 @@ import src.BLL.CustomerBLL;
 import src.BLL.RentBLL;
 import src.DTO.Customer;
 import src.DTO.Store;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 
 public class RentBike {
@@ -68,6 +71,7 @@ public class RentBike {
 	//Truy xuat BLL
 	private RentBLL rentBike = new RentBLL();
 	private CustomerBLL cusBLL = new CustomerBLL();
+	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
@@ -185,8 +189,29 @@ public class RentBike {
 		}
 		
 		JComboBox storeCb = new JComboBox(arrSTO);
-		storeCb.setBounds(139, 262, 150, 28);
+		storeCb.setBounds(128, 262, 161, 28);
 		frmThu.getContentPane().add(storeCb);
+		
+		JButton searchBtn = new JButton("");
+		searchBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(tfCccd.getText()=="")
+					JOptionPane.showMessageDialog(frmThu, "Chưa điền CCCD/CMND !");
+				
+				if(cusBLL.checkCus(tfCccd.getText())=="exists") {
+					Customer cus = cusBLL.getInformation(tfCccd.getText());
+					tfHoten.setText(cus.getName());
+					tfPhone.setText(cus.getPhone());
+				}
+				else
+					JOptionPane.showMessageDialog(frmThu, "Ko có CCCD/CMND trong hệ thống !");
+			}
+			
+		});
+		searchBtn.setAction(action);
+		searchBtn.setFont(new Font("Tahoma", Font.BOLD, 7));
+		searchBtn.setBounds(259, 94, 30, 31);
+		frmThu.getContentPane().add(searchBtn);
 		
 		
 		storeCb.addActionListener(new ActionListener() {
@@ -308,7 +333,7 @@ public class RentBike {
 		frmThu.getContentPane().add(lblNewLabel_1_2_1);
 		
 		tfCccd = new JTextField();
-		tfCccd.setBounds(139, 96, 150, 28);
+		tfCccd.setBounds(128, 96, 125, 28);
 		frmThu.getContentPane().add(tfCccd);
 		tfCccd.setColumns(10);
 		tfCccd.requestFocusInWindow();
@@ -336,6 +361,13 @@ public class RentBike {
 	    
 	  
 	    btnRent = new JButton("Thuê");
+	    btnRent.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		DetailRentBike detailRentBike = new DetailRentBike();
+	    		detailRentBike.frmHoadon.setVisible(true);
+	    		detailRentBike.frmHoadon.toFront();
+	    	}
+	    });
 		btnRent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnRent.setBounds(721, 431, 101, 35);
 		frmThu.getContentPane().add(btnRent);
@@ -350,7 +382,6 @@ public class RentBike {
 			public void actionPerformed(ActionEvent e) {
 				UserHomePage home = new UserHomePage();
 				home.frame.setVisible(true);
-				
 				frmThu.setVisible(false);
 				
 			}
@@ -374,11 +405,11 @@ public class RentBike {
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
 	    rentDate = new JDateChooser();
-		rentDate.setBounds(139, 316, 150, 28);
+		rentDate.setBounds(128, 316, 161, 28);
 		frmThu.getContentPane().add(rentDate);
 		
 		returnDate = new JDateChooser();
-		returnDate.setBounds(139, 366, 150, 28);
+		returnDate.setBounds(128, 366, 161, 28);
 		frmThu.getContentPane().add(returnDate);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Họ tên");
@@ -394,16 +425,24 @@ public class RentBike {
 		tfPhone = new JTextField();
 		tfPhone.setEditable(false);
 		tfPhone.setColumns(10);
-		tfPhone.setBounds(139, 201, 150, 28);
+		tfPhone.setBounds(128, 201, 161, 28);
 		frmThu.getContentPane().add(tfPhone);
 		
 		tfHoten = new JTextField();
 		tfHoten.setEditable(false);
 		tfHoten.setColumns(10);
-		tfHoten.setBounds(139, 147, 150, 28);
+		tfHoten.setBounds(128, 147, 161, 28);
 		frmThu.getContentPane().add(tfHoten);
 		
 	
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 };
 

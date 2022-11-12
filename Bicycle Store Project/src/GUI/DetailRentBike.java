@@ -166,9 +166,10 @@ public class DetailRentBike {
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_2);
 		
 		txtFuwefwg = new JTextField();
+		txtFuwefwg.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtFuwefwg.setText("FUWEFWG8");
 		txtFuwefwg.setEditable(false);
-		txtFuwefwg.setBounds(123, 68, 132, 20);
+		txtFuwefwg.setBounds(123, 65, 133, 24);
 		frmHoadon.getContentPane().add(txtFuwefwg);
 		txtFuwefwg.setColumns(10);
 		
