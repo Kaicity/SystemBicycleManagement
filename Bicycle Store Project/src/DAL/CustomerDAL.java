@@ -144,7 +144,7 @@ public class CustomerDAL {
 		Boolean result = false;
 		Customer object = new Customer();
 		if(DB.openConection()) {
-			String query = "SELECT * FROM customer WHERE cccc =?";
+			String query = "SELECT * FROM khachhang WHERE cccd =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);

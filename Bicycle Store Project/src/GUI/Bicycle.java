@@ -102,18 +102,21 @@ public class Bicycle {
 		JComboBox cbStorebike = new JComboBox(arrSTO);
 		cbStorebike.setBounds(163, 59, 202, 22);
 		frame.getContentPane().add(cbStorebike);
+		
 		//----------------------------------SHOW LIST XE DAP 
 		
 		cbStorebike.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				modelBicycle.getDataVector().removeAllElements();
-
+		
 				String cbSelect = cbStorebike.getSelectedItem().toString();
 				System.out.println(cbSelect);
 				
 				Vector<src.DTO.Bicycle> arr = bikeBLL.getBicyclesList(cbSelect);
+				
+				modelBicycle.getDataVector().removeAllElements();
+						
 				int count = 1;
 				for(int i = 0;i < arr.size(); i++) {
 					

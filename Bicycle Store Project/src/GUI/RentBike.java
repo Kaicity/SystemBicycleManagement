@@ -25,8 +25,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
+
+import src.BLL.RentBLL;
+import src.DTO.Store;
 
 
 public class RentBike {
@@ -35,6 +39,8 @@ public class RentBike {
 	private JTextField nameTxt;
 	private JTable table;
 	private JButton rentBtn, exitBtn;
+	
+	private RentBLL rentBike = new RentBLL();
 	
 	private DefaultTableModel tableModel = new DefaultTableModel() {
 		@Override
@@ -71,6 +77,62 @@ public class RentBike {
 	 */
 	public RentBike() {
 		initialize();
+		
+		eventRentBike();
+	}
+
+	private void eventRentBike() {
+        Vector<String> arrSTO = new Vector<String>();
+		
+		Vector<Store> listSTO = rentBike.getStoreList();
+		
+		for(int i = 0; i < listSTO.size(); i++) {
+			Store st = listSTO.get(i);
+			String id = st.getId();
+			String name = st.getName();
+			
+			arrSTO.add(id);
+		}
+		
+		
+		
+		JComboBox storeCb = new JComboBox(arrSTO);
+		storeCb.setBounds(139, 262, 150, 28);
+		frmThu.getContentPane().add(storeCb);
+		
+		storeCb.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				String cbSelect = storeCb.getSelectedItem().toString();
+				System.out.println(cbSelect);
+				
+				Vector<src.DTO.Bicycle> arr = rentBike.getBicyclesList(cbSelect);
+				
+				tableModel.getDataVector().removeAllElements();
+						
+				int count = 1;
+				for(int i = 0;i < arr.size(); i++) {
+					
+					src.DTO.Bicycle bike = arr.get(i);
+					String id = bike.getId();
+					String name = bike.getName();
+					String type = bike.getType();
+					String store = bike.getStoreId();
+					String price = String.valueOf(bike.getPricePerH());
+					String status = bike.getStatus();
+					
+					tableModel.addRow(new Object[] {
+							count++, id, name, type, store, price, status
+					});
+				}
+				
+				
+			}
+		});
 	}
 
 	/**
@@ -83,6 +145,7 @@ public class RentBike {
 		frmThu.setBounds(100, 100, 929, 516);
 		frmThu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThu.getContentPane().setLayout(null);
+		frmThu.setLocationRelativeTo(frmThu);
 		
 		
 		JLabel lblNewLabel = new JLabel("Thuê Xe");
@@ -106,10 +169,6 @@ public class RentBike {
 		frmThu.getContentPane().add(nameTxt);
 		nameTxt.setColumns(10);
 		
-		String listCuaHang[] = {"cua hang 1", "cua hang 2", "cua hang 3"};
-		JComboBox storeCb = new JComboBox(listCuaHang);
-		storeCb.setBounds(139, 262, 150, 28);
-		frmThu.getContentPane().add(storeCb);
 		
 		
 		table = new JTable();
@@ -132,31 +191,7 @@ public class RentBike {
 	    frmThu.getContentPane().add(sp1);
 	    
 	  
-	     
-	    tableModel.addRow(new Object[] {
-	    		"###", "FE8FH", "Xe Đạp 1 bánh", "Racingboy", "500.19", "Chưa thuê"
-	    });
-	    
-	    tableModel.addRow(new Object[] {
-	    		"###", "FE8FH", "Xe Đạp ghế tình yêu", "Nhún cực mạnh", "999.99", "Đã thuê"
-	    });
-	    tableModel.addRow(new Object[] {
-	    		"###", "FE8FH", "Xe Đạp 1 bánh", "Racingboy", "500.19", "Chưa thuê"
-	    });
-	    
-	    tableModel.addRow(new Object[] {
-	    		"###", "FE8FH", "Xe Đạp ghế tình yêu", "Nhún cực mạnh", "999.99", "Đã thuê"
-	    });
-	    tableModel.addRow(new Object[] {
-	    		"###", "FE8FH", "Xe Đạp 1 bánh", "Racingboy", "500.19", "Chưa thuê"
-	    });
-	    
-	    tableModel.addRow(new Object[] {
-	    		"###", "FE8FH", "Xe Đạp ghế tình yêu", "Nhún cực mạnh", "999.99", "Đã thuê"
-	    });
-	    
-	    
-	    
+	  
 		
 		exitBtn = new JButton("Thoát");
 		exitBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
