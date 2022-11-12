@@ -26,7 +26,7 @@ public class CustomerDAL {
 					Customer cus = new Customer();
 					cus.setCccd(rs.getString("cccd"));
 					cus.setName(rs.getString("name"));
-					cus.setPhone(rs.getString("sdt"));
+					cus.setPhone(rs.getString("phone"));
 					
 					list.add(cus);
 				}
@@ -46,7 +46,7 @@ public class CustomerDAL {
 	public Boolean addCustomer(Customer cus) {
 		Boolean result = false;
 		if(DB.openConection()) {
-			String query = "INSERT INTO customer VALUES(?,?,?)";
+			String query = "INSERT INTO khachhang VALUES(?,?,?)";
 			PreparedStatement pr;
 			
 			try {
@@ -73,7 +73,7 @@ public class CustomerDAL {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM customer WHERE cccd =?";
+			String query = "SELECT * FROM khachhang WHERE cccd =?";
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
@@ -96,7 +96,7 @@ public class CustomerDAL {
 	public boolean editCustomer(Customer cus) {
 		boolean result = false;
 		if(DB.openConection()) {
-			String sql = "UPDATE khachhang ten =?, sdt =? WHERE cccd =?";
+			String sql = "UPDATE khachhang name =?, phone =? WHERE cccd =?";
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(sql);
 				pr.setString(1, cus.getName());
@@ -154,7 +154,7 @@ public class CustomerDAL {
 				while(rs.next()) {
 					object.setCccd(rs.getString("cccd"));
 					object.setName(rs.getString("name"));
-					object.setPhone(rs.getString("sdt"));
+					object.setPhone(rs.getString("phone"));
 				}
 				
 			} catch (SQLException e) {
