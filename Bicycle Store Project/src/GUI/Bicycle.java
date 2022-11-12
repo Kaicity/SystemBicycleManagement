@@ -25,6 +25,7 @@ import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class Bicycle {
 
@@ -343,9 +344,10 @@ public class Bicycle {
 		tfBicyclePrice.setColumns(10);
 		
 		
-		JLabel lblNewLabel_5 = new JLabel("Quản lý xe đạp cho thuê");
+		JLabel lblNewLabel_5 = new JLabel("Quản lý xe đạp");
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_5.setBounds(82, 0, 283, 41);
+		lblNewLabel_5.setBounds(10, 8, 946, 41);
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		table = new JTable();
