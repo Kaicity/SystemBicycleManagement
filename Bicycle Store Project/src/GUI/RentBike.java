@@ -117,10 +117,10 @@ public class RentBike {
 		frmThu.getContentPane().add(table);
 		table.setModel(tableModel);
 		tableModel.addColumn("STT");
-		tableModel.addColumn("Mã Hóa Đơn");
-		tableModel.addColumn("CCCD");
-		tableModel.addColumn("DS Xe");
-		tableModel.addColumn("Tỏng Giá");
+		tableModel.addColumn("Mã Xe Đạp");
+		tableModel.addColumn("Tên Xe Đạp");
+		tableModel.addColumn("Loại Xe Đạp");
+		tableModel.addColumn("Giá/H");
 		tableModel.addColumn("Tình Trạng");
 
 		
