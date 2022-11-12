@@ -31,6 +31,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class RentManage {
@@ -38,7 +39,6 @@ public class RentManage {
 	public JFrame frmThu;
 	private JTextField nameTxt;
 	private JTable table;
-	private JTextField phoneTxt;
 	private JButton rentBtn, exitBtn;
 
 	
@@ -52,6 +52,7 @@ public class RentManage {
 	    }
 	};
 	private JTextField cccdTxt;
+	private JTextField textField;
 	
 	
 	
@@ -92,25 +93,25 @@ public class RentManage {
 		frmThu.getContentPane().setLayout(null);
 		
 		
-		JLabel lblNewLabel = new JLabel("Thuê Xe");
+		JLabel lblNewLabel = new JLabel("Quản Lý Thuê Xê");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(43, 0, 686, 46);
+		lblNewLabel.setBounds(10, 0, 895, 46);
 		frmThu.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Họ tên");
+		JLabel lblNewLabel_1 = new JLabel("CCCD/CMND");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(10, 139, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Số điện thoại");
+		JLabel lblNewLabel_1_1 = new JLabel("Trạng Thái");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_1.setBounds(10, 202, 108, 28);
+		lblNewLabel_1_1.setBounds(10, 366, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2_1 = new JLabel("Cửa hàng");
+		JLabel lblNewLabel_1_2_1 = new JLabel("Mã Cửa Hàng");
 		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_1.setBounds(10, 265, 108, 28);
+		lblNewLabel_1_2_1.setBounds(10, 194, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1);
 		
 		nameTxt = new JTextField();
@@ -119,9 +120,6 @@ public class RentManage {
 		nameTxt.setColumns(10);
 		
 		String listCuaHang[] = {"cua hang 1", "cua hang 2", "cua hang 3"};
-		JComboBox storeCb = new JComboBox(listCuaHang);
-		storeCb.setBounds(128, 267, 150, 28);
-		frmThu.getContentPane().add(storeCb);
 		
 		
 		table = new JTable();
@@ -174,17 +172,12 @@ public class RentManage {
 		rentBtn.setBounds(681, 431, 135, 35);
 		frmThu.getContentPane().add(rentBtn);
 		
-		phoneTxt = new JTextField();
-		phoneTxt.setColumns(10);
-		phoneTxt.setBounds(128, 204, 150, 28);
-		frmThu.getContentPane().add(phoneTxt);
-		
-		JLabel lblNewLabel_2 = new JLabel("Các loại xe");
+		JLabel lblNewLabel_2 = new JLabel("Danh sách thuê");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_2.setBounds(299, 57, 108, 17);
 		frmThu.getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("CCCD/CMND");
+		JLabel lblNewLabel_1_2 = new JLabel("Mã Hóa Đơn");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2.setBounds(10, 79, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2);
@@ -196,22 +189,32 @@ public class RentManage {
 		
 		JLabel lblNewLabel_1_2_1_1 = new JLabel("Ngày thuê");
 		lblNewLabel_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_1_1.setBounds(10, 324, 108, 28);
+		lblNewLabel_1_2_1_1.setBounds(10, 249, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1);
 		
 		
 		JLabel lblNewLabel_1_2_1_1_1 = new JLabel("Ngày trả");
 		lblNewLabel_1_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_1_1_1.setBounds(10, 381, 108, 28);
+		lblNewLabel_1_2_1_1_1.setBounds(10, 306, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
 		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(128, 324, 150, 28);
+		dateChooser.setBounds(128, 249, 150, 28);
 		frmThu.getContentPane().add(dateChooser);
 		
 		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(128, 381, 150, 28);
+		dateChooser_1.setBounds(128, 306, 150, 28);
 		frmThu.getContentPane().add(dateChooser_1);
+		
+		JComboBox statusCb = new JComboBox(new Object[]{});
+		statusCb.setModel(new DefaultComboBoxModel(new String[] {"Đang Thuê", "Chưa Thuê", "Đặt Trước"}));
+		statusCb.setBounds(128, 368, 150, 28);
+		frmThu.getContentPane().add(statusCb);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(128, 196, 150, 28);
+		frmThu.getContentPane().add(textField);
 		
 		
 		

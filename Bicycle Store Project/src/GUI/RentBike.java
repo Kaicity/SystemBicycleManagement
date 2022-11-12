@@ -34,7 +34,6 @@ public class RentBike {
 	public JFrame frmThu;
 	private JTextField nameTxt;
 	private JTable table;
-	private JTextField phoneTxt;
 	private JButton rentBtn, exitBtn;
 	
 	private DefaultTableModel tableModel = new DefaultTableModel() {
@@ -44,7 +43,8 @@ public class RentBike {
 	       return false;
 	    }
 	};
-	private JTextField cccdTxt;
+	private JTextField textField;
+	private JTextField textField_1;
 	
 	
 	
@@ -85,7 +85,7 @@ public class RentBike {
 		frmThu.getContentPane().setLayout(null);
 		
 		
-		JLabel lblNewLabel = new JLabel("Quản Lý Thuê Xe");
+		JLabel lblNewLabel = new JLabel("Thuê Xe");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(10, 0, 895, 46);
@@ -93,27 +93,22 @@ public class RentBike {
 		
 		JLabel lblNewLabel_1 = new JLabel("CCCD/CMND");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(10, 139, 108, 28);
+		lblNewLabel_1.setBounds(10, 94, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Trạng Thái");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_1.setBounds(10, 360, 108, 28);
-		frmThu.getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_2_1 = new JLabel("Cửa hàng");
 		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_1.setBounds(10, 196, 108, 28);
+		lblNewLabel_1_2_1.setBounds(10, 260, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1);
 		
 		nameTxt = new JTextField();
-		nameTxt.setBounds(128, 139, 150, 28);
+		nameTxt.setBounds(139, 96, 150, 28);
 		frmThu.getContentPane().add(nameTxt);
 		nameTxt.setColumns(10);
 		
 		String listCuaHang[] = {"cua hang 1", "cua hang 2", "cua hang 3"};
 		JComboBox storeCb = new JComboBox(listCuaHang);
-		storeCb.setBounds(128, 198, 150, 28);
+		storeCb.setBounds(139, 262, 150, 28);
 		frmThu.getContentPane().add(storeCb);
 		
 		
@@ -189,44 +184,49 @@ public class RentBike {
 		rentBtn.setBounds(681, 431, 135, 35);
 		frmThu.getContentPane().add(rentBtn);
 		
-		phoneTxt = new JTextField();
-		phoneTxt.setColumns(10);
-		phoneTxt.setBounds(128, 362, 150, 28);
-		frmThu.getContentPane().add(phoneTxt);
-		
-		JLabel lblNewLabel_2 = new JLabel("Danh sách đơn thuê");
+		JLabel lblNewLabel_2 = new JLabel("Danh sách xe");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_2.setBounds(299, 57, 150, 17);
 		frmThu.getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("Mã Thuê");
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2.setBounds(10, 79, 108, 28);
-		frmThu.getContentPane().add(lblNewLabel_1_2);
-		
-		cccdTxt = new JTextField();
-		cccdTxt.setBounds(128, 81, 150, 28);
-		frmThu.getContentPane().add(cccdTxt);
-		cccdTxt.setColumns(10);
-		
 		JLabel lblNewLabel_1_2_1_1 = new JLabel("Ngày thuê");
 		lblNewLabel_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_1_1.setBounds(10, 252, 108, 28);
+		lblNewLabel_1_2_1_1.setBounds(10, 316, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1);
 		
 		
 		JLabel lblNewLabel_1_2_1_1_1 = new JLabel("Ngày trả");
 		lblNewLabel_1_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_1_1_1.setBounds(10, 302, 108, 28);
+		lblNewLabel_1_2_1_1_1.setBounds(10, 366, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
 		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(128, 252, 150, 28);
+		dateChooser.setBounds(139, 316, 150, 28);
 		frmThu.getContentPane().add(dateChooser);
 		
 		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(128, 302, 150, 28);
+		dateChooser_1.setBounds(139, 366, 150, 28);
 		frmThu.getContentPane().add(dateChooser_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Họ tên");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1.setBounds(10, 145, 108, 28);
+		frmThu.getContentPane().add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Số điện thoại");
+		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1_1.setBounds(10, 199, 108, 28);
+		frmThu.getContentPane().add(lblNewLabel_1_1_1);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(139, 201, 150, 28);
+		frmThu.getContentPane().add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(139, 147, 150, 28);
+		frmThu.getContentPane().add(textField_1);
 		
 		
 		
@@ -245,10 +245,6 @@ public class RentBike {
 		});
 		
 	}
-	
-	
-	
-
 };
 
 
