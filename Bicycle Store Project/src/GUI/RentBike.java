@@ -195,6 +195,11 @@ public class RentBike {
 		JButton searchBtn = new JButton("");
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tfHoten.setEditable(true);
+				tfPhone.setEditable(true);
+				
+				tfHoten.setText("");
+				tfPhone.setText("");
 				if(tfCccd.getText()=="")
 					JOptionPane.showMessageDialog(frmThu, "Chưa điền CCCD/CMND !");
 				
@@ -202,10 +207,14 @@ public class RentBike {
 					Customer cus = cusBLL.getInformation(tfCccd.getText());
 					tfHoten.setText(cus.getName());
 					tfPhone.setText(cus.getPhone());
+					
+					tfHoten.setEditable(false);
+					tfPhone.setEditable(false);
 				}
 				else
 					JOptionPane.showMessageDialog(frmThu, "Ko có CCCD/CMND trong hệ thống !");
-			}
+				
+			}	
 			
 		});
 		searchBtn.setAction(action);
@@ -219,14 +228,14 @@ public class RentBike {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				tableModel.getDataVector().removeAllElements();
 				
 				String cbSelect = storeCb.getSelectedItem().toString();
 				System.out.println(cbSelect);
 				
 				Vector<src.DTO.Bicycle> arr = rentBike.getBicyclesList(cbSelect);
 				
-				tableModel.getDataVector().removeAllElements();
+				
 						
 				int count = 1;
 				for(int i = 0;i < arr.size(); i++) {
@@ -240,7 +249,7 @@ public class RentBike {
 					String status = bike.getStatus();
 					
 					tableModel.addRow(new Object[] {
-							count++, id, name, type, store, price, status
+							count++, id, name, type, price, status
 					});
 				}
 				
