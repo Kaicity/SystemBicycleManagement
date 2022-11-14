@@ -202,14 +202,27 @@ public class RentBike {
 		searchBtn.setIcon(new ImageIcon("C:\\Users\\ASUS\\Desktop\\sign-check-icon.png"));
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				if(tfCccd.getText().trim().equals(""))
+=======
+				tfHoten.setEditable(true);
+				tfPhone.setEditable(true);
+				
+				tfHoten.setText("");
+				tfPhone.setText("");
+				if(tfCccd.getText()=="")
+>>>>>>> branch 'master' of https://github.com/Kaicity/SystemBicycleManagement.git
 					JOptionPane.showMessageDialog(frmThu, "Chưa điền CCCD/CMND !");
 				
 				else if(cusBLL.checkCus(tfCccd.getText())=="exists") {
 					Customer cus = cusBLL.getInformation(tfCccd.getText());
 					tfHoten.setText(cus.getName());
 					tfPhone.setText(cus.getPhone());
+					
+					tfHoten.setEditable(false);
+					tfPhone.setEditable(false);
 				}
+<<<<<<< HEAD
 				else {
 					int result = JOptionPane.showConfirmDialog(frmThu, "Đéo có CCCD/CMND trong hệ thống ok!, tạo thông tin "
 							+ "khách hàng mới", "Thông báo",
@@ -222,6 +235,12 @@ public class RentBike {
 					}
 				}
 			}
+=======
+				else
+					JOptionPane.showMessageDialog(frmThu, "Ko có CCCD/CMND trong hệ thống !");
+				
+			}	
+>>>>>>> branch 'master' of https://github.com/Kaicity/SystemBicycleManagement.git
 			
 		});
 		searchBtn.setAction(action);
@@ -235,14 +254,14 @@ public class RentBike {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				tableModel.getDataVector().removeAllElements();
 				
 				String cbSelect = storeCb.getSelectedItem().toString();
 				System.out.println(cbSelect);
 				
 				Vector<src.DTO.Bicycle> arr = rentBike.getBicyclesList(cbSelect);
 				
-				tableModel.getDataVector().removeAllElements();
+				
 						
 				int count = 1;
 				for(int i = 0;i < arr.size(); i++) {
@@ -256,7 +275,7 @@ public class RentBike {
 					String status = bike.getStatus();
 					
 					tableModel.addRow(new Object[] {
-							count++, id, name, type, store, price, status
+							count++, id, name, type, price, status
 					});
 				}
 				
