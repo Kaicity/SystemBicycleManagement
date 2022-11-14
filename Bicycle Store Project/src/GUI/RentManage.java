@@ -154,7 +154,7 @@ public class RentManage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserHomePage home = new UserHomePage();
+				HomePage home = new HomePage();
 				home.frame.setVisible(true);
 				
 				frmThu.setVisible(false);

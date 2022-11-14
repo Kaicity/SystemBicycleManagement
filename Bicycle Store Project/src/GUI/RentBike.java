@@ -47,6 +47,7 @@ import src.DTO.Customer;
 import src.DTO.Store;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 
 
 public class RentBike {
@@ -101,80 +102,84 @@ public class RentBike {
 
 	private void eventRentBike() {
 		
-		//
-		frmThu.addWindowListener(new WindowListener() {
-			
-			@Override
-			public void windowOpened(WindowEvent e) {
-				String ques = "";
-				do {
-					 ques += JOptionPane.showInputDialog(frmThu,"Nhập CCCD/CMND để thuê xe");
-					 if(!(ques).equals("")) {
-						 tfCccd.setText(ques);
-					 }
-				}while(ques.isEmpty());
-				
-				
-				if(tfCccd.getText().trim().isEmpty() || tfCccd.getText().equals("null")) {
-					 UserHomePage back = new UserHomePage();
-					 back.frame.setVisible(true);
-					 frmThu.setVisible(false);
-				}else {
-					//kiem tra va dien thong tin khach hang neu khach hang da ton tai 
-					Customer info = new Customer();
-					
-					info = cusBLL.getInformation(tfCccd.getText());
-					
-					tfHoten.setText(info.getName());
-					tfPhone.setText(info.getPhone());
-					
-					if(tfHoten.getText().trim().toString().equals("") || tfPhone.getText().trim().toString().equals("")) {
-						JOptionPane.showMessageDialog(frmThu, "Khách hàng mới");
-						tfHoten.setEditable(true);
-						tfPhone.setEditable(true);
-						
-					}
-					
-				}
-				
-			}
-			
-			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowClosed(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		//Form load 
+//		frmThu.addWindowListener(new WindowListener() {
+//			
+//			@Override
+//			public void windowOpened(WindowEvent e) {
+//				String ques = "";
+//				do {
+//					 ques += JOptionPane.showInputDialog(frmThu,"Nhập CCCD/CMND để thuê xe");
+//					 if(!(ques).equals("")) {
+//						 tfCccd.setText(ques);
+//					 }
+//				}while(ques.isEmpty());
+//				
+//				
+//				if(tfCccd.getText().trim().isEmpty() || tfCccd.getText().equals("null")) {
+//					 UserHomePage back = new UserHomePage();
+//					 back.frame.setVisible(true);
+//					 frmThu.setVisible(false);
+//				}else {
+//					//kiem tra va dien thong tin khach hang neu khach hang da ton tai 
+//					Customer info = new Customer();
+//					
+//					info = cusBLL.getInformation(tfCccd.getText());
+//					
+//					tfHoten.setText(info.getName());
+//					tfPhone.setText(info.getPhone());
+//					
+//					if(tfHoten.getText().trim().toString().equals("") || tfPhone.getText().trim().toString().equals("")) {
+//						JOptionPane.showMessageDialog(frmThu, "Khách hàng mới");
+//						tfHoten.setEditable(true);
+//						tfPhone.setEditable(true);
+//						
+//					}
+//					
+//				}
+//				
+//			}
+//			
+//			@Override
+//			public void windowIconified(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowDeiconified(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowDeactivated(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowClosing(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowClosed(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowActivated(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		
+		
+		
+		
 		//----------------Lay danh sach cua hang trong combobox
         Vector<String> arrSTO = new Vector<String>();
 		
@@ -193,18 +198,29 @@ public class RentBike {
 		frmThu.getContentPane().add(storeCb);
 		
 		JButton searchBtn = new JButton("");
+		searchBtn.setSelectedIcon(new ImageIcon("C:\\Users\\ASUS\\Desktop\\sign-check-icon.png"));
+		searchBtn.setIcon(new ImageIcon("C:\\Users\\ASUS\\Desktop\\sign-check-icon.png"));
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(tfCccd.getText()=="")
+				if(tfCccd.getText().trim().equals(""))
 					JOptionPane.showMessageDialog(frmThu, "Chưa điền CCCD/CMND !");
 				
-				if(cusBLL.checkCus(tfCccd.getText())=="exists") {
+				else if(cusBLL.checkCus(tfCccd.getText())=="exists") {
 					Customer cus = cusBLL.getInformation(tfCccd.getText());
 					tfHoten.setText(cus.getName());
 					tfPhone.setText(cus.getPhone());
 				}
-				else
-					JOptionPane.showMessageDialog(frmThu, "Ko có CCCD/CMND trong hệ thống !");
+				else {
+					int result = JOptionPane.showConfirmDialog(frmThu, "Đéo có CCCD/CMND trong hệ thống ok!, tạo thông tin "
+							+ "khách hàng mới", "Thông báo",
+							JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+					if(result == JOptionPane.YES_NO_OPTION) {
+						tfHoten.setEditable(true);
+						tfPhone.setEditable(true);
+						
+						
+					}
+				}
 			}
 			
 		});
@@ -266,12 +282,6 @@ public class RentBike {
 						else if(tfCccd.getText().length() > 20) {
 							JOptionPane.showMessageDialog(frmThu, "CCCD/CMND không được quá 20 kí tự");
 						}
-						else if(selectBike < 0 || storeCb.getSelectedIndex() < 0) {
-							JOptionPane.showMessageDialog(frmThu, "Vui Lòng chọn xe đạp trong danh sách xe");
-						}
-						else if(storeCb.getSelectedIndex() < 0) {
-							JOptionPane.showMessageDialog(frmThu, "Vui Lòng chọn cửa hàng");
-						}
 						else {
 							
 							SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
@@ -290,9 +300,6 @@ public class RentBike {
 							System.out.println(result);
 							JOptionPane.showMessageDialog(frmThu, result);
 							
-							
-							DetailRentBike inv = new DetailRentBike();
-							inv.frmHoadon.setVisible(true);
 						}
 					}
 				});
@@ -361,13 +368,6 @@ public class RentBike {
 	    
 	  
 	    btnRent = new JButton("Thuê");
-	    btnRent.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		DetailRentBike detailRentBike = new DetailRentBike();
-	    		detailRentBike.frmHoadon.setVisible(true);
-	    		detailRentBike.frmHoadon.toFront();
-	    	}
-	    });
 		btnRent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnRent.setBounds(721, 431, 101, 35);
 		frmThu.getContentPane().add(btnRent);
