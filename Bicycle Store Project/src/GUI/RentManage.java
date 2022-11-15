@@ -216,25 +216,7 @@ public class RentManage {
 		textField.setBounds(128, 196, 150, 28);
 		frmThu.getContentPane().add(textField);
 		
-		
-		
-		eventRent();
 	}
-	
-	private void eventRent() {
-		rentBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				DetailRentBike inv = new DetailRentBike();
-				inv.frmHoadon.setVisible(true);
-				
-			}
-		});
-		
-	}
-	
-	
 	
 
 };

@@ -57,7 +57,7 @@ public class RentBike {
 	private JTable table;
 	private JButton  exitBtn, btnRent;
 	private JDateChooser rentDate, returnDate;
-	
+	private JLabel checkSelectStore;
 	
 	private DefaultTableModel tableModel = new DefaultTableModel() {
 		@Override
@@ -72,7 +72,7 @@ public class RentBike {
 	//Truy xuat BLL
 	private RentBLL rentBike = new RentBLL();
 	private CustomerBLL cusBLL = new CustomerBLL();
-	private final Action action = new SwingAction();
+	
 
 	/**
 	 * Launch the application.
@@ -101,6 +101,8 @@ public class RentBike {
 	}
 
 	private void eventRentBike() {
+		
+		//DOAN CODE NAY CHI MANG TINH CHAT DEMO 
 		
 		//Form load 
 //		frmThu.addWindowListener(new WindowListener() {
@@ -185,33 +187,40 @@ public class RentBike {
 		
 		Vector<Store> listSTO = rentBike.getStoreList();
 		
+		String temp = " ";
+		
+		arrSTO.add(temp);
+		
 		for(int i = 0; i < listSTO.size(); i++) {
 			Store st = listSTO.get(i);
 			String id = st.getId();
 			String name = st.getName();
-			
+		
 			arrSTO.add(id);
 		}
 		
+		
 		JComboBox storeCb = new JComboBox(arrSTO);
-		storeCb.setBounds(128, 262, 161, 28);
+		storeCb.setSelectedItem("");
+		storeCb.setBounds(128, 262, 181, 28);
 		frmThu.getContentPane().add(storeCb);
 		
+		
+		//---------------------------------------------------------
+		
 		JButton searchBtn = new JButton("");
+		searchBtn.setBackground(new Color(255, 255, 255));
 		searchBtn.setSelectedIcon(new ImageIcon("C:\\Users\\ASUS\\Desktop\\sign-check-icon.png"));
-		searchBtn.setIcon(new ImageIcon("C:\\Users\\ASUS\\Desktop\\sign-check-icon.png"));
+		searchBtn.setIcon(new ImageIcon("C:\\Users\\ASUS\\Downloads\\sign-check-icon.png"));
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				if(tfCccd.getText().trim().equals(""))
-=======
 				tfHoten.setEditable(true);
 				tfPhone.setEditable(true);
 				
 				tfHoten.setText("");
 				tfPhone.setText("");
-				if(tfCccd.getText()=="")
->>>>>>> branch 'master' of https://github.com/Kaicity/SystemBicycleManagement.git
+				
+				if(tfCccd.getText().trim().equals(""))
 					JOptionPane.showMessageDialog(frmThu, "Chưa điền CCCD/CMND !");
 				
 				else if(cusBLL.checkCus(tfCccd.getText())=="exists") {
@@ -222,7 +231,6 @@ public class RentBike {
 					tfHoten.setEditable(false);
 					tfPhone.setEditable(false);
 				}
-<<<<<<< HEAD
 				else {
 					int result = JOptionPane.showConfirmDialog(frmThu, "Đéo có CCCD/CMND trong hệ thống ok!, tạo thông tin "
 							+ "khách hàng mới", "Thông báo",
@@ -235,18 +243,19 @@ public class RentBike {
 					}
 				}
 			}
-=======
-				else
-					JOptionPane.showMessageDialog(frmThu, "Ko có CCCD/CMND trong hệ thống !");
-				
-			}	
->>>>>>> branch 'master' of https://github.com/Kaicity/SystemBicycleManagement.git
 			
 		});
-		searchBtn.setAction(action);
+		
 		searchBtn.setFont(new Font("Tahoma", Font.BOLD, 7));
-		searchBtn.setBounds(259, 94, 30, 31);
+		searchBtn.setBounds(259, 94, 50, 31);
 		frmThu.getContentPane().add(searchBtn);
+		
+		checkSelectStore = new JLabel("Chọn cửa hàng");
+		checkSelectStore.setForeground(new Color(255, 0, 0));
+		checkSelectStore.setBounds(128, 240, 125, 22);
+		frmThu.getContentPane().add(checkSelectStore);
+		
+		
 		
 		
 		storeCb.addActionListener(new ActionListener() {
@@ -254,14 +263,14 @@ public class RentBike {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				tableModel.getDataVector().removeAllElements();
+				
 				
 				String cbSelect = storeCb.getSelectedItem().toString();
 				System.out.println(cbSelect);
 				
 				Vector<src.DTO.Bicycle> arr = rentBike.getBicyclesList(cbSelect);
 				
-				
+				tableModel.getDataVector().removeAllElements();
 						
 				int count = 1;
 				for(int i = 0;i < arr.size(); i++) {
@@ -275,17 +284,25 @@ public class RentBike {
 					String status = bike.getStatus();
 					
 					tableModel.addRow(new Object[] {
-							count++, id, name, type, price, status
+							count++, id, name, type, store, price, status
 					});
 				}
 				
 				//--------------------EVENT THUE LAY THONG TIN TU KHACH HANG NHAP VAO
+				System.out.println(storeCb.getSelectedItem().toString());
+				if(!(storeCb.getSelectedItem().toString().equals(" "))) {
+					checkSelectStore.setText("Đã chọn");
 				
+				}
+				else {
+					checkSelectStore.setText("Chọn cửa hàng");
+				}
 				
 				btnRent.addActionListener(new ActionListener() {
-					
+			    	
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						
 						
 						int selectBike = table.getSelectedRow();
 						
@@ -293,13 +310,20 @@ public class RentBike {
 						d1 = rentDate.getDate();
 						d2 = rentDate.getDate();
 						
-						if((d1 == null && d2 == null) || tfHoten.getText().trim().equals("") || tfPhone.getText().trim().equals("")
-								|| tfCccd.getText().trim().equals("")) {
+						if(tfHoten.getText().trim().equals("") || tfPhone.getText().trim().equals("")
+								|| tfCccd.getText().trim().equals("") || (d1 == null && d2 == null)) {
 							
 							JOptionPane.showMessageDialog(frmThu, "Vui lòng nhập đầy đủ thông tin khách hàng");
 						}
+						else if(checkSelectStore.getText().equals("Chọn cửa hàng")) {
+							JOptionPane.showMessageDialog(frmThu, "Chưa chọn cửa hàng" , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+						}
 						else if(tfCccd.getText().length() > 20) {
 							JOptionPane.showMessageDialog(frmThu, "CCCD/CMND không được quá 20 kí tự");
+							System.out.println(storeCb.getSelectedItem().toString());
+						}
+						else if((d1 == null && d2 == null)) {
+							JOptionPane.showMessageDialog(frmThu, "Chưa chọn ngày thuê / ngày trả" , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 						}
 						else {
 							
@@ -315,14 +339,20 @@ public class RentBike {
 							newCus.setName(tfHoten.getText());
 							newCus.setPhone(tfPhone.getText());
 							
-							String result = cusBLL.addNewCustomer(newCus);
-							System.out.println(result);
-							JOptionPane.showMessageDialog(frmThu, result);
+//							String result = cusBLL.addNewCustomer(newCus);
+//							System.out.println(result);
+//							JOptionPane.showMessageDialog(frmThu, result);
+							
+							DetailRentBike inv = new DetailRentBike();
+							inv.frmHoadon.setVisible(true);
+							
 							
 						}
-					}
-				});
-				
+						
+			    	
+			        }
+			    	
+			    });
 			}
 		});
 		
@@ -336,7 +366,7 @@ public class RentBike {
 	private void initialize() {
 		frmThu = new JFrame();
 		frmThu.setTitle("THUÊ");
-		frmThu.setBounds(100, 100, 929, 516);
+		frmThu.setBounds(100, 100, 988, 516);
 		frmThu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThu.getContentPane().setLayout(null);
 		frmThu.setLocationRelativeTo(frmThu);
@@ -382,18 +412,20 @@ public class RentBike {
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		JScrollPane sp1 = new JScrollPane(table);
-		sp1.setBounds(299, 81, 606, 327);
+		sp1.setBounds(319, 81, 643, 327);
 	    frmThu.getContentPane().add(sp1);
 	    
 	  
 	    btnRent = new JButton("Thuê");
+	    
+	    
 		btnRent.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnRent.setBounds(721, 431, 101, 35);
+		btnRent.setBounds(772, 417, 101, 35);
 		frmThu.getContentPane().add(btnRent);
 		
 		exitBtn = new JButton("Thoát");
 		exitBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
-		exitBtn.setBounds(826, 431, 79, 35);
+		exitBtn.setBounds(883, 417, 79, 35);
 		frmThu.getContentPane().add(exitBtn);
 		exitBtn.addActionListener(new ActionListener() {
 			
@@ -409,7 +441,7 @@ public class RentBike {
 
 		JLabel lblNewLabel_2 = new JLabel("Danh sách xe");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_2.setBounds(299, 57, 150, 17);
+		lblNewLabel_2.setBounds(318, 53, 150, 17);
 		frmThu.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_1_2_1_1 = new JLabel("Ngày thuê");
@@ -424,11 +456,11 @@ public class RentBike {
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
 	    rentDate = new JDateChooser();
-		rentDate.setBounds(128, 316, 161, 28);
+		rentDate.setBounds(128, 316, 181, 28);
 		frmThu.getContentPane().add(rentDate);
 		
 		returnDate = new JDateChooser();
-		returnDate.setBounds(128, 366, 161, 28);
+		returnDate.setBounds(128, 366, 181, 28);
 		frmThu.getContentPane().add(returnDate);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Họ tên");
@@ -444,24 +476,16 @@ public class RentBike {
 		tfPhone = new JTextField();
 		tfPhone.setEditable(false);
 		tfPhone.setColumns(10);
-		tfPhone.setBounds(128, 201, 161, 28);
+		tfPhone.setBounds(128, 201, 181, 28);
 		frmThu.getContentPane().add(tfPhone);
 		
 		tfHoten = new JTextField();
 		tfHoten.setEditable(false);
 		tfHoten.setColumns(10);
-		tfHoten.setBounds(128, 147, 161, 28);
+		tfHoten.setBounds(128, 147, 181, 28);
 		frmThu.getContentPane().add(tfHoten);
 		
 	
-	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
 	}
 };
 
