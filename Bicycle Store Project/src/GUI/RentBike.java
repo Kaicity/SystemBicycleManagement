@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
@@ -44,6 +45,7 @@ import com.toedter.calendar.JDateChooser;
 import src.BLL.CustomerBLL;
 import src.BLL.RentBLL;
 import src.DTO.Customer;
+import src.DTO.Rent;
 import src.DTO.Store;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -53,7 +55,7 @@ import javax.swing.ImageIcon;
 public class RentBike {
 
 	public JFrame frmThu;
-	private JTextField tfCccd;
+	private JTextField tfCccdRent;
 	private JTable table;
 	private JButton  exitBtn, btnRent;
 	private JDateChooser rentDate, returnDate;
@@ -66,12 +68,13 @@ public class RentBike {
 	       return false;
 	    }
 	};
-	private JTextField tfPhone;
-	private JTextField tfHoten;
+	private JTextField tfPhoneRent;
+	private JTextField tfHotenRent;
 	
 	//Truy xuat BLL
 	private RentBLL rentBike = new RentBLL();
 	private CustomerBLL cusBLL = new CustomerBLL();
+	private JLabel tfXedap;
 	
 
 	/**
@@ -214,31 +217,30 @@ public class RentBike {
 		searchBtn.setIcon(new ImageIcon("C:\\Users\\ASUS\\Downloads\\sign-check-icon.png"));
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tfHoten.setEditable(true);
-				tfPhone.setEditable(true);
+				tfHotenRent.setEditable(true);
+				tfPhoneRent.setEditable(true);
 				
-				tfHoten.setText("");
-				tfPhone.setText("");
+				tfHotenRent.setText("");
+				tfPhoneRent.setText("");
 				
-				if(tfCccd.getText().trim().equals(""))
+				if(tfCccdRent.getText().trim().equals(""))
 					JOptionPane.showMessageDialog(frmThu, "Chưa điền CCCD/CMND !");
 				
-				else if(cusBLL.checkCus(tfCccd.getText())=="exists") {
-					Customer cus = cusBLL.getInformation(tfCccd.getText());
-					tfHoten.setText(cus.getName());
-					tfPhone.setText(cus.getPhone());
+				else if(cusBLL.checkCus(tfCccdRent.getText())=="exists") {
+					Customer cus = cusBLL.getInformation(tfCccdRent.getText());
+					tfHotenRent.setText(cus.getName());
+					tfPhoneRent.setText(cus.getPhone());
 					
-					tfHoten.setEditable(false);
-					tfPhone.setEditable(false);
+					tfHotenRent.setEditable(false);
+					tfPhoneRent.setEditable(false);
 				}
 				else {
-					int result = JOptionPane.showConfirmDialog(frmThu, "Đéo có CCCD/CMND trong hệ thống ok!, tạo thông tin "
+					int result = JOptionPane.showConfirmDialog(frmThu, "Không có CCCD/CMND trong hệ thống "
 							+ "khách hàng mới", "Thông báo",
 							JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if(result == JOptionPane.YES_NO_OPTION) {
-						tfHoten.setEditable(true);
-						tfPhone.setEditable(true);
-						
+						tfHotenRent.setEditable(true);
+						tfPhoneRent.setEditable(true);
 						
 					}
 				}
@@ -279,12 +281,11 @@ public class RentBike {
 					String id = bike.getId();
 					String name = bike.getName();
 					String type = bike.getType();
-					String store = bike.getStoreId();
 					String price = String.valueOf(bike.getPricePerH());
 					String status = bike.getStatus();
 					
 					tableModel.addRow(new Object[] {
-							count++, id, name, type, store, price, status
+							count++, id, name, type, price, status
 					});
 				}
 				
@@ -310,20 +311,23 @@ public class RentBike {
 						d1 = rentDate.getDate();
 						d2 = rentDate.getDate();
 						
-						if(tfHoten.getText().trim().equals("") || tfPhone.getText().trim().equals("")
-								|| tfCccd.getText().trim().equals("") || (d1 == null && d2 == null)) {
+						if(tfHotenRent.getText().trim().equals("") || tfPhoneRent.getText().trim().equals("")
+								|| tfCccdRent.getText().trim().equals("")) {
 							
 							JOptionPane.showMessageDialog(frmThu, "Vui lòng nhập đầy đủ thông tin khách hàng");
 						}
 						else if(checkSelectStore.getText().equals("Chọn cửa hàng")) {
 							JOptionPane.showMessageDialog(frmThu, "Chưa chọn cửa hàng" , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 						}
-						else if(tfCccd.getText().length() > 20) {
+						else if(tfCccdRent.getText().length() > 20) {
 							JOptionPane.showMessageDialog(frmThu, "CCCD/CMND không được quá 20 kí tự");
 							System.out.println(storeCb.getSelectedItem().toString());
 						}
-						else if((d1 == null && d2 == null)) {
+						else if(d1 == null || d2 == null) {
 							JOptionPane.showMessageDialog(frmThu, "Chưa chọn ngày thuê / ngày trả" , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+						}
+						else if(tfXedap.getText().equals("")) {
+							JOptionPane.showMessageDialog(frmThu, "Vui lòng chọn xe đạp để thuê");
 						}
 						else {
 							
@@ -335,18 +339,48 @@ public class RentBike {
 							
 							//Set thong tin khach hang nhap vao
 							Customer newCus = new Customer();
-							newCus.setCccd(tfCccd.getText());
-							newCus.setName(tfHoten.getText());
-							newCus.setPhone(tfPhone.getText());
+							newCus.setCccd(tfCccdRent.getText());
+							newCus.setName(tfHotenRent.getText());
+							newCus.setPhone(tfPhoneRent.getText());
+							
+							Rent rent = new Rent();
+							rent.setCustomer(newCus);
+							
+							rent.setStore(storeCb.getSelectedItem().toString());
+							rent.setRentDate(d1);
+							rent.setReturnDate(d2);
+							
+							
+							
+							
 							
 //							String result = cusBLL.addNewCustomer(newCus);
 //							System.out.println(result);
 //							JOptionPane.showMessageDialog(frmThu, result);
 							
-							DetailRentBike inv = new DetailRentBike();
-							inv.frmHoadon.setVisible(true);
+							DetailRentBike detailInv = new DetailRentBike();
+							detailInv.frmHoadon.setVisible(true);
 							
-							
+						    detailInv.tfCustomerName.setText(tfHotenRent.getText());
+						    detailInv.tfPhoneCus.setText(tfPhoneRent.getText());
+						    detailInv.tfStoreName.setText(storeCb.getSelectedItem().toString());
+						    
+						    
+						    
+						    int i = table.getSelectedRow();
+						    
+						    String id = tableModel.getValueAt(i, 1).toString();
+						    String name = tableModel.getValueAt(i, 2).toString();
+						    String type = tableModel.getValueAt(i, 3).toString();
+						    String price = tableModel.getValueAt(i, 4).toString();
+						
+						    
+						    
+						    detailInv.bikeId.setText(id);
+						    detailInv.bikeName.setText(name);
+						    detailInv.bikePriceh.setText(price);
+						    detailInv.rentDate.setText(String.valueOf(d1.getDay()));
+						    detailInv.returnDate.setText(String.valueOf(d2.getDay()));							
 						}
 						
 			    	
@@ -355,6 +389,17 @@ public class RentBike {
 			    });
 			}
 		});
+		
+		//table mouse 
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int i = table.getSelectedRow();
+				if(i >= 0) {
+					tfXedap.setText(tableModel.getValueAt(i, 2).toString());
+				}
+			}
+		});
+		
 		
 		
 	}
@@ -388,11 +433,11 @@ public class RentBike {
 		lblNewLabel_1_2_1.setBounds(10, 260, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1);
 		
-		tfCccd = new JTextField();
-		tfCccd.setBounds(128, 96, 125, 28);
-		frmThu.getContentPane().add(tfCccd);
-		tfCccd.setColumns(10);
-		tfCccd.requestFocusInWindow();
+		tfCccdRent = new JTextField();
+		tfCccdRent.setBounds(128, 96, 125, 28);
+		frmThu.getContentPane().add(tfCccdRent);
+		tfCccdRent.setColumns(10);
+		tfCccdRent.requestFocusInWindow();
 		
 		
 		
@@ -406,6 +451,10 @@ public class RentBike {
 		tableModel.addColumn("Loại Xe Đạp");
 		tableModel.addColumn("Giá/H");
 		tableModel.addColumn("Tình Trạng");
+		
+	    tableModel.addRow( new Object[] {
+	    		" ", " "
+	    });
 
 		
 		table.setRowSelectionAllowed(true);
@@ -473,17 +522,21 @@ public class RentBike {
 		lblNewLabel_1_1_1.setBounds(10, 199, 108, 28);
 		frmThu.getContentPane().add(lblNewLabel_1_1_1);
 		
-		tfPhone = new JTextField();
-		tfPhone.setEditable(false);
-		tfPhone.setColumns(10);
-		tfPhone.setBounds(128, 201, 181, 28);
-		frmThu.getContentPane().add(tfPhone);
+		tfPhoneRent = new JTextField();
+		tfPhoneRent.setEditable(false);
+		tfPhoneRent.setColumns(10);
+		tfPhoneRent.setBounds(128, 201, 181, 28);
+		frmThu.getContentPane().add(tfPhoneRent);
 		
-		tfHoten = new JTextField();
-		tfHoten.setEditable(false);
-		tfHoten.setColumns(10);
-		tfHoten.setBounds(128, 147, 181, 28);
-		frmThu.getContentPane().add(tfHoten);
+		tfHotenRent = new JTextField();
+		tfHotenRent.setEditable(false);
+		tfHotenRent.setColumns(10);
+		tfHotenRent.setBounds(128, 147, 181, 28);
+		frmThu.getContentPane().add(tfHotenRent);
+		
+		tfXedap = new JLabel("");
+		tfXedap.setBounds(318, 429, 204, 14);
+		frmThu.getContentPane().add(tfXedap);
 		
 	
 	}

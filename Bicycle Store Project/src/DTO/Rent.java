@@ -8,7 +8,7 @@ public class Rent{
 	
     private Customer customer;
     private Bicycle bicycle;
-    private Store store;
+    private String store;
     
     private String id;
     private int deposit;
@@ -16,7 +16,7 @@ public class Rent{
     private Date returnDate;
     
     
-	public Rent(Customer customer, Bicycle bicycle,Store store, String id, int deposit, Date rentDate,
+	public Rent(Customer customer, Bicycle bicycle, String store, String id, int deposit, Date rentDate,
 			Date returnDate) {
 		super();
 		this.customer = customer;
@@ -37,7 +37,7 @@ public class Rent{
 
 	public Rent() {}
 	
-
+	
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -86,17 +86,17 @@ public class Rent{
 		this.returnDate = returnDate;
 	}
 
-	public Store getStore() {
+	public String getStore() {
 		return store;
 	}
 
-	public void setStore(Store store) {
+	public void setStore(String store) {
 		this.store = store;
 	}
 	
-	
-	
-	
+	public int rentPayment(int priceH, int deposit, int dayRent, int dayReturn) {
+		return (priceH + deposit) * (dayReturn - dayRent);
+	}
 	
 }
 	
