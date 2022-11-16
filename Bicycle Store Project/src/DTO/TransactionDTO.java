@@ -8,10 +8,10 @@ public class TransactionDTO {
     private String id;
     private String idBicycle;
     private String Status;
-    private Date rentDate;
-    private Date returnDate;
+    private String rentDate;
+    private String returnDate;
     
-    public  TransactionDTO(String id,String idBicycle,String Status,Date rentDate,Date returnDate)
+    public  TransactionDTO(String id,String idBicycle,String Status,String rentDate,String returnDate)
     {
     	this.id = id;
     	this.idBicycle=idBicycle;
@@ -33,10 +33,10 @@ public class TransactionDTO {
     public String getStatus() {
 		return Status;
 	}
-    public Date getRentDate() {
+    public String getRentDate() {
 		return rentDate;
 	}
-    public Date getReturnDate() {
+    public String getReturnDate() {
 		return returnDate;
 	}
     
@@ -49,10 +49,10 @@ public class TransactionDTO {
     public void setStatus(String status) {
 		Status = status;
 	}
-    public void setRentDate(Date rentDate) {
+    public void setRentDate(String rentDate) {
 		this.rentDate = rentDate;
 	}
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(String returnDate) {
 		this.returnDate = returnDate;
 	}
     
