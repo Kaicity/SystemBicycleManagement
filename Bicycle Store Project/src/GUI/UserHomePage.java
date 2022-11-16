@@ -118,6 +118,18 @@ public class UserHomePage {
 		btnLchSThu.setBackground(new Color(65, 105, 225));
 		btnLchSThu.setBounds(306, 170, 249, 120);
 		frame.getContentPane().add(btnLchSThu);
+		btnLchSThu.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Transaction Transaction = new Transaction();
+				Transaction.frmlichsu.setVisible(true);
+				
+				frame.setVisible(false);
+				
+				
+			}
+		});
 		
 		JButton btnThoatUserHome = new JButton("Thoát");
 		btnThoatUserHome.setBounds(306, 301, 510, 62);
