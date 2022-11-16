@@ -38,6 +38,7 @@ import java.lang.ProcessHandle.Info;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
@@ -380,7 +381,10 @@ public class RentBike {
 						    detailInv.bikeId.setText(id);
 						    detailInv.bikeName.setText(name);
 						    detailInv.bikePriceh.setText(price);
-						    detailInv.howDay.setText(String.valueOf(d2.getTime() - d1.getTime()));					
+						    
+						    Calendar cal = Calendar.getInstance();
+						    
+						    detailInv.howDay.setText(String.valueOf(d1.getDay() + d2.getDay()));					
 						}
 						
 			    	
