@@ -333,10 +333,12 @@ public class RentBike {
 						}
 						else {
 							
-							SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
-							String rentD, returnD;
-							rentD = dcn.format(d1);
-							returnD = dcn.format(d2);
+							
+							
+							
+							SimpleDateFormat formatdate = new SimpleDateFormat("dd-MM-yyyy");
+							String rentD = formatdate.format(d1);
+							String returnD = formatdate.format(d2);
 							
 							
 							//Set thong tin khach hang nhap vao
@@ -509,10 +511,12 @@ public class RentBike {
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
 	    rentDate = new JDateChooser();
+	    rentDate.setDateFormatString("dd/mm/yyyy");
 		rentDate.setBounds(128, 316, 181, 28);
 		frmThu.getContentPane().add(rentDate);
 		
 		returnDate = new JDateChooser();
+		returnDate.setDateFormatString("dd/mm/yyyy");
 		returnDate.setBounds(128, 366, 181, 28);
 		frmThu.getContentPane().add(returnDate);
 		
