@@ -18,19 +18,21 @@ public class DetailRentBikeDAL {
 	public Boolean orderBike(Rent re) {
 		Boolean result = false;
 		if(DB.openConection()) {
-			String query = "INSERT INTO hoadon VALUES(?,?,?,?,?,?)";
+			String query = "INSERT INTO hoadon VALUES(?,?,?,?,?,?,?)";
 			PreparedStatement pr;
 			
 			try {
 				pr = DB.con.prepareStatement(query);
-				pr.setString(1, re.getId());
+				pr.setString(1,null);
 				pr.setString(2, re.getCustomer().getCccd());
 				//chi them dc 1 xe
 				pr.setString(3, re.getBicycle().getId());
-				pr.setString(4, re.getStore().getId());
-				pr.setInt(5, re.getDeposit());
-				pr.setDate(6, (Date) re.getRentDate());
-				pr.setDate(7, (Date) re.getReturnDate());
+				pr.setString(4, re.getRentDate());
+				pr.setString(5, re.getReturnDate());
+				
+				pr.setDate(6, null);
+				
+				pr.setString(7,"Đang Thuê");
 			
 				
 				if(pr.executeUpdate() >= 0) {

@@ -12,12 +12,12 @@ public class Rent{
     
     private String id;
     private int deposit;
-    private Date rentDate;
-    private Date returnDate;
+    private String rentDate;
+    private String returnDate;
     
     
-	public Rent(Customer customer, Bicycle bicycle, String store, String id, int deposit, Date rentDate,
-			Date returnDate) {
+	public Rent(Customer customer, Bicycle bicycle, String store, String id, int deposit, String rentDate,
+			String returnDate) {
 		super();
 		this.customer = customer;
 		this.bicycle = bicycle;
@@ -70,19 +70,19 @@ public class Rent{
 		this.deposit = deposit;
 	}
 
-	public Date getRentDate() {
+	public String getRentDate() {
 		return rentDate;
 	}
 
-	public void setRentDate(Date rentDate) {
+	public void setRentDate(String rentDate) {
 		this.rentDate = rentDate;
 	}
 
-	public Date getReturnDate() {
+	public String getReturnDate() {
 		return returnDate;
 	}
 
-	public void setReturnDate(Date returnDate) {
+	public void setReturnDate(String returnDate) {
 		this.returnDate = returnDate;
 	}
 

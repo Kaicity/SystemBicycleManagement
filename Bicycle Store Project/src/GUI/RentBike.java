@@ -310,6 +310,7 @@ public class RentBike {
 						int selectBike = table.getSelectedRow();
 						
 						java.util.Date d1, d2;
+					
 						d1 = rentDate.getDate();
 						d2 = rentDate.getDate();
 						
@@ -347,16 +348,16 @@ public class RentBike {
 							newCus.setName(tfHotenRent.getText());
 							newCus.setPhone(tfPhoneRent.getText());
 							
+							//cusBLL.addNewCustomer(newCus);
+							
+							
 							Rent rent = new Rent();
 							rent.setCustomer(newCus);
-							
 							rent.setStore(storeCb.getSelectedItem().toString());
-							rent.setRentDate(d1);
-							rent.setReturnDate(d2);
+							rent.setRentDate(d1.toString());
+							rent.setReturnDate(d2.toString());
 							
-							
-							
-							
+							//rentBike.addHoadon(rent);
 							
 //							String result = cusBLL.addNewCustomer(newCus);
 //							System.out.println(result);
@@ -364,11 +365,18 @@ public class RentBike {
 							
 							DetailRentBike detailInv = new DetailRentBike();
 							detailInv.frmHoadon.setVisible(true);
-							
 						    detailInv.tfCustomerName.setText(tfHotenRent.getText());
+						    detailInv.tfCccd.setText(tfCccdRent.getText());
 						    detailInv.tfPhoneCus.setText(tfPhoneRent.getText());
-						    detailInv.tfStoreName.setText(storeCb.getSelectedItem().toString());
+						    detailInv.tfStoreName.setText(storeCb.getSelectedItem().toString()); 
 						    
+						    
+						    detailInv.d1 = d1;
+						    detailInv.d2 = d2;
+						    
+						    
+						    
+						    detailInv.tfhoadonid.setText(String.valueOf(rentBike.getNextHdid()));
 						    
 						    
 						    int i = table.getSelectedRow();
@@ -384,9 +392,13 @@ public class RentBike {
 						    detailInv.bikeName.setText(name);
 						    detailInv.bikePriceh.setText(price);
 						    
+						    
+						    
 						    Calendar cal = Calendar.getInstance();
 						    
-						    detailInv.howDay.setText(String.valueOf(d1.getDay() + d2.getDay()));					
+						    int rDay = d2.getTimezoneOffset() - d1.getTimezoneOffset();
+						    
+						    detailInv.howDay.setText(String.valueOf(rDay));					
 						}
 						
 			    	
@@ -511,12 +523,12 @@ public class RentBike {
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
 	    rentDate = new JDateChooser();
-	    rentDate.setDateFormatString("dd/mm/yyyy");
+	    rentDate.setDateFormatString("yyyy-mm-dd");
 		rentDate.setBounds(128, 316, 181, 28);
 		frmThu.getContentPane().add(rentDate);
 		
 		returnDate = new JDateChooser();
-		returnDate.setDateFormatString("dd/mm/yyyy");
+		returnDate.setDateFormatString("yyyy-mm-dd");
 		returnDate.setBounds(128, 366, 181, 28);
 		frmThu.getContentPane().add(returnDate);
 		
@@ -531,13 +543,11 @@ public class RentBike {
 		frmThu.getContentPane().add(lblNewLabel_1_1_1);
 		
 		tfPhoneRent = new JTextField();
-		tfPhoneRent.setEditable(false);
 		tfPhoneRent.setColumns(10);
 		tfPhoneRent.setBounds(128, 201, 181, 28);
 		frmThu.getContentPane().add(tfPhoneRent);
 		
 		tfHotenRent = new JTextField();
-		tfHotenRent.setEditable(false);
 		tfHotenRent.setColumns(10);
 		tfHotenRent.setBounds(128, 147, 181, 28);
 		frmThu.getContentPane().add(tfHotenRent);

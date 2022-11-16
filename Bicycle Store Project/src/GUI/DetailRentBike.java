@@ -2,6 +2,7 @@ package src.GUI;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -10,11 +11,14 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import src.DTO.Bicycle;
+import src.DTO.Customer;
 import src.DTO.Rent;
 
 import javax.swing.JTextField;
@@ -23,17 +27,28 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.awt.event.ActionEvent;
+
+import src.BLL.RentBLL;
+import src.BLL.BicycleBLL;
+import src.BLL.CustomerBLL;
 
 public class DetailRentBike {
 
 	public JFrame frmHoadon;
 	
+	
 	DefaultTableModel dTable = new DefaultTableModel();
 	JTextField tfhoadonid , tfDeposit, bikeId;
-	JLabel tfCustomerName, tfPhoneCus, tfStoreName, bikeName, bikePriceh, howDay;
+	JLabel tfCustomerName, tfPhoneCus, tfStoreName, bikeName, bikePriceh, howDay, tfCccd;
+	java.util.Date d1, d2;
 	Rent rentPay = new Rent();
 	private JTextField totalpayment;
+	
+	RentBLL rentBll = new RentBLL();
+	CustomerBLL cusBll = new CustomerBLL();
+	BicycleBLL bikeBLL = new BicycleBLL();
 
 	/**
 	 * Launch the application.
@@ -89,12 +104,12 @@ public class DetailRentBike {
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Số Điện Thoại :");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_2.setBounds(10, 143, 103, 31);
+		lblNewLabel_1_2.setBounds(10, 185, 103, 31);
 		frmHoadon.getContentPane().add(lblNewLabel_1_2);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Cửa Hàng :");
 		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_3.setBounds(10, 185, 103, 31);
+		lblNewLabel_1_3.setBounds(10, 227, 103, 31);
 		frmHoadon.getContentPane().add(lblNewLabel_1_3);
 		dTable.addColumn("Mã Xe");
 		dTable.addColumn("Tên Xe");
@@ -112,11 +127,31 @@ public class DetailRentBike {
 		btnOrderBike.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(d1);
+				System.out.println(d2);
 				
 				
 				totalpayment.setText(String.valueOf(rentPay.rentPayment(Integer.parseInt(bikePriceh.getText()), Integer.parseInt(tfDeposit.getText())
 				, Integer.parseInt(howDay.getText()))));
 				
+				Customer cus = new Customer();
+				cus.setCccd(tfCccd.getText());
+				cus.setName(tfCustomerName.getName());
+				cus.setPhone(tfPhoneCus.getText());
+				cusBll.addNewCustomer(cus);
+				
+				Bicycle bike = new Bicycle();
+				bike = bikeBLL.searchbikeBLLID(bikeId.getText());
+				
+
+				Rent rt = new Rent();
+				rt.setCustomer(cus);
+				rt.setBicycle(bike);
+				rt.setRentDate(d1.toString());
+				rt.setReturnDate(d2.toString());
+				
+				JOptionPane.showConfirmDialog(frmHoadon, rentBll.addHoadon(rt));
+
 			}
 		});
 		btnOrderBike.setBounds(162, 358, 232, 39);
@@ -144,12 +179,12 @@ public class DetailRentBike {
 		
 		tfPhoneCus = new JLabel();
 		tfPhoneCus.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		tfPhoneCus.setBounds(123, 143, 200, 31);
+		tfPhoneCus.setBounds(123, 185, 156, 31);
 		frmHoadon.getContentPane().add(tfPhoneCus);
 		
 		tfStoreName = new JLabel();
 		tfStoreName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		tfStoreName.setBounds(123, 185, 156, 31);
+		tfStoreName.setBounds(133, 227, 156, 31);
 		
 		frmHoadon.getContentPane().add(tfStoreName);
 		
@@ -160,7 +195,9 @@ public class DetailRentBike {
 		
 		tfhoadonid = new JTextField();
 		tfhoadonid.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfhoadonid.setText("WDFEYF87Y");
+		
+		int hoadonId = rentBll.getNextHdid();
+		tfhoadonid.setText(String.valueOf(hoadonId));
 		tfhoadonid.setEditable(false);
 		tfhoadonid.setBounds(123, 65, 133, 24);
 		frmHoadon.getContentPane().add(tfhoadonid);
@@ -177,20 +214,20 @@ public class DetailRentBike {
 		
 		JLabel lblNewLabel_1_3_3 = new JLabel("Đặt cọc:");
 		lblNewLabel_1_3_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_3_3.setBounds(10, 227, 103, 31);
+		lblNewLabel_1_3_3.setBounds(206, 260, 103, 31);
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_3);
 		
 		tfDeposit = new JTextField();
-		tfDeposit.setText(String.valueOf(500));
+		tfDeposit.setText("50000");
 		tfDeposit.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfDeposit.setEditable(false);
 		tfDeposit.setColumns(10);
-		tfDeposit.setBounds(123, 231, 133, 24);
+		tfDeposit.setBounds(307, 264, 142, 24);
 		frmHoadon.getContentPane().add(tfDeposit);
 		
 		JLabel lblNewLabel_1_3_3_1 = new JLabel("VND");
 		lblNewLabel_1_3_3_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_3_3_1.setBounds(266, 227, 59, 31);
+		lblNewLabel_1_3_3_1.setBounds(459, 260, 40, 31);
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_3_1);
 		
 		JLabel lblNewLabel_1_3_2_1 = new JLabel("Mã xe :");
@@ -252,6 +289,16 @@ public class DetailRentBike {
 		lblNewLabel_1_3_3_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1_3_3_1_1.setBounds(509, 298, 59, 31);
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_3_1_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("CCCD/CMND : ");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_1_1.setBounds(10, 143, 103, 31);
+		frmHoadon.getContentPane().add(lblNewLabel_1_1);
+		
+		tfCccd = new JLabel("");
+		tfCccd.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tfCccd.setBounds(123, 143, 174, 31);
+		frmHoadon.getContentPane().add(tfCccd);
 
 	}
 }

@@ -13,6 +13,7 @@ public class CustomerBLL {
 		if(cusDAL.checkCccd(cus.getCccd())) {
 			return "exist";
 		}
+		else
 		if(cusDAL.addCustomer(cus)) {
 			return "success";
 		}

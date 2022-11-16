@@ -1,5 +1,6 @@
 package src.DAL;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.util.Vector;
 
 import src.DTO.Bicycle;
 import src.DTO.Customer;
+import src.DTO.Rent;
 
 public class RentBikeDAL {
 	
@@ -73,5 +75,58 @@ ConnectDatabase DB = new ConnectDatabase();
 		}
 		return list;
 	}
+	
+	
+	public Boolean orderBike(Rent re) {
+		Boolean result = false;
+		if(DB.openConection()) {
+			String query = "INSERT INTO hoadon VALUES(?,?,?,?,?,?,?)";
+			PreparedStatement pr;
+			
+			try {
+				pr = DB.con.prepareStatement(query);
+				pr.setString(1,null);
+				pr.setString(2, re.getCustomer().getCccd());
+				//chi them dc 1 xe
+				pr.setString(3, re.getBicycle().getId());
+				pr.setString(4, re.getRentDate());
+				pr.setString(5, re.getReturnDate());
+				
+				pr.setDate(6, null);
+				
+				pr.setString(7,"Đang Thuê");
+			
+				
+				if(pr.executeUpdate() >= 0) {
+					result = true;
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				DB.closeConection();
+			}
+		}
+		return result;
+	}
+	
+	public int nextId() {
+		int id = 0;
+		if(DB.openConection()) {
+			String query = "SELECT * FROM hoadon";
+			try {
+				PreparedStatement pr = DB.con.prepareStatement(query);
+				ResultSet rs = pr.executeQuery();
+				while (rs.next()) {
+					id ++;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return id+1;
+	}
+	
+	
 		
 }
