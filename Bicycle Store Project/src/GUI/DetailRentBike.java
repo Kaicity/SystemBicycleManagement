@@ -31,7 +31,7 @@ public class DetailRentBike {
 	
 	DefaultTableModel dTable = new DefaultTableModel();
 	JTextField tfhoadonid , tfDeposit, bikeId;
-	JLabel tfCustomerName, tfPhoneCus, tfStoreName, bikeName, bikePriceh, rentDate, returnDate;
+	JLabel tfCustomerName, tfPhoneCus, tfStoreName, bikeName, bikePriceh, howDay;
 	Rent rentPay = new Rent();
 	private JTextField totalpayment;
 
@@ -56,6 +56,13 @@ public class DetailRentBike {
 	 */
 	public DetailRentBike() {
 		initialize();
+		
+		eventRentBike();
+	}
+
+	private void eventRentBike() {
+		
+		
 	}
 
 	/**
@@ -101,9 +108,19 @@ public class DetailRentBike {
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_1);
 	
 		
-		JButton btnNewButton = new JButton("Đặt xe");
-		btnNewButton.setBounds(162, 358, 232, 39);
-		frmHoadon.getContentPane().add(btnNewButton);
+		JButton btnOrderBike = new JButton("Đặt xe");
+		btnOrderBike.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				totalpayment.setText(String.valueOf(rentPay.rentPayment(Integer.parseInt(bikePriceh.getText()), Integer.parseInt(tfDeposit.getText())
+				, Integer.parseInt(howDay.getText()))));
+				
+			}
+		});
+		btnOrderBike.setBounds(162, 358, 232, 39);
+		frmHoadon.getContentPane().add(btnOrderBike);
 		
 		JButton btnHy = new JButton("Hủy");
 		btnHy.addActionListener(new ActionListener() {
@@ -149,10 +166,10 @@ public class DetailRentBike {
 		frmHoadon.getContentPane().add(tfhoadonid);
 		tfhoadonid.setColumns(10);
 		
-		JButton btnInPhiu = new JButton("In phiếu");
+		JButton btnInPhiu = new JButton("Thanh toán");
 		btnInPhiu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frmHoadon, "Chưa kết nối máy in","",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(frmHoadon, "Thanh toán thành công","",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnInPhiu.setBounds(10, 358, 142, 39);
@@ -164,7 +181,7 @@ public class DetailRentBike {
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_3);
 		
 		tfDeposit = new JTextField();
-		tfDeposit.setText(String.valueOf(500.0));
+		tfDeposit.setText(String.valueOf(500));
 		tfDeposit.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfDeposit.setEditable(false);
 		tfDeposit.setColumns(10);
@@ -191,15 +208,10 @@ public class DetailRentBike {
 		lblNewLabel_1_3_2_3.setBounds(329, 143, 103, 31);
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_2_3);
 		
-		JLabel lblNewLabel_1_3_2_4 = new JLabel("Ngày thuê");
+		JLabel lblNewLabel_1_3_2_4 = new JLabel("Số ngày thuê");
 		lblNewLabel_1_3_2_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1_3_2_4.setBounds(326, 185, 103, 31);
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_2_4);
-		
-		JLabel lblNewLabel_1_3_2_5 = new JLabel("Ngày trả");
-		lblNewLabel_1_3_2_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_3_2_5.setBounds(326, 227, 103, 31);
-		frmHoadon.getContentPane().add(lblNewLabel_1_3_2_5);
 		
 		bikeId = new JTextField();
 		bikeId.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -218,15 +230,10 @@ public class DetailRentBike {
 		bikePriceh.setBounds(450, 143, 103, 31);
 		frmHoadon.getContentPane().add(bikePriceh);
 		
-		rentDate = new JLabel();
-		rentDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		rentDate.setBounds(450, 185, 103, 31);
-		frmHoadon.getContentPane().add(rentDate);
-		
-		returnDate = new JLabel();
-		returnDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		returnDate.setBounds(450, 227, 103, 31);
-		frmHoadon.getContentPane().add(returnDate);
+		howDay = new JLabel();
+		howDay.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		howDay.setBounds(450, 185, 103, 31);
+		frmHoadon.getContentPane().add(howDay);
 		
 		totalpayment = new JTextField();
 		totalpayment.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -235,8 +242,10 @@ public class DetailRentBike {
 		totalpayment.setBounds(307, 302, 192, 24);
 		frmHoadon.getContentPane().add(totalpayment);
 		
-		totalpayment.setText(String.valueOf(rentPay.rentPayment(Integer.parseInt(bikePriceh.getText()), Integer.parseInt(tfDeposit.getText())
-				, Integer.parseInt(rentDate.getText()), Integer.parseInt(rentDate.getText()))));
+
+		
+		
+		
 		
 		
 		JLabel lblNewLabel_1_3_3_1_1 = new JLabel("VND");

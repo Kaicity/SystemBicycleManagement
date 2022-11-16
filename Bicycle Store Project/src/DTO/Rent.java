@@ -94,8 +94,8 @@ public class Rent{
 		this.store = store;
 	}
 	
-	public int rentPayment(int priceH, int deposit, int dayRent, int dayReturn) {
-		return (priceH + deposit) * (dayReturn - dayRent);
+	public int rentPayment(int priceH, int deposit, int day) {
+		return priceH + deposit * day * 24;
 	}
 	
 }

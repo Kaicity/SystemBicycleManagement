@@ -301,6 +301,7 @@ public class RentBike {
 				
 				btnRent.addActionListener(new ActionListener() {
 			    	
+					@SuppressWarnings("deprecation")
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						
@@ -379,8 +380,7 @@ public class RentBike {
 						    detailInv.bikeId.setText(id);
 						    detailInv.bikeName.setText(name);
 						    detailInv.bikePriceh.setText(price);
-						    detailInv.rentDate.setText(String.valueOf(d1.getDay()));
-						    detailInv.returnDate.setText(String.valueOf(d2.getDay()));							
+						    detailInv.howDay.setText(String.valueOf(d2.getTime() - d1.getTime()));					
 						}
 						
 			    	
@@ -412,7 +412,7 @@ public class RentBike {
 		frmThu = new JFrame();
 		frmThu.setTitle("THUÊ");
 		frmThu.setBounds(100, 100, 988, 516);
-		frmThu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmThu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmThu.getContentPane().setLayout(null);
 		frmThu.setLocationRelativeTo(frmThu);
 		
