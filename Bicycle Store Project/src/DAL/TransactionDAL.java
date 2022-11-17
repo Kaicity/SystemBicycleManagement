@@ -30,9 +30,9 @@ ConnectDatabase DB = new ConnectDatabase();
 					Transaction Transaction = new Transaction();
 					Transaction.setId(rs.getString("hdid"));
 					Transaction.setIdBicycle(rs.getString("bikeid"));
-					Transaction.setStatus(rs.getString("status"));
-					Transaction.setRentDate(rs.getString("date"));
+					Transaction.setRentDate(rs.getString("rentdate"));
 					Transaction.setReturnDate(rs.getString("returndate"));
+					Transaction.setStatus(rs.getString("note"));
 					
 					list.add(Transaction);
 					

@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 public class HomePage {
 
 	public JFrame frame;
-	JButton btnMenuRent, btnMenuReturn, btnMenuCus, btnMenuBicycle, btnMenuStore, btnMenuLogout;
+	JButton btnMenuRent, btnMenuCus, btnMenuBicycle, btnMenuStore, btnMenuLogout;
 	public JLabel textAdmin;
 	private JLabel lblNewLabel_2;
 	/**
@@ -82,7 +82,7 @@ public class HomePage {
 		btnMenuRent = new JButton("Quản lý thuê xe ");
 		btnMenuRent.setBackground(Color.WHITE);
 		btnMenuRent.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnMenuRent.setBounds(306, 11, 252, 125);
+		btnMenuRent.setBounds(306, 11, 508, 125);
 		frame.getContentPane().add(btnMenuRent);
 		btnMenuRent.addActionListener(new ActionListener() {
 			
@@ -93,23 +93,6 @@ public class HomePage {
 				
 				frame.setVisible(false);
 				
-				
-			}
-		});
-		
-		btnMenuReturn = new JButton("Trả xe");
-		btnMenuReturn.setBackground(Color.WHITE);
-		btnMenuReturn.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnMenuReturn.setBounds(564, 11, 252, 125);
-		frame.getContentPane().add(btnMenuReturn);
-		btnMenuReturn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ReturnBike returnBike = new ReturnBike();
-				returnBike.frmThu.setVisible(true);
-				
-				frame.setVisible(false);
 				
 			}
 		});

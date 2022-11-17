@@ -28,6 +28,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
@@ -43,18 +45,23 @@ public class DetailRentBike {
 	
 	JTextField tfhoadonid , tfDeposit, bikeId;
 	JLabel tfCustomerName, tfStoreId, bikeName, bikePriceh, rentDay, tfCccd , returnDay, tfPhoneCus, howDays;
-	private JTextField totalpayment;
+	JTextField totalpayment;
 	
 	
 	RentBLL rentBll = new RentBLL();
 	CustomerBLL cusBll = new CustomerBLL();
 	BicycleBLL bikeBLL = new BicycleBLL();
+	
+	Rent rentPay;
+	
 
 	public DetailRentBike() {
 		initialize();
 		
 	}
 	
+	
+
 	//RANDOM CHUOI HOA DON TU DONG CHO KHACH HANG THUE XE 
 	private String getSaltString() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -68,11 +75,15 @@ public class DetailRentBike {
         return saltStr;
 
     }
+	
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
 		frmHoadon = new JFrame();
 		frmHoadon.setResizable(false);
 		frmHoadon.setVisible(false);
@@ -81,6 +92,8 @@ public class DetailRentBike {
 		frmHoadon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmHoadon.getContentPane().setLayout(null);
 		frmHoadon.setLocationRelativeTo(frmHoadon);
+		
+		
 		
 		JLabel lblNewLabel = new JLabel("Phiếu thuê xe");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,42 +123,43 @@ public class DetailRentBike {
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_1);
 	
 		
-	    btnOrderBike = new JButton("Đặt xe");
+	    btnOrderBike = new JButton("Đặt xe ");
 		btnOrderBike.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				
 				String tempDate1 = rentDay.getText();
 				String tempDate2 = returnDay.getText();
-				
-				System.out.println(tempDate1);
-				
-				 // Định dạng thời gian
-		        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-		        Calendar c1 = Calendar.getInstance();
-		        Calendar c2 = Calendar.getInstance();
-
-		        // Định nghĩa 2 mốc thời gian ban đầu
-		        Date date1 = Date.valueOf(tempDate1);
-		        Date date2 = Date.valueOf(tempDate2);
-
-		        c1.setTime(date1);
-		        c2.setTime(date2);
-
-		        // Công thức tính số ngày giữa 2 mốc thời gian:
-		        long noDay = (c2.getTime().getTime() - c1.getTime().getTime()) / (24 * 3600 * 1000);
-
-		        System.out.print("Số ngày giữa " + dateFormat.format(c1.getTime())
-		                + " và " + dateFormat.format(c2.getTime()) + ": ");
-
-		        System.out.println(noDay);
-		        
-		        howDays.setText(String.valueOf(noDay));
+//				
+//				System.out.println(tempDate1);
+//				
+//				 // Định dạng thời gian
+//		        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//
+//		        Calendar c1 = Calendar.getInstance();
+//		        Calendar c2 = Calendar.getInstance();
+//
+//		        // Định nghĩa 2 mốc thời gian ban đầu
+//		        Date date1 = Date.valueOf(tempDate1);
+//		        Date date2 = Date.valueOf(tempDate2);
+//
+//		        c1.setTime(date1);
+//		        c2.setTime(date2);
+//
+//		        // Công thức tính số ngày giữa 2 mốc thời gian:
+//		        long noDay = (c2.getTime().getTime() - c1.getTime().getTime()) / (24 * 3600 * 1000);
+//
+//		        System.out.print("Số ngày giữa " + dateFormat.format(c1.getTime())
+//		                + " và " + dateFormat.format(c2.getTime()) + ": ");
+//
+//		        System.out.println(noDay);
+//		        
+//		        howDays.setText(String.valueOf(noDay));
 		        
 		        
 		        //---------------Tinh gia tien thue xe --------------------------------
-				Rent rentPay = new Rent();
+				
+		        rentPay = new Rent();
 				rentPay.setId(tfhoadonid.getText());
 				rentPay.setDeposit(Integer.parseInt(tfDeposit.getText()));
 				rentPay.setRentDate(tempDate1);
@@ -153,19 +167,22 @@ public class DetailRentBike {
 				rentPay.setBicycle(bikeId.getText());
 				rentPay.setCustomer(tfCccd.getText());
 				
-				
-				String result = "";
-				
-				totalpayment.setText(String.valueOf(rentPay.rentPayment(Integer.parseInt(bikePriceh.getText())
-				, Integer.parseInt(howDays.getText()))));
-				
 				//--------------LAY THONG TIN KHACH HANG THUE XE TAO 1 HOA DON MOI----------------------------------
-			
 				
-				
+				String result = rentBll.createInvoice(rentPay, rentPay.getCustomer(), rentPay.getBicycle());
+			    System.out.println(result);
+			    
+			    JOptionPane.showMessageDialog(frmHoadon, result);
+			    if(result.equals("Thuê thành công")) {
+			    	frmHoadon.setVisible(false);
+			    	
+			    	Transaction history = new Transaction();
+			    	history.frmlichsu.setVisible(true);
+			    }
 			
 			}
 		});
+		
 		btnOrderBike.setBounds(162, 358, 232, 39);
 		frmHoadon.getContentPane().add(btnOrderBike);
 		
@@ -229,7 +246,7 @@ public class DetailRentBike {
 		frmHoadon.getContentPane().add(lblNewLabel_1_3_3);
 		
 		tfDeposit = new JTextField();
-		tfDeposit.setText("500000");
+		tfDeposit.setText("500");
 		tfDeposit.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfDeposit.setEditable(false);
 		tfDeposit.setColumns(10);

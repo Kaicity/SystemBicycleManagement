@@ -38,7 +38,9 @@ ConnectDatabase DB = new ConnectDatabase();
 	 * return list; }
 	 */
 	
-	
+	public Boolean add(Bicycle bike) {
+		return false;
+	}
 		
 		
 	//chon cua hang co tat ca xe dap trong cua hang do
@@ -46,7 +48,7 @@ ConnectDatabase DB = new ConnectDatabase();
 		Vector<Bicycle> list = new Vector<Bicycle>();
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM `xedap` WHERE `xedap`.`storeid` = '"+storeid+"'";
+			String query = "SELECT * FROM `xedap` WHERE `xedap`.`storeid` = '"+storeid+"' AND status ='Chưa thuê'";
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
 				ResultSet rs = pr.executeQuery(query);
@@ -105,24 +107,5 @@ ConnectDatabase DB = new ConnectDatabase();
 //		}
 //		return result;
 //	}
-	
-	public int nextId() {
-		int id = 0;
-		if(DB.openConection()) {
-			String query = "SELECT * FROM hoadon";
-			try {
-				PreparedStatement pr = DB.con.prepareStatement(query);
-				ResultSet rs = pr.executeQuery();
-				while (rs.next()) {
-					id ++;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return id+1;
-	}
-	
-	
-		
+
 }

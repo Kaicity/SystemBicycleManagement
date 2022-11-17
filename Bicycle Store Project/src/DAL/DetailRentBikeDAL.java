@@ -28,7 +28,7 @@ public class DetailRentBikeDAL {
 				pr.setString(4, rentbike.getBicycle());
 				pr.setString(5, rentbike.getRentDate());
 				pr.setString(6, rentbike.getReturnDate());
-				pr.setString(7, "Đang thuê");
+				pr.setString(7, "Đã thuê");
 				
 				if(pr.executeUpdate() >= 0) {
 					result = true;
@@ -44,20 +44,19 @@ public class DetailRentBikeDAL {
 	}
 	
 	//Kiem tra hoa don co ton tai trong cua hang hay chua 
-	public Boolean detaiOderBike(String  id) {
+	public Boolean checkHdonId(String  id) {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM hoadon WHERE hdid";
+			String query = "SELECT * FROM hoadon WHERE hdid =?";
 			PreparedStatement pr;
 			
 			try {
 				pr = DB.con.prepareStatement(query);
-				pr.setString(1, re.getId());
-				pr.setString(2, re.getCustomer().getCccd());
-				pr.setString(3, re.getBicycle().getId());
+				pr.setString(1, id);
 				
-				if(pr.executeUpdate() >= 0) {
+				ResultSet rs = pr.executeQuery();
+				if(rs.next()) {
 					result = true;
 				}
 			}catch(SQLException e) {
@@ -71,34 +70,34 @@ public class DetailRentBikeDAL {
 	}
 	
 	//hoa don tra ve list xe dap
-	public Vector<Bicycle> SeachBicycleByName (String hoadonid) {
-		Boolean result = false;
-		Vector<Bicycle> list = new Vector<Bicycle>();
-		if(DB.openConection()) {
-			String query = "SELECT * FROM bicycle WHERE id =?";
-			
-			try {
-				PreparedStatement pr = DB.con.prepareStatement(query);
-				pr.setString(1, hoadonid);
-				
-				ResultSet rs = pr.executeQuery();
-				while(rs.next()) {
-					Bicycle bike = new Bicycle();
-					bike.setId(rs.getString("bikeid"));
-					bike.setName(rs.getString("name"));
-					bike.setType(rs.getString("type"));
-					bike.setStoreId(rs.getString("storeid"));
-					bike.setPricePerH(rs.getInt("priceh"));
-					bike.setStatus(rs.getString("status"));
-					list.add(bike);
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-	
+//	public Vector<Bicycle> SeachBicycleByName (String hoadonid) {
+//		Boolean result = false;
+//		Vector<Bicycle> list = new Vector<Bicycle>();
+//		if(DB.openConection()) {
+//			String query = "SELECT * FROM bicycle WHERE id =?";
+//			
+//			try {
+//				PreparedStatement pr = DB.con.prepareStatement(query);
+//				pr.setString(1, hoadonid);
+//				
+//				ResultSet rs = pr.executeQuery();
+//				while(rs.next()) {
+//					Bicycle bike = new Bicycle();
+//					bike.setId(rs.getString("bikeid"));
+//					bike.setName(rs.getString("name"));
+//					bike.setType(rs.getString("type"));
+//					bike.setStoreId(rs.getString("storeid"));
+//					bike.setPricePerH(rs.getInt("priceh"));
+//					bike.setStatus(rs.getString("status"));
+//					list.add(bike);
+//				}
+//				
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return list;
+//	}
+//	
 	
 }

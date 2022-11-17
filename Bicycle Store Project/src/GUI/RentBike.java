@@ -356,6 +356,33 @@ public class RentBike {
 							String rentD = formatdate.format(d1);
 							String returnD = formatdate.format(d2);
 							
+							System.out.println(rentD);
+							System.out.println(returnD);
+							
+							 // Định dạng thời gian
+					        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+					        Calendar c1 = Calendar.getInstance();
+					        Calendar c2 = Calendar.getInstance();
+
+					        // Định nghĩa 2 mốc thời gian ban đầu
+					        Date date1 = Date.valueOf(rentD);
+					        Date date2 = Date.valueOf(returnD);
+
+					        c1.setTime(date1);
+					        c2.setTime(date2);
+
+					        // Công thức tính số ngày giữa 2 mốc thời gian:
+					        long noDay = (c2.getTime().getTime() - c1.getTime().getTime()) / (24 * 3600 * 1000);
+					        System.out.print("Số ngày giữa " + dateFormat.format(c1.getTime())
+					                + " và " + dateFormat.format(c2.getTime()) + ": ");
+
+					        System.out.println(noDay);
+					        int howDays = (int) noDay;
+					        
+					      
+					        
+							
 							
 							//Set thong tin khach hang nhap vao
 							Customer newCus = new Customer();
@@ -390,6 +417,10 @@ public class RentBike {
 						    
 						    detailInv.rentDay.setText(rentD);
 						    detailInv.returnDay.setText(returnD);
+						    detailInv.howDays.setText(String.valueOf(noDay));
+						    
+						   
+						    
 						    
 						    int i = table.getSelectedRow();
 						    
@@ -402,7 +433,15 @@ public class RentBike {
 						    detailInv.bikeName.setText(name);
 						    detailInv.bikePriceh.setText(price);
 						    
+						    Rent pay = new Rent();
 						    
+						    int dep = Integer.parseInt(detailInv.tfDeposit.getText());
+						    int day = Integer.parseInt(detailInv.howDays.getText());
+						    int priceh = Integer.parseInt(price);
+						  
+						    
+						    detailInv.totalpayment.setText(String.valueOf(pay.rentPayment(priceh, day, dep)));
+						   
 						  
 						}
 						

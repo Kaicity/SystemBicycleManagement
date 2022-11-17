@@ -98,8 +98,8 @@ public class Rent{
 		return status;
 	}
 	
-	public int rentPayment(int priceH, int howDay) {
-		return (priceH * howDay * 24) + getDeposit() ;
+	public int rentPayment(int priceH, int howDay, int deposit) {
+		return priceH * howDay * 24 + deposit;
 	}
 }
 	

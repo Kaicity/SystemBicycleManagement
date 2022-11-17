@@ -65,7 +65,6 @@ public class BicycleDAL {
 				pr.setInt(5, bike.getPricePerH());
 				pr.setString(6, bike.getStatus());
 			
-				
 				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
