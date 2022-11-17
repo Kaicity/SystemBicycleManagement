@@ -18,6 +18,8 @@ import java.util.Vector;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import com.mysql.cj.jdbc.result.UpdatableResultSet;
+
 import src.DTO.Bicycle;
 import src.DTO.Customer;
 import src.DTO.Rent;
@@ -174,6 +176,9 @@ public class DetailRentBike {
 			    
 			    JOptionPane.showMessageDialog(frmHoadon, result);
 			    if(result.equals("Thuê thành công")) {
+			    	String upStatus = rentBll.updateStatus(rentPay.getBicycle());
+			    	System.out.println(upStatus);
+			    	
 			    	frmHoadon.setVisible(false);
 			    	
 			    	Transaction history = new Transaction();

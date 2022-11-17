@@ -55,4 +55,10 @@ public class RentBLL {
 		
 		return "Thuê thất bại";
 	}
+	public String updateStatus(String bikeid) {
+		if(rentDAL.updateStatusBike(bikeid)) {
+			return "success";
+		}
+		return "failed";
+	}
 }

@@ -20,5 +20,18 @@ public class CustomerBLL {
 		return "failed";
 	}
 	
+	public String editCustomer(Customer cus) {
+		if(cusDAL.editCustomer(cus)) {
+			return "success";
+		}
+		return "failed";
+	}
+	
+	public String removeCustomer(String cusid) {
+		if(cusDAL.RemoveCustomer(cusid)) {
+			return "success";
+		}
+		return "failed";
+	}
 	
 }

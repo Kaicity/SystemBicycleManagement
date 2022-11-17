@@ -18,7 +18,7 @@ public class BicycleDAL {
 		Vector<Bicycle> list = new Vector<Bicycle>();
 		
 		if(DB.openConection()) {
-			String query = "SELECT * FROM `xedap` WHERE `xedap`.`storeid` = '"+getStoreId+"'";
+			String query = "SELECT * FROM `xedap` WHERE `xedap`.`storeid` = '"+getStoreId+"' AND `status` = 'Chưa thuê'";
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
 				ResultSet rs = pr.executeQuery(query);
