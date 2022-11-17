@@ -408,7 +408,7 @@ public class RentManage {
 				if(hdidTxt.getText()=="") {
 					allHoaDonList();
 				}
-				else if(quanly.checkHoaDon(hdidTxt.getText()) && hdidTxt.getText()=="") {
+				else if(quanly.checkHoaDon(hdidTxt.getText()) && hdidTxt.getText()!="") {
 					getHoaDonListById(hdidTxt.getText());
 				}
 				else
