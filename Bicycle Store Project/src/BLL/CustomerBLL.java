@@ -20,13 +20,5 @@ public class CustomerBLL {
 		return "failed";
 	}
 	
-	public String checkCus(String cccd) {
-		if(cusDAL.checkCuS(cccd)) {
-			return "exists";
-		}
-		else
-			return "no exists";
-	}
-	
 	
 }

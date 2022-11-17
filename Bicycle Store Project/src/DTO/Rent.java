@@ -6,62 +6,34 @@ import java.util.Date;
 
 public class Rent{
 	
-    private Customer customer;
-    private Bicycle bicycle;
-    private String store;
-    
-    private String id;
-    private int deposit;
+	private String id;
+	private int deposit;
     private String rentDate;
     private String returnDate;
+	
+    private String customer;
+    private String bicycle;
+    private String store;
     
-    
-	public Rent(Customer customer, Bicycle bicycle, String store, String id, int deposit, String rentDate,
-			String returnDate) {
+   
+	public Rent(String id, int deposit, String rentDate, String returnDate, String customer, String bicycle,
+			String store) {
 		super();
+		this.id = id;
+		this.deposit = deposit;
+		this.rentDate = rentDate;
+		this.returnDate = returnDate;
 		this.customer = customer;
 		this.bicycle = bicycle;
 		this.store = store;
-		this.id = id;
-		this.rentDate = rentDate;
-		this.returnDate = returnDate;
 	}
 	
-	
-	public Rent(Bicycle bicycle, String id) {
-		super();
-		this.bicycle = bicycle;
-		this.id = id;
-	}
-
-
 	public Rent() {}
 	
 	
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public Bicycle getBicycle() {
-		return bicycle;
-	}
-
-	public void setBicycle(Bicycle bicycle) {
-		this.bicycle = bicycle;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
+	
+	
+	
 	public int getDeposit() {
 		return deposit;
 	}
@@ -86,6 +58,22 @@ public class Rent{
 		this.returnDate = returnDate;
 	}
 
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public String getBicycle() {
+		return bicycle;
+	}
+
+	public void setBicycle(String bicycle) {
+		this.bicycle = bicycle;
+	}
+
 	public String getStore() {
 		return store;
 	}
@@ -93,9 +81,17 @@ public class Rent{
 	public void setStore(String store) {
 		this.store = store;
 	}
-	
-	public int rentPayment(int priceH, int deposit, int day) {
-		return priceH + deposit * day * 24;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public int rentPayment(int priceH, int howDay) {
+		return (priceH * howDay * 24) + getDeposit() ;
 	}
 	
 }

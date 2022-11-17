@@ -135,6 +135,7 @@ public class BicycleDAL {
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
+				pr.setString(1, id);
 				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}

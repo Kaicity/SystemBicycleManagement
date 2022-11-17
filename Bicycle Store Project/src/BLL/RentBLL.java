@@ -25,19 +25,14 @@ public class RentBLL {
 		return storeDAL.getStoreList();
 	}
 	
-	public Customer getInformationCustomer(String cccd) {
-		return cusDAl.SeachCustomer(cccd);
-	}
-	
-	public int getNextHdid() {
-		return rentDAL.nextId();
-	}
-	
-	public String addHoadon(Rent rt) {
-		if(rentDAL.orderBike(rt)) {
-			return "success";
+	public String add_GetInformationCustomer(Customer cus) {
+		if(cusDAl.checkCccd(cus.getCccd())) {
+			return "Thuê ngay";
 		}
-		else return "false";
+		if(cusDAl.addCustomer(cus)){
+			return "Thuê lần đầu";
+		}
+		return "failed";
 	}
 	
 }

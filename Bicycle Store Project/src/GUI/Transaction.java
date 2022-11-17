@@ -2,6 +2,7 @@ package src.GUI;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -61,6 +62,7 @@ public class Transaction {
 		frmlichsu.setBounds(100, 100, 796, 509);
 		frmlichsu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmlichsu.getContentPane().setLayout(null);
+		frmlichsu.setLocationRelativeTo(frmlichsu);
 		
 		JLabel lblNewLabel = new JLabel("LỊCH SỬ GIAO DỊCH");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -89,22 +91,22 @@ public class Transaction {
 		btnCHECK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dTable.getDataVector().removeAllElements();
-				Vector<src.DTO.TransactionDTO> arr = TransactionBLL.selectTransaction();
+				Vector<src.DTO.Transaction> arr = TransactionBLL.selectTransaction();
 				int count = 1;
 				
 				for(int i = 0;i < arr.size(); i++) {	
-					src.DTO.TransactionDTO Transaction =  arr.get(i);
+					src.DTO.Transaction Transaction =  arr.get(i);
 					String id = Transaction.getId();
 					String idxe = Transaction.getIdBicycle();
 					String Status = Transaction.getStatus();
-					Date RentDate = (Date) Transaction.getRentDate();
-					Date ReturnDate = (Date) Transaction.getReturnDate();
+					String rentDate = Transaction.getRentDate();
+					String returnDate = Transaction.getReturnDate();
 					
 					dTable.addRow(new Object[] {
-							count++, id, idxe, Status, RentDate, ReturnDate
+							count++, id, idxe, Status, rentDate, returnDate
 					});
 				}
-				}
+			}
 			
 		});
 		

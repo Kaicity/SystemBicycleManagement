@@ -127,6 +127,7 @@ public class CustomerDAL {
 			
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(query);
+				pr.setString(1, cccd);
 				if(pr.executeUpdate() >= 0) {
 					result = true;
 				}
@@ -164,29 +165,4 @@ public class CustomerDAL {
 		return object;
 	}
 	
-	//check khach hang co ton tai ko = cccd
-	public Boolean checkCuS(String cccd) {
-		Boolean result = false;
-		
-		if(DB.openConection()) {
-			String query = "SELECT * FROM khachhang WHERE cccd =?";
-			
-			try {
-				PreparedStatement pr = DB.con.prepareStatement(query);
-				pr.setString(1, cccd);
-				
-				ResultSet rs = pr.executeQuery();
-				if(rs.next()) {
-					result = true;
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			finally {
-				DB.closeConection();
-			}
-		}
-		return result;
-	}
 }

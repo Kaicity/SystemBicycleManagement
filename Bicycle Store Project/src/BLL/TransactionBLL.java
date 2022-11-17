@@ -4,14 +4,14 @@ import java.util.Vector;
 
 import src.DAL.BicycleDAL;
 import src.DAL.TransactionDAL;
-import src.DTO.TransactionDTO;
+import src.DTO.Transaction;
 
 
 public class TransactionBLL {
 	TransactionDAL TransactionDAL = new TransactionDAL();
 	
 	
-	public Vector<TransactionDTO> selectTransaction(){
+	public Vector<Transaction> selectTransaction(){
 		return TransactionDAL.selectTransaction();
 	}
 	

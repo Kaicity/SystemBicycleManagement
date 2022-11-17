@@ -13,8 +13,7 @@ public class DetailRentBikeDAL {
 	ConnectDatabase DB = new ConnectDatabase();
 	
 	
-	//sai
-	//tao hon don xong tao chi tiet hoa don co sanh sach cac xe dap
+	//Insert hoa don moi thue duy nhat 1 xe dap
 	public Boolean orderBike(Rent re) {
 		Boolean result = false;
 		if(DB.openConection()) {
@@ -22,17 +21,17 @@ public class DetailRentBikeDAL {
 			PreparedStatement pr;
 			
 			try {
-				pr = DB.con.prepareStatement(query);
-				pr.setString(1,null);
-				pr.setString(2, re.getCustomer().getCccd());
-				//chi them dc 1 xe
-				pr.setString(3, re.getBicycle().getId());
-				pr.setString(4, re.getRentDate());
-				pr.setString(5, re.getReturnDate());
-				
-				pr.setDate(6, null);
-				
-				pr.setString(7,"Đang Thuê");
+//				pr = DB.con.prepareStatement(query);
+//				pr.setString(1,null);
+//				pr.setString(2, re.getCustomer().getCccd());
+//				//chi them dc 1 xe
+//				pr.setString(3, re.getBicycle().getId());
+//				pr.setString(4, re.getRentDate());
+//				pr.setString(5, re.getReturnDate());
+//				
+//				pr.setDate(6, null);
+//				
+//				pr.setString(7,"Đang Thuê");
 			
 				
 				if(pr.executeUpdate() >= 0) {

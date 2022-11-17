@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.Vector;
 
 
-import src.DTO.TransactionDTO;
+import src.DTO.Transaction;
 
 
 public class TransactionDAL {
@@ -16,8 +16,8 @@ ConnectDatabase DB = new ConnectDatabase();
 	
 	
 
-	public Vector<TransactionDTO> selectTransaction() {
-		Vector<TransactionDTO> list = new Vector<TransactionDTO>();
+	public Vector<Transaction> selectTransaction() {
+		Vector<Transaction> list = new Vector<Transaction>();
 		
 		if(DB.openConection()) {
 			String query = "SELECT * FROM `hoadon`,`xedap` WHERE `hoadon`.`bikeid`=`xedap`.`bikeid`;";
@@ -27,7 +27,7 @@ ConnectDatabase DB = new ConnectDatabase();
 			
 				
 				while(rs.next()) {
-					TransactionDTO Transaction = new TransactionDTO();
+					Transaction Transaction = new Transaction();
 					Transaction.setId(rs.getString("hdid"));
 					Transaction.setIdBicycle(rs.getString("bikeid"));
 					Transaction.setStatus(rs.getString("status"));

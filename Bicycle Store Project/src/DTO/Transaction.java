@@ -2,7 +2,7 @@ package src.DTO;
 
 import java.util.Date;
 
-public class TransactionDTO {
+public class Transaction {
 	
     
     private String id;
@@ -11,7 +11,7 @@ public class TransactionDTO {
     private String rentDate;
     private String returnDate;
     
-    public  TransactionDTO(String id,String idBicycle,String Status,String rentDate,String returnDate)
+    public  Transaction(String id,String idBicycle,String Status,String rentDate,String returnDate)
     {
     	this.id = id;
     	this.idBicycle=idBicycle;
@@ -20,7 +20,7 @@ public class TransactionDTO {
 		this.returnDate = returnDate;
     	
     }
-    public  TransactionDTO() 
+    public  Transaction() 
     {
     
     }

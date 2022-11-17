@@ -84,17 +84,17 @@ ConnectDatabase DB = new ConnectDatabase();
 			PreparedStatement pr;
 			
 			try {
-				pr = DB.con.prepareStatement(query);
-				pr.setString(1,null);
-				pr.setString(2, re.getCustomer().getCccd());
-				//chi them dc 1 xe
-				pr.setString(3, re.getBicycle().getId());
-				pr.setString(4, re.getRentDate());
-				pr.setString(5, re.getReturnDate());
-				
-				pr.setDate(6, null);
-				
-				pr.setString(7,"Đang Thuê");
+//				pr = DB.con.prepareStatement(query);
+//				pr.setString(1,null);
+//				pr.setString(2, re.getCustomer().getCccd());
+//				//chi them dc 1 xe
+//				pr.setString(3, re.getBicycle().getId());
+//				pr.setString(4, re.getRentDate());
+//				pr.setString(5, re.getReturnDate());
+//				
+//				pr.setDate(6, null);
+//				
+//				pr.setString(7,"Đang Thuê");
 			
 				
 				if(pr.executeUpdate() >= 0) {
