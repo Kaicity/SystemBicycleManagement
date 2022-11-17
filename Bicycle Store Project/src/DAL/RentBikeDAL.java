@@ -77,38 +77,34 @@ ConnectDatabase DB = new ConnectDatabase();
 	}
 	
 	
-	public Boolean orderBike(Rent re) {
-		Boolean result = false;
-		if(DB.openConection()) {
-			String query = "INSERT INTO hoadon VALUES(?,?,?,?,?,?,?)";
-			PreparedStatement pr;
-			
-			try {
+//	public Boolean orderBike(Rent rentbike) {
+//		Boolean result = false;
+//		if(DB.openConection()) {
+//			String query = "INSERT INTO hoadon VALUES(?,?,?,?,?,?,?)";
+//			PreparedStatement pr;
+//			
+//			try {
 //				pr = DB.con.prepareStatement(query);
-//				pr.setString(1,null);
-//				pr.setString(2, re.getCustomer().getCccd());
-//				//chi them dc 1 xe
-//				pr.setString(3, re.getBicycle().getId());
-//				pr.setString(4, re.getRentDate());
-//				pr.setString(5, re.getReturnDate());
+//				pr.setString(1, rentbike.getId());
+//				pr.setInt(2, rentbike.getDeposit());
+//				pr.setString(3, rentbike.getCustomer());
+//				pr.setString(4, rentbike.getBicycle());
+//				pr.setString(5, rentbike.getRentDate());
+//				pr.setString(6, rentbike.getReturnDate());
+//				pr.setString(7, rentbike.get);
 //				
-//				pr.setDate(6, null);
-//				
-//				pr.setString(7,"Đang Thuê");
-			
-				
-				if(pr.executeUpdate() >= 0) {
-					result = true;
-				}
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
-			finally {
-				DB.closeConection();
-			}
-		}
-		return result;
-	}
+//				if(pr.executeUpdate() >= 0) {
+//					result = true;
+//				}
+//			}catch(SQLException e) {
+//				e.printStackTrace();
+//			}
+//			finally {
+//				DB.closeConection();
+//			}
+//		}
+//		return result;
+//	}
 	
 	public int nextId() {
 		int id = 0;

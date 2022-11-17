@@ -150,7 +150,6 @@ public class DetailRentBike {
 				rentPay.setDeposit(Integer.parseInt(tfDeposit.getText()));
 				rentPay.setRentDate(tempDate1);
 				rentPay.setReturnDate(tempDate2);
-				rentPay.setStore(tfStoreId.getText());
 				rentPay.setBicycle(bikeId.getText());
 				rentPay.setCustomer(tfCccd.getText());
 				

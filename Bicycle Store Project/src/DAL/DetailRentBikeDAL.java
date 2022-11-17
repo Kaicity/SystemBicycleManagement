@@ -13,26 +13,22 @@ public class DetailRentBikeDAL {
 	ConnectDatabase DB = new ConnectDatabase();
 	
 	
-	//Insert hoa don moi thue duy nhat 1 xe dap
-	public Boolean orderBike(Rent re) {
+	//Insert hoa don moi thue duy nhat mot xe dap
+	public Boolean orderBike(Rent rentbike) {
 		Boolean result = false;
 		if(DB.openConection()) {
 			String query = "INSERT INTO hoadon VALUES(?,?,?,?,?,?,?)";
 			PreparedStatement pr;
 			
 			try {
-//				pr = DB.con.prepareStatement(query);
-//				pr.setString(1,null);
-//				pr.setString(2, re.getCustomer().getCccd());
-//				//chi them dc 1 xe
-//				pr.setString(3, re.getBicycle().getId());
-//				pr.setString(4, re.getRentDate());
-//				pr.setString(5, re.getReturnDate());
-//				
-//				pr.setDate(6, null);
-//				
-//				pr.setString(7,"Đang Thuê");
-			
+				pr = DB.con.prepareStatement(query);
+				pr.setString(1, rentbike.getId());
+				pr.setInt(2, rentbike.getDeposit());
+				pr.setString(3, rentbike.getCustomer());
+				pr.setString(4, rentbike.getBicycle());
+				pr.setString(5, rentbike.getRentDate());
+				pr.setString(6, rentbike.getReturnDate());
+				pr.setString(7, "Đang thuê");
 				
 				if(pr.executeUpdate() >= 0) {
 					result = true;
@@ -47,12 +43,12 @@ public class DetailRentBikeDAL {
 		return result;
 	}
 	
-	//add
-	public Boolean detaiOderBike(Rent re) {
+	//Kiem tra hoa don co ton tai trong cua hang hay chua 
+	public Boolean detaiOderBike(String  id) {
 		Boolean result = false;
 		
 		if(DB.openConection()) {
-			String query = "INSERT INTO chitiethoadon VALUES(?,?,?)";
+			String query = "SELECT * FROM hoadon WHERE hdid";
 			PreparedStatement pr;
 			
 			try {

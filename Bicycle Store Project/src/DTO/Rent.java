@@ -13,11 +13,10 @@ public class Rent{
 	
     private String customer;
     private String bicycle;
-    private String store;
+    private String status;
     
    
-	public Rent(String id, int deposit, String rentDate, String returnDate, String customer, String bicycle,
-			String store) {
+	public Rent(String id, int deposit, String rentDate, String returnDate, String customer, String bicycle, String status) {
 		super();
 		this.id = id;
 		this.deposit = deposit;
@@ -25,13 +24,21 @@ public class Rent{
 		this.returnDate = returnDate;
 		this.customer = customer;
 		this.bicycle = bicycle;
-		this.store = store;
+		this.status = status;
 	}
 	
+	
+	public Rent(String id, int deposit, String rentDate, String returnDate, String customer, String bicycle) {
+		super();
+		this.id = id;
+		this.deposit = deposit;
+		this.rentDate = rentDate;
+		this.returnDate = returnDate;
+		this.customer = customer;
+		this.bicycle = bicycle;
+	}
+
 	public Rent() {}
-	
-	
-	
 	
 	
 	public int getDeposit() {
@@ -74,13 +81,6 @@ public class Rent{
 		this.bicycle = bicycle;
 	}
 
-	public String getStore() {
-		return store;
-	}
-
-	public void setStore(String store) {
-		this.store = store;
-	}
 
 	public String getId() {
 		return id;
@@ -89,10 +89,17 @@ public class Rent{
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
+	
+	public void setstatus(String status) {
+		this.status = status;
+	}
+	public String status() {
+		return status;
+	}
+	
 	public int rentPayment(int priceH, int howDay) {
 		return (priceH * howDay * 24) + getDeposit() ;
 	}
-	
 }
 	
