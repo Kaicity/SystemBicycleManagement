@@ -32,6 +32,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
@@ -48,7 +50,8 @@ public class RentManage {
 	public JFrame frmThu;
 	private JTextField cccdTxt;
 	private JTable table;
-	private JButton rentBtn, exitBtn;
+	private JButton saveBtn, exitBtn;
+	private JDateChooser ngaythueTxt, ngaytraTxt;
 	
 	QuanLyBLL quanly = new QuanLyBLL();
 
@@ -63,7 +66,7 @@ public class RentManage {
 	    }
 	};
 	private JTextField hdidTxt;
-	private JTextField cuahangIdTxt;
+	private JTextField bikeidTxt;
 	private JTextField searchTxt;
 	
 	private String cccd;
@@ -109,6 +112,17 @@ public class RentManage {
 	
 	private void hoanthanhHoaDon(Rent hoadon) {
 		quanly.hoanthanhHoaDon(hoadon);
+	}
+	
+	public Rent getHoaDon() {
+		Rent rent = new Rent();
+		String hdid = rent.getId();
+		String cccd = rent.getCustomer();
+		String bikeid = rent.getBicycle();
+		String rentday = rent.getRentDate();
+		String returnday = rent.getRentDate();
+		String status = rent.getStatus();
+		return rent;
 	}
 	
 	private void showHoaDonList(Vector<Rent> hoadonlist) {
@@ -252,10 +266,10 @@ public class RentManage {
 		lblNewLabel_1_1.setBounds(10, 398, 108, 35);
 		frmThu.getContentPane().add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2_1 = new JLabel("Mã Cửa Hàng");
-		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1_2_1.setBounds(10, 238, 108, 35);
-		frmThu.getContentPane().add(lblNewLabel_1_2_1);
+		JLabel laeerqr = new JLabel("Mã Xe");
+		laeerqr.setFont(new Font("Tahoma", Font.BOLD, 15));
+		laeerqr.setBounds(10, 238, 108, 35);
+		frmThu.getContentPane().add(laeerqr);
 		
 		cccdTxt = new JTextField();
 		cccdTxt.setEditable(false);
@@ -263,7 +277,6 @@ public class RentManage {
 		frmThu.getContentPane().add(cccdTxt);
 		cccdTxt.setColumns(10);
 		
-		String listCuaHang[] = {"cua hang 1", "cua hang 2", "cua hang 3"};
 		
 		
 		table = new JTable();
@@ -278,6 +291,39 @@ public class RentManage {
 		tableModel.addColumn("Ngày Trả");
 		tableModel.addColumn("Trạng Thái");
 		
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int i = table.getSelectedRow();
+				if(i >= 0) {
+					hdidTxt.setEditable(false);
+					
+					hdidTxt.setText(tableModel.getValueAt(i, 1).toString());
+					cccdTxt.setText(tableModel.getValueAt(i, 2).toString());
+					bikeidTxt.setText(tableModel.getValueAt(i, 3).toString());
+					
+					
+					SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+					
+					String tempDate1 = tableModel.getValueAt(i, 4).toString();
+					String tempDate2 = tableModel.getValueAt(i, 5).toString();
+				
+					Date date1 = new Date(Date.parse(tempDate1));
+				
+					
+					
+					
+					
+					
+					/*
+					 * tfBicycleName.setText(modelBicycle.getValueAt(i, 3).toString());
+					 * cbStorebike.setSelectedItem(modelBicycle.getValueAt(i, 3).toString());
+					 * typeBicycleBox.setSelectedItem(modelBicycle.getValueAt(i, 4).toString());
+					 * tfBicyclePrice.setText(modelBicycle.getValueAt(i, 5).toString());
+					 * statusBox.setSelectedItem(modelBicycle.getValueAt(i, 6).toString());
+					 */
+				}
+			}
+		});
 
 		
 		
@@ -307,15 +353,17 @@ public class RentManage {
 		});
 		
 		 
-		rentBtn = new JButton("Lưu");
-		rentBtn.addActionListener(new ActionListener() {
+		saveBtn = new JButton("Lưu");
+		saveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(quanly.checkHoaDon(getHoaDon().getId()))
+				editHoaDon(getHoaDon());
 			}
 		});
 		
-		rentBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
-		rentBtn.setBounds(695, 449, 152, 35);
-		frmThu.getContentPane().add(rentBtn);
+		saveBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
+		saveBtn.setBounds(695, 449, 152, 35);
+		frmThu.getContentPane().add(saveBtn);
 		
 		JLabel lblNewLabel_2 = new JLabel("Danh Sách Hóa Đơn");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -343,11 +391,11 @@ public class RentManage {
 		lblNewLabel_1_2_1_1_1.setBounds(10, 348, 108, 35);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
-		JDateChooser ngaythueTxt = new JDateChooser();
+		ngaythueTxt = new JDateChooser();
 		ngaythueTxt.setBounds(128, 292, 161, 35);
 		frmThu.getContentPane().add(ngaythueTxt);
 		
-		JDateChooser ngaytraTxt = new JDateChooser();
+		ngaytraTxt = new JDateChooser();
 		ngaytraTxt.setBounds(128, 348, 161, 35);
 		frmThu.getContentPane().add(ngaytraTxt);
 		
@@ -357,11 +405,11 @@ public class RentManage {
 		statusCb.setBounds(128, 398, 161, 35);
 		frmThu.getContentPane().add(statusCb);
 		
-		cuahangIdTxt = new JTextField();
-		cuahangIdTxt.setEditable(false);
-		cuahangIdTxt.setColumns(10);
-		cuahangIdTxt.setBounds(128, 240, 161, 35);
-		frmThu.getContentPane().add(cuahangIdTxt);
+		bikeidTxt = new JTextField();
+		bikeidTxt.setEditable(false);
+		bikeidTxt.setColumns(10);
+		bikeidTxt.setBounds(128, 240, 161, 35);
+		frmThu.getContentPane().add(bikeidTxt);
 		
 		JButton datraBtn = new JButton("Đã Trả");
 		datraBtn.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -439,6 +487,12 @@ public class RentManage {
 		frmThu.getContentPane().add(lblNewLabel_3);
 		
 		JButton huyBtn = new JButton("Hủy");
+		huyBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(quanly.checkHoaDon(getHoaDon().getId()))
+				huyHoaDon(getHoaDon());
+			}
+		});
 		huyBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
 		huyBtn.setBounds(857, 449, 108, 35);
 		frmThu.getContentPane().add(huyBtn);
@@ -453,6 +507,9 @@ public class RentManage {
 		traxeBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
 		traxeBtn.setBounds(299, 449, 161, 35);
 		frmThu.getContentPane().add(traxeBtn);
+		
+		
+		
 		
 	}
 	
