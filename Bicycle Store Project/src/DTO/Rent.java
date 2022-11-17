@@ -15,21 +15,22 @@ public class Rent{
     private String bicycle;
     private String status;
     
-   
-	public String getStatus() {
-		return status;
-	}
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
+ 
 
 	public Rent(String id, int deposit, String rentDate, String returnDate, String customer, String bicycle, String status) {
 		super();
 		this.id = id;
 		this.deposit = deposit;
+		this.rentDate = rentDate;
+		this.returnDate = returnDate;
+		this.customer = customer;
+		this.bicycle = bicycle;
+		this.status = status;
+	}
+	
+	public Rent(String id,String customer, String bicycle, String rentDate, String returnDate,  String status) {
+		super();
+		this.id = id;
 		this.rentDate = rentDate;
 		this.returnDate = returnDate;
 		this.customer = customer;
@@ -101,15 +102,21 @@ public class Rent{
 	}
 	
 	
-	public void setstatus(String status) {
-		this.status = status;
-	}
-	public String status() {
+	public String getStatus() {
 		return status;
 	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	
 	
 	public int rentPayment(int priceH, int howDay, int deposit) {
 		return priceH * howDay * 24 + deposit;
 	}
+
+
 }
 	

@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -121,7 +122,6 @@ public class RentManage {
 			String rentday = rent.getRentDate();
 			String returnday = rent.getRentDate();
 			String status = rent.getStatus();
-			
 			tableModel.addRow(new Object[] {
 					i,	hdid,	cccd,	bikeid, 	rentday,	returnday,	status
 			});
@@ -131,6 +131,7 @@ public class RentManage {
 	
 	private void showHoaDon(Rent rent) {
 		tableModel.getDataVector().removeAllElements();
+		
 		String hdid = rent.getId();
 		String cccd = rent.getCustomer();
 		String bikeid = rent.getBicycle();
@@ -311,6 +312,7 @@ public class RentManage {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		rentBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rentBtn.setBounds(695, 449, 152, 35);
 		frmThu.getContentPane().add(rentBtn);
@@ -365,6 +367,10 @@ public class RentManage {
 		datraBtn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		datraBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(cccd == "") {
+					getHoaDonListByStatus("Đã Trả");
+				}
+				getHoaDonByCccdAndStatus(cccd, "Đã trả");
 			}
 		});
 		datraBtn.setBounds(862, 91, 87, 35);
@@ -373,7 +379,10 @@ public class RentManage {
 		JButton dangthueBtn = new JButton("Đang Thuê");
 		dangthueBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(cccd == "") {
+					getHoaDonListByStatus("Đang Thuê");
+				}
+				getHoaDonByCccdAndStatus(cccd, "Đang Thuê");
 			}
 		});
 		dangthueBtn.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -383,6 +392,10 @@ public class RentManage {
 		JButton dahuyBtn = new JButton("Đã Hủy");
 		dahuyBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(cccd == "") {
+					getHoaDonListByStatus("Đã Hủy");
+				}
+				getHoaDonByCccdAndStatus(cccd, "Đã Hủy");
 			}
 		});
 		dahuyBtn.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -392,8 +405,14 @@ public class RentManage {
 		JButton btnSearchByHdid = new JButton("");
 		btnSearchByHdid.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				getHoaDonListById(hdidTxt.getText());
+				if(hdidTxt.getText()=="") {
+					allHoaDonList();
+				}
+				else if(quanly.checkHoaDon(hdidTxt.getText()) && hdidTxt.getText()=="") {
+					getHoaDonListById(hdidTxt.getText());
+				}
+				else
+					JOptionPane.showMessageDialog(btnSearchByHdid, "Không tồn tại mã hóa đơn");
 			}
 		});
 		btnSearchByHdid.setBounds(249, 128, 40, 35);
@@ -407,7 +426,8 @@ public class RentManage {
 		JButton btnSearchByCccd = new JButton("");
 		btnSearchByCccd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				cccd = cccdTxt.getText();
+				getHoaDonListByCccd(cccd);
 			}
 		});
 		btnSearchByCccd.setBounds(706, 89, 40, 36);

@@ -9,6 +9,10 @@ public class QuanLyBLL {
 	
 	QuanLyDAL quanlyDal = new QuanLyDAL();
 	
+	public Boolean checkHoaDon(String hdid) {
+		return quanlyDal.checkHoaDon(hdid);
+	}
+	
 	public Vector<Rent> allHoaDonList(){
 		return quanlyDal.getAllHoaDonlist();
 	}
