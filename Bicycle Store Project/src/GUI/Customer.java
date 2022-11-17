@@ -4,11 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import src.BLL.CustomerBLL;
+import src.DTO.Customer;
 
 import java.awt.Font;
 import javax.swing.JTextArea;
@@ -16,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.ActionEvent;
 
 public class Customer {
@@ -27,6 +32,9 @@ public class Customer {
 	private JTable tableCus;
 	private JTextField tfCusSeach;
 	private DefaultTableModel modelCus = new DefaultTableModel();
+	private JButton btnCusAdd, btnCusRemove, btnCusReset, btnCusEdit;
+	
+	CustomerBLL cusBLL = new CustomerBLL();
 
 	/**
 	 * Launch the application.
@@ -49,6 +57,67 @@ public class Customer {
 	 */
 	public Customer() {
 		initialize();
+		
+		eventCustomer();
+	}
+
+	private void eventCustomer() {
+		//Them khach hang moi 
+		// TODO Auto-generated method stub
+		btnCusAdd.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(tfCusID.getText().trim().isEmpty() || tfCusName.getText().trim().equals("") || tfCusPhone.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(frame,"Vui lòng điền đầy đủ thông tin khách hàng");
+				}else {
+				    //kiem tra va dien thong tin khach hang neu khach hang da ton tai 
+					src.DTO.Customer info = new src.DTO.Customer();
+					info.setCccd(tfCusID.getText());
+					info.setName(tfCusName.getText());
+					info.setPhone(tfCusPhone.getText());
+					
+					String result = cusBLL.addNewCustomer(info);
+					System.out.println(result);
+					
+					JOptionPane.showMessageDialog(frame, result);	
+				}
+				
+			}
+		});
+		
+		//Sua thong tin khach hang
+		btnCusEdit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		//Xoa thong tin khach hang
+		btnCusRemove.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		//Click table 
+		tableCus.addMouseListener(new MouseAdapter() {
+			int i = tableCus.getSelectedRow();
+			
+		});
+		//Reset thong tin khach hang 
+		btnCusReset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 	/**
@@ -120,19 +189,19 @@ public class Customer {
 		
 		
 		
-		JButton btnCusAdd = new JButton("Thêm");
+		btnCusAdd = new JButton("Thêm");
 		btnCusAdd.setBounds(70, 267, 89, 30);
 		frame.getContentPane().add(btnCusAdd);
 		
-		JButton btnCusEdit = new JButton("Sửa ");
+		btnCusEdit = new JButton("Sửa ");
 		btnCusEdit.setBounds(172, 267, 89, 30);
 		frame.getContentPane().add(btnCusEdit);
 		
-		JButton btnCusRemove = new JButton("Xóa");
+		btnCusRemove = new JButton("Xóa");
 		btnCusRemove.setBounds(70, 310, 89, 30);
 		frame.getContentPane().add(btnCusRemove);
 		
-		JButton btnCusReset = new JButton("Reset");
+		btnCusReset = new JButton("Reset");
 		btnCusReset.setBounds(172, 310, 89, 30);
 		frame.getContentPane().add(btnCusReset);
 		

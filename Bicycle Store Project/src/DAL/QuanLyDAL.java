@@ -26,7 +26,7 @@ public class QuanLyDAL {
 						rt.setId(rs.getString("hdid"));
 						rt.setCustomer(rs.getString("cccd"));
 						rt.setBicycle(rs.getString("bikeid"));
-						rt.setRentDate(rs.getString("date"));
+						rt.setRentDate(rs.getString("rentDate"));
 						rt.setReturnDate(rs.getString("returndate"));
 						rt.setstatus(rs.getString("note"));
 						

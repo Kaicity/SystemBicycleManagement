@@ -17,18 +17,17 @@ public class DetailRentBikeDAL {
 	public Boolean orderBike(Rent rentbike) {
 		Boolean result = false;
 		if(DB.openConection()) {
-			String query = "INSERT INTO hoadon VALUES(?,?,?,?,?,?,?)";
+			String query = "INSERT INTO hoadon VALUES(?,?,?,?,?,?)";
 			PreparedStatement pr;
 			
 			try {
 				pr = DB.con.prepareStatement(query);
 				pr.setString(1, rentbike.getId());
-				pr.setInt(2, rentbike.getDeposit());
-				pr.setString(3, rentbike.getCustomer());
-				pr.setString(4, rentbike.getBicycle());
-				pr.setString(5, rentbike.getRentDate());
-				pr.setString(6, rentbike.getReturnDate());
-				pr.setString(7, "Đã thuê");
+				pr.setString(2, rentbike.getCustomer());
+				pr.setString(3, rentbike.getBicycle());
+				pr.setString(4, rentbike.getRentDate());
+				pr.setString(5, rentbike.getReturnDate());
+				pr.setString(6, "Đã thuê");
 				
 				if(pr.executeUpdate() >= 0) {
 					result = true;
@@ -42,6 +41,29 @@ public class DetailRentBikeDAL {
 		}
 		return result;
 	}
+	
+	public Boolean updateStatusBike(String bikeid) {
+		Boolean result = false;
+		if(DB.openConection()) {
+			String query = "UPDATE xedap SET status ='Đã thuê' WHERE bikeid =?";
+			try {
+				PreparedStatement pr = DB.con.prepareStatement(query);
+				pr.setString(1, bikeid);
+				
+				if(pr.executeUpdate() >= 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally {
+				DB.closeConection();
+			}
+		}
+		return result;
+	}
+	
 	
 	//Kiem tra hoa don co ton tai trong cua hang hay chua 
 	public Boolean checkHdonId(String  id) {
