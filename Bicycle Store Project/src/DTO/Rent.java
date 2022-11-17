@@ -16,6 +16,16 @@ public class Rent{
     private String status;
     
    
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	public Rent(String id, int deposit, String rentDate, String returnDate, String customer, String bicycle, String status) {
 		super();
 		this.id = id;
