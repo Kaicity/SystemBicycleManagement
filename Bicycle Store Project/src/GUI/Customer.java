@@ -12,8 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import src.BLL.CustomerBLL;
-import src.DTO.Customer;
-
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
