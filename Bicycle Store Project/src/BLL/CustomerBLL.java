@@ -1,10 +1,15 @@
 package src.BLL;
+import java.util.Vector;
+
 import src.DAL.CustomerDAL;
 import src.DTO.Customer;
 
 public class CustomerBLL {
 	CustomerDAL cusDAL = new CustomerDAL();
 	
+	public Vector<Customer> getCustomerlist(){
+		return cusDAL.getCustomerList();
+	}
 	public Customer getInformation(String cccd) {
 		return cusDAL.SeachCustomer(cccd);
 	}

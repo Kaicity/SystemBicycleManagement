@@ -21,6 +21,8 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class Customer {
@@ -35,6 +37,8 @@ public class Customer {
 	private JButton btnCusAdd, btnCusRemove, btnCusReset, btnCusEdit;
 	
 	CustomerBLL cusBLL = new CustomerBLL();
+	
+	int count = 1;
 
 	/**
 	 * Launch the application.
@@ -62,6 +66,21 @@ public class Customer {
 	}
 
 	private void eventCustomer() {
+		
+		
+		Vector<src.DTO.Customer> arr = cusBLL.getCustomerlist();
+		for(int i = 0;i < arr.size(); i++) {
+			src.DTO.Customer cus = arr.get(i);
+			String cccd = cus.getCccd();
+			String name = cus.getName();
+			String phone = cus.getPhone();
+			
+			modelCus.addRow(new Object[] {
+					count++, cccd, name, phone
+			});
+		}
+		
+		
 		//Them khach hang moi 
 		// TODO Auto-generated method stub
 		btnCusAdd.addActionListener(new ActionListener() {
@@ -70,7 +89,11 @@ public class Customer {
 			public void actionPerformed(ActionEvent e) {
 				if(tfCusID.getText().trim().isEmpty() || tfCusName.getText().trim().equals("") || tfCusPhone.getText().trim().equals("")) {
 					JOptionPane.showMessageDialog(frame,"Vui lòng điền đầy đủ thông tin khách hàng");
-				}else {
+				}
+				else if(tfCusID.getText().length() > 20) {
+					JOptionPane.showMessageDialog(frame, "CCCD/CMND không quá 20 kí tự");
+				}
+				else {
 				    //kiem tra va dien thong tin khach hang neu khach hang da ton tai 
 					src.DTO.Customer info = new src.DTO.Customer();
 					info.setCccd(tfCusID.getText());
@@ -81,6 +104,13 @@ public class Customer {
 					System.out.println(result);
 					
 					JOptionPane.showMessageDialog(frame, result);	
+					
+					if(result.equals("success")) {
+						modelCus.addRow(new Object[] {
+								
+								count++ + "*" , info.getCccd(), info.getName(), info.getPhone()
+						});
+					}
 				}
 				
 			}
@@ -91,7 +121,32 @@ public class Customer {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				int i = tableCus.getSelectedRow();
+				if(i >= 0) {
+					src.DTO.Customer cus = new src.DTO.Customer();
+					cus.setCccd(tfCusID.getText());
+					cus.setName(tfCusName.getText());
+					cus.setPhone(tfCusPhone.getText());
+					
+					
+					
+					int ques = JOptionPane.showConfirmDialog(frame, "Xác nhận sửa thông tin khách hàng");
+					if(ques == JOptionPane.YES_OPTION) {
+						String result = cusBLL.editCustomer(cus);
+						
+						JOptionPane.showMessageDialog(frame, result);
+						if(result.equals("success")) {
+							modelCus.setValueAt(cus.getCccd(), i, 1);
+							modelCus.setValueAt(cus.getName(), i, 2);
+							modelCus.setValueAt(cus.getPhone(), i, 3);
+							
+						}
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(frame, "Vui lòng chọn dòng dữ liệu để cập nhật không thì khỏi làm");
+					
+				}
 				
 			}
 		});
@@ -100,22 +155,48 @@ public class Customer {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				int i = tableCus.getSelectedRow();
+				if(i >= 0) {
+					int ques = JOptionPane.showConfirmDialog(frame, "Xác nhận xóa thông tin khách hàng");
+					if(ques == JOptionPane.YES_OPTION) {
+						String result = cusBLL.removeCustomer(modelCus.getValueAt(i, 1).toString());
+						System.out.println(modelCus.getValueAt(i, 1).toString());
+						JOptionPane.showMessageDialog(frame, result);
+						if(result.equals("success")) {
+							modelCus.removeRow(i);
+						}
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(frame, "Vui lòng chọn dòng dữ liệu để xóa không thì khỏi xóa");
+				}
 				
 			}
 		});
 		//Click table 
 		tableCus.addMouseListener(new MouseAdapter() {
-			int i = tableCus.getSelectedRow();
-			
+			public void mouseClicked(MouseEvent e) {
+				int i = tableCus.getSelectedRow();
+				if(i >= 0) {
+					tfCusID.setEditable(false);
+					
+					tfCusID.setText(modelCus.getValueAt(i, 1).toString());
+					tfCusName.setText(modelCus.getValueAt(i, 2).toString());
+					tfCusPhone.setText(modelCus.getValueAt(i, 3).toString());
+					
+				}
+			}
 		});
 		//Reset thong tin khach hang 
 		btnCusReset.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+		    tfCusID.setEditable(true);
+		    
+			tfCusID.setText("");
+			tfCusName.setText("");
+			tfCusPhone.setText("");
 			}
 		});
 	}
@@ -128,6 +209,7 @@ public class Customer {
 		frame.setBounds(100, 100, 853, 432);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(frame);
 		
 		JLabel lblNewLabel = new JLabel("CCCD/CMND");
 		lblNewLabel.setBounds(67, 75, 92, 14);

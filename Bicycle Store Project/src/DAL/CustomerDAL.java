@@ -96,7 +96,7 @@ public class CustomerDAL {
 	public boolean editCustomer(Customer cus) {
 		boolean result = false;
 		if(DB.openConection()) {
-			String sql = "UPDATE khachhang name =?, phone =? WHERE cccd =?";
+			String sql = "UPDATE khachhang SET name =?, phone =? WHERE cccd =?";
 			try {
 				PreparedStatement pr = DB.con.prepareStatement(sql);
 				pr.setString(1, cus.getName());
