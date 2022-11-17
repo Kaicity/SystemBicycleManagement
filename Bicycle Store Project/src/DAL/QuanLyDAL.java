@@ -26,6 +26,7 @@ public class QuanLyDAL {
 						rt.setId(rs.getString("hdid"));
 						rt.setCustomer(rs.getString("cccd"));
 						rt.setBicycle(rs.getString("bikeid"));
+						rt.setRentDate(rs.getString("rentdate"));
 						rt.setRentDate(rs.getString("rentDate"));
 						rt.setReturnDate(rs.getString("returndate"));
 						rt.setStatus(rs.getString("note"));
@@ -60,7 +61,7 @@ public class QuanLyDAL {
 						rt.setId(rs.getString("hdid"));
 						rt.setCustomer(rs.getString("cccd"));
 						rt.setBicycle(rs.getString("bikeid"));
-						rt.setRentDate(rs.getString("date"));
+						rt.setRentDate(rs.getString("rentdate"));
 						rt.setReturnDate(rs.getString("returndate"));
 						rt.setStatus(rs.getString("note"));
 						
@@ -82,7 +83,7 @@ public class QuanLyDAL {
 			boolean kq = false;
 			Rent rt = new Rent();
 			if(DB.openConection()) {
-				String query = "SELECT * FROM `hoadon` WHERE `hdid` = ?";
+				String query = "SELECT * FROM `hoadon` WHERE `hdid` LIKE ?";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(query);
 					pr.setString(1, id);
@@ -91,7 +92,7 @@ public class QuanLyDAL {
 						rt.setId(rs.getString("hdid"));
 						rt.setCustomer(rs.getString("cccd"));
 						rt.setBicycle(rs.getString("bikeid"));
-						rt.setRentDate(rs.getString("date"));
+						rt.setRentDate(rs.getString("rentdate"));
 						rt.setReturnDate(rs.getString("returndate"));
 						rt.setStatus(rs.getString("note"));
 						
@@ -111,7 +112,7 @@ public class QuanLyDAL {
 		public Rent getHoaDonListById(String id) {
 			Rent rt = new Rent();
 			if(DB.openConection()) {
-				String query = "SELECT * FROM `hoadon` WHERE `hdid` = ?";
+				String query = "SELECT * FROM `hoadon` WHERE `hdid` LIKE ?";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(query);
 					pr.setString(1, id);
@@ -120,7 +121,7 @@ public class QuanLyDAL {
 						rt.setId(rs.getString("hdid"));
 						rt.setCustomer(rs.getString("cccd"));
 						rt.setBicycle(rs.getString("bikeid"));
-						rt.setRentDate(rs.getString("date"));
+						rt.setRentDate(rs.getString("rentdate"));
 						rt.setReturnDate(rs.getString("returndate"));
 						rt.setStatus(rs.getString("note"));
 					}
@@ -138,7 +139,7 @@ public class QuanLyDAL {
 		public boolean editHoaDon(Rent hoadon) {
 			boolean result = false;
 			if(DB.openConection()) {
-				String sql = " UPDATE `hoadon` SET `returndate` = ?, `note` = ? WHERE `hoadon`.`hdid` = ? ";
+				String sql = " UPDATE `hoadon` SET `returndate` = ?, `note` LIKE ? WHERE `hoadon`.`hdid` LIKE ? ";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(sql);
 					pr.setString(1, hoadon.getReturnDate());
@@ -173,7 +174,7 @@ public class QuanLyDAL {
 						rt.setId(rs.getString("hdid"));
 						rt.setCustomer(rs.getString("cccd"));
 						rt.setBicycle(rs.getString("bikeid"));
-						rt.setRentDate(rs.getString("date"));
+						rt.setRentDate(rs.getString("rentdate"));
 						rt.setReturnDate(rs.getString("returndate"));
 						rt.setStatus(rs.getString("note"));
 						
@@ -203,7 +204,7 @@ public class QuanLyDAL {
 						rt.setId(rs.getString("hdid"));
 						rt.setCustomer(rs.getString("cccd"));
 						rt.setBicycle(rs.getString("bikeid"));
-						rt.setRentDate(rs.getString("date"));
+						rt.setRentDate(rs.getString("rentdate"));
 						rt.setReturnDate(rs.getString("returndate"));
 						rt.setStatus(rs.getString("note"));
 						
@@ -223,7 +224,7 @@ public class QuanLyDAL {
 		public boolean huyHoaDon(Rent hoadon) {
 			boolean result = false;
 			if(DB.openConection()) {
-				String sql = " UPDATE `hoadon` SET `returndate` = ?, `note` = ? WHERE `hoadon`.`hdid` = ? ";
+				String sql = " UPDATE `hoadon` SET `returndate` = ?, `note` LIKE ? WHERE `hoadon`.`hdid` LIKE ? ";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(sql);
 					pr.setString(1, hoadon.getReturnDate());
@@ -246,7 +247,7 @@ public class QuanLyDAL {
 		public boolean hoanthanhHoaDon(Rent hoadon) {
 			boolean result = false;
 			if(DB.openConection()) {
-				String sql = " UPDATE `hoadon` SET `returndate` = ?, `note` = ? WHERE `hoadon`.`hdid` = ? ";
+				String sql = " UPDATE `hoadon` SET `returndate` = ?, `note` LIKE ? WHERE `hoadon`.`hdid` LIKE ? ";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(sql);
 					pr.setString(1, hoadon.getReturnDate());
