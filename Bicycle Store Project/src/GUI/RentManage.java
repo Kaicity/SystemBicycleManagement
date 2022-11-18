@@ -51,8 +51,7 @@ public class RentManage {
 	private JTextField cccdTxt;
 	private JTable table;
 	private JButton saveBtn, exitBtn;
-	private JDateChooser ngaythueTxt, ngaytraTxt;
-	
+	private JButton traxeBtn;
 	QuanLyBLL quanly = new QuanLyBLL();
 
 	
@@ -65,11 +64,14 @@ public class RentManage {
 	       return false;
 	    }
 	};
+	
 	private JTextField hdidTxt;
 	private JTextField bikeidTxt;
 	private JTextField searchTxt;
 	
 	private String cccd;
+	private JTextField rentDate;
+	private JTextField returnDate;
 	
 
 	//show hoa don
@@ -159,33 +161,58 @@ public class RentManage {
 	}
 
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Rent window = new Rent();
-//					window.frmThu.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//					
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public RentManage() {
 		initialize();
 		
 		eventload();
+		
+		eventReturnBike();
 	}
 	
 	
+
+	private void eventReturnBike() {
+		// TODO Auto-generated method stub
+		
+		//Tra xe cho khach hang
+		traxeBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int i = table.getSelectedRow();
+				
+				if(i >= 0) {
+//					
+//					Rent return = new Rent();
+//					
+//					
+//					int ques = JOptionPane.showConfirmDialog(frame, "Xác nhận sửa thông tin xe đạp");
+//					if(ques == JOptionPane.YES_OPTION) {
+//						String result = bikeBLL.editbikeBLL(bike);
+//						
+//						JOptionPane.showMessageDialog(frame, result);
+//						if(result.equals("success")) {
+//							modelBicycle.setValueAt(bike.getId(), i, 1);
+//							modelBicycle.setValueAt(bike.getName(), i, 2);
+//							modelBicycle.setValueAt(bike.getType(), i, 3);
+//							modelBicycle.setValueAt(bike.getStoreId(), i, 4);
+//							modelBicycle.setValueAt(bike.getPricePerH(), i, 5);
+//							modelBicycle.setValueAt(bike.getStatus(), i, 6);
+//							
+//							
+//						}
+//					}
+				}
+				else {
+					JOptionPane.showMessageDialog(frmThu, "Vui lòng chọn thông tin hóa đơn thuê để trả");
+					
+				}
+				
+			}
+		});
+		
+	}
 
 	private void eventload() {
 		// TODO Auto-generated method stub
@@ -237,10 +264,7 @@ public class RentManage {
 		
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	@SuppressWarnings("deprecation")
+	
 	private void initialize() {
 		frmThu = new JFrame();
 		frmThu.setTitle("THUÊ");
@@ -248,12 +272,13 @@ public class RentManage {
 		frmThu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThu.getContentPane().setLayout(null);
 		frmThu.setLocationRelativeTo(frmThu);
+	
 		
 		
 		JLabel lblNewLabel = new JLabel("Quản Lý Thuê Xe");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 0, 1044, 62);
+		lblNewLabel.setBounds(10, 0, 1044, 63);
 		frmThu.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("CCCD/CMND");
@@ -300,19 +325,9 @@ public class RentManage {
 					hdidTxt.setText(tableModel.getValueAt(i, 1).toString());
 					cccdTxt.setText(tableModel.getValueAt(i, 2).toString());
 					bikeidTxt.setText(tableModel.getValueAt(i, 3).toString());
-					
-					
-					SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
-					
-					String tempDate1 = tableModel.getValueAt(i, 4).toString();
-					String tempDate2 = tableModel.getValueAt(i, 5).toString();
-				
-					Date date1 = new Date(Date.parse(tempDate1));
-				
-					
-					
-					
-					
+					rentDate.setText(tableModel.getValueAt(i, 4).toString());
+					returnDate.setText(tableModel.getValueAt(i, 5).toString());
+			
 					
 					/*
 					 * tfBicycleName.setText(modelBicycle.getValueAt(i, 3).toString());
@@ -325,8 +340,7 @@ public class RentManage {
 			}
 		});
 
-		
-		
+	
 		
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -391,17 +405,9 @@ public class RentManage {
 		lblNewLabel_1_2_1_1_1.setBounds(10, 348, 108, 35);
 		frmThu.getContentPane().add(lblNewLabel_1_2_1_1_1);
 		
-		ngaythueTxt = new JDateChooser();
-		ngaythueTxt.setBounds(128, 292, 161, 35);
-		frmThu.getContentPane().add(ngaythueTxt);
-		
-		ngaytraTxt = new JDateChooser();
-		ngaytraTxt.setBounds(128, 348, 161, 35);
-		frmThu.getContentPane().add(ngaytraTxt);
-		
 		JComboBox statusCb = new JComboBox(new Object[]{});
 		statusCb.setFont(new Font("Tahoma", Font.BOLD, 14));
-		statusCb.setModel(new DefaultComboBoxModel(new String[] {"Đang Thuê", "Chưa Thuê", "Đặt Trước"}));
+		statusCb.setModel(new DefaultComboBoxModel(new String[] {"Đã thuê", "Chưa Thuê"}));
 		statusCb.setBounds(128, 398, 161, 35);
 		frmThu.getContentPane().add(statusCb);
 		
@@ -503,17 +509,26 @@ public class RentManage {
 		lblNewLabel_3_1.setBounds(756, 74, 298, 14);
 		frmThu.getContentPane().add(lblNewLabel_3_1);
 		
-		JButton traxeBtn = new JButton("Xác Nhận Trả Xe");
+		traxeBtn = new JButton("Xác Nhận Trả Xe");
 		traxeBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
 		traxeBtn.setBounds(299, 449, 161, 35);
 		frmThu.getContentPane().add(traxeBtn);
 		
+		rentDate = new JTextField();
+		rentDate.setEditable(false);
+		rentDate.setColumns(10);
+		rentDate.setBounds(128, 292, 161, 35);
+		frmThu.getContentPane().add(rentDate);
 		
+		returnDate = new JTextField();
+		returnDate.setEditable(false);
+		returnDate.setColumns(10);
+		returnDate.setBounds(128, 348, 161, 35);
+		frmThu.getContentPane().add(returnDate);
 		
+
 		
 	}
-	
-
 };
 
 

@@ -247,7 +247,7 @@ public class QuanLyDAL {
 		public boolean hoanthanhHoaDon(Rent hoadon) {
 			boolean result = false;
 			if(DB.openConection()) {
-				String sql = " UPDATE `hoadon` SET `returndate` = ?, `note` LIKE ? WHERE `hoadon`.`hdid` LIKE ? ";
+				String sql = " UPDATE `hoadon` SET `note` = `Đã trả`, `xedap` = `Chưa thuê` , `note` LIKE ? WHERE `hoadon`.`hdid` LIKE ? ";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(sql);
 					pr.setString(1, hoadon.getReturnDate());

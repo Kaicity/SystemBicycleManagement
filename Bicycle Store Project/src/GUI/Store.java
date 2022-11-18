@@ -271,6 +271,7 @@ public class Store {
 		frame.setBounds(100, 100, 980, 490);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(frame);
 		
 		JLabel lblNewLabel = new JLabel("Cửa hàng ID");
 		lblNewLabel.setBounds(82, 107, 80, 17);
