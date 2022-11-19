@@ -247,7 +247,7 @@ public class QuanLyDAL {
 		public boolean hoanthanhHoaDon(Rent hoadon) {
 			boolean result = false;
 			if(DB.openConection()) {
-				String sql = " UPDATE `hoadon` SET `note` = `Đã trả`, `xedap` = `Chưa thuê` , `note` LIKE ? WHERE `hoadon`.`hdid` LIKE ? ";
+				String sql =  "UPDATE `hoadon` SET `returndate` = ? , `note` = ? WHERE `hoadon`.`hdid` LIKE ?;";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(sql);
 					pr.setString(1, hoadon.getReturnDate());
@@ -265,6 +265,59 @@ public class QuanLyDAL {
 			}
 			return result;
 		}
+		
+		//lay bikeID tu hoa don
+		public Bicycle SeachBicycleByHdid(String hdid) {
+			Boolean result = false;
+			Bicycle bike = new Bicycle();
+			if(DB.openConection()) {
+				String query = "SELECT xedap.bikeid, xedap.name, xedap.type, xedap.storeid, xedap.priceh, xedap.status FROM xedap, hoadon WHERE hoadon.bikeid = xedap.bikeid AND hoadon.hdid LIKE ? ;";
+				
+				try {
+					PreparedStatement pr = DB.con.prepareStatement(query);
+					pr.setString(1, hdid);
+					ResultSet rs = pr.executeQuery();
+					while(rs.next()) {
+						bike.setId(rs.getString("bikeid"));
+						bike.setName(rs.getString("name"));
+						bike.setType(rs.getString("type"));
+						bike.setStoreId(rs.getString("storeid"));
+						bike.setPricePerH(rs.getInt("priceh"));
+						bike.setStatus(rs.getString("status"));
+					}
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return bike;
+		}
+		
+		//set lai tinh trang xe dap
+		public boolean editBicycleStatus(Bicycle bike, String status) {
+			boolean result = false;
+			if(DB.openConection()) {
+				String sql = "UPDATE xedap SET status =? WHERE bikeid = ? ";
+				try {
+					PreparedStatement pr = DB.con.prepareStatement(sql);
+					pr.setString(1, status);
+					//where
+					pr.setString(2, bike.getId());
+					if(pr.executeUpdate() >= 0) {
+						result = true;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					DB.closeConection();
+				}
+			}
+			return result;
+		}
+		
+		// tra xe
+		
+		
 		
 		
 		
