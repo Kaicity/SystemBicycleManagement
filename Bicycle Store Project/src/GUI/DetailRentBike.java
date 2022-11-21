@@ -91,7 +91,7 @@ public class DetailRentBike {
 		frmHoadon.setVisible(false);
 		frmHoadon.setTitle("HoaDon");
 		frmHoadon.setBounds(100, 100, 601, 453);
-		frmHoadon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmHoadon.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frmHoadon.getContentPane().setLayout(null);
 		frmHoadon.setLocationRelativeTo(frmHoadon);
 		
@@ -183,6 +183,9 @@ public class DetailRentBike {
 			    	
 			    	Transaction history = new Transaction();
 			    	history.frmlichsu.setVisible(true);
+			    	
+			    	Ending open = new Ending();
+			    	open.frame.setVisible(true);
 			    }
 			
 			}

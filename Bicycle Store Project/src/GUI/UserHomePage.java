@@ -13,37 +13,18 @@ import java.awt.event.ActionListener;
 import java.awt.font.OpenType;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
 
 public class UserHomePage {
 
 	public JFrame frame;
 	JButton btnMenuRent, btnMenuLogout;
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					HomePage window = new HomePage();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public UserHomePage() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBackground(Color.DARK_GRAY);
@@ -73,7 +54,8 @@ public class UserHomePage {
 		panel.add(lblNewLabel_1);
 		
 		btnMenuRent = new JButton("Thuê xe");
-		btnMenuRent.setBackground(new Color(255, 235, 205));
+		btnMenuRent.setIcon(new ImageIcon(UserHomePage.class.getResource("/img/Bike-icon.png")));
+		btnMenuRent.setBackground(new Color(245, 222, 179));
 		btnMenuRent.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnMenuRent.setBounds(306, 11, 510, 148);
 		frame.getContentPane().add(btnMenuRent);
@@ -91,8 +73,9 @@ public class UserHomePage {
 		});
 		
 		btnMenuLogout = new JButton("Quản lý chung");
+		btnMenuLogout.setIcon(new ImageIcon(UserHomePage.class.getResource("/img/system-settings-icon.png")));
 		btnMenuLogout.setForeground(new Color(255, 255, 255));
-		btnMenuLogout.setBackground(new Color(65, 105, 225));
+		btnMenuLogout.setBackground(new Color(100, 149, 237));
 		btnMenuLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -112,10 +95,11 @@ public class UserHomePage {
 		btnMenuLogout.setBounds(565, 170, 251, 120);
 		frame.getContentPane().add(btnMenuLogout);
 		
-		JButton btnLchSThu = new JButton("Lịch sử giao dịch");
+		JButton btnLchSThu = new JButton("Giao dịch");
+		btnLchSThu.setIcon(new ImageIcon(UserHomePage.class.getResource("/img/glossy-3d-blue-i-icon.png")));
 		btnLchSThu.setForeground(new Color(255, 255, 255));
 		btnLchSThu.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnLchSThu.setBackground(new Color(65, 105, 225));
+		btnLchSThu.setBackground(new Color(100, 149, 237));
 		btnLchSThu.setBounds(306, 170, 249, 120);
 		frame.getContentPane().add(btnLchSThu);
 		btnLchSThu.addActionListener(new ActionListener() {
@@ -134,7 +118,7 @@ public class UserHomePage {
 		JButton btnThoatUserHome = new JButton("Thoát");
 		btnThoatUserHome.setBounds(306, 301, 510, 62);
 		frame.getContentPane().add(btnThoatUserHome);
-		btnThoatUserHome.setBackground(Color.GRAY);
+		btnThoatUserHome.setBackground(new Color(105, 105, 105));
 		btnThoatUserHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);

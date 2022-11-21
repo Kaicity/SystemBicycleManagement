@@ -19,25 +19,7 @@ public class HomePage {
 	JButton btnMenuRent, btnMenuCus, btnMenuBicycle, btnMenuStore, btnMenuLogout;
 	public JLabel textAdmin;
 	private JLabel lblNewLabel_2;
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					HomePage window = new HomePage();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the application.
-	 */
 	public HomePage() {
 		initialize();
 	}

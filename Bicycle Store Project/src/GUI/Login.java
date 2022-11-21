@@ -26,34 +26,14 @@ public class Login {
 	private ButtonGroup rdMenuLogin;
 	
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Login window = new Login();
-//					window.frmLogin.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public Login() {
 		initialize();
 		
 		
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
 	private void initialize() {
 		frmLogin = new JFrame();
 		frmLogin.setTitle("Login");
