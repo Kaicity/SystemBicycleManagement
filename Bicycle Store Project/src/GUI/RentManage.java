@@ -166,7 +166,6 @@ public class RentManage {
 			public void actionPerformed(ActionEvent e) {
 				int i = table.getSelectedRow();
 				if(i >= 0) {
-					if(tableModel.getValueAt(i, 6).toString().equals("Đã thuê")) {
 						System.out.println(tableModel.getValueAt(i, 6).toString());
 						int ques = JOptionPane.showConfirmDialog(frmThu, "Xác nhận trả xe");
 						if(ques == JOptionPane.YES_OPTION) {
@@ -189,10 +188,9 @@ public class RentManage {
 								JOptionPane.showMessageDialog(frmThu, "Trả xe không thành công");
 					
 						}
-					}
-					else
-						JOptionPane.showMessageDialog(frmThu, "Không thể hoàn thành hóa đơn đã hoàn thành / hủy");
-				
+						else {
+							JOptionPane.showMessageDialog(frmThu, "Không thể hoàn thành hóa đơn đã hoàn thành / hủy");
+						}
 				}
 				else 
 					JOptionPane.showMessageDialog(frmThu, "Vui lòng chọn thông tin hóa đơn thuê để trả");
