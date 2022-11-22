@@ -166,7 +166,8 @@ public class RentManage {
 			public void actionPerformed(ActionEvent e) {
 				int i = table.getSelectedRow();
 				if(i >= 0) {
-					if(tableModel.getValueAt(i, 6).toString() == "Đang Thuê") {
+					if(tableModel.getValueAt(i, 6).toString().equals("Đã thuê")) {
+						System.out.println(tableModel.getValueAt(i, 6).toString());
 						int ques = JOptionPane.showConfirmDialog(frmThu, "Xác nhận trả xe");
 						if(ques == JOptionPane.YES_OPTION) {
 							
@@ -421,16 +422,16 @@ public class RentManage {
 		datraBtn.setBounds(862, 91, 87, 35);
 		frmThu.getContentPane().add(datraBtn);
 
-		JButton dangthueBtn = new JButton("Đang Thuê");
+		JButton dangthueBtn = new JButton("Đã Thuê");
 		dangthueBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tableModel.getDataVector().removeAllElements();
 				if(cccd != "") {
-					getHoaDonByCccdAndStatus(cccd, "Đang Thuê");
+					getHoaDonByCccdAndStatus(cccd, "Đã thuê");
 				}
 				else
-					getHoaDonListByStatus("Đang Thuê");
+					getHoaDonListByStatus("Đã Thuê");
 			}
 		});
 		dangthueBtn.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -487,8 +488,8 @@ public class RentManage {
 			public void actionPerformed(ActionEvent e) {
 				int i = table.getSelectedRow();
 				if(i >= 0) {
-					if(tableModel.getValueAt(i, 6).toString() == "Đang Thuê") {
-						int ques = JOptionPane.showConfirmDialog(frmThu, "Xác nhận trả xe");
+					
+						int ques = JOptionPane.showConfirmDialog(frmThu, "Xác nhận hủy");
 						if(ques == JOptionPane.YES_OPTION) {
 							
 							Rent rt = new Rent();
@@ -509,10 +510,10 @@ public class RentManage {
 								JOptionPane.showMessageDialog(frmThu, "Trả xe không thành công");
 					
 						}
-					}
-					else
-						JOptionPane.showMessageDialog(frmThu, "Không thể hoàn thành hóa đơn đã hoàn thành / hủy");
-				
+						else {
+							JOptionPane.showMessageDialog(frmThu ,"Không thể hoàn thành hóa đơn / Hủy");
+						}
+		
 				}
 				else 
 					JOptionPane.showMessageDialog(frmThu, "Vui lòng chọn thông tin hóa đơn thuê để trả");
