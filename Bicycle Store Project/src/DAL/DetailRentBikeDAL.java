@@ -27,7 +27,7 @@ public class DetailRentBikeDAL {
 				pr.setString(3, rentbike.getBicycle());
 				pr.setString(4, rentbike.getRentDate());
 				pr.setString(5, rentbike.getReturnDate());
-				pr.setString(6, "Đang thuê");
+				pr.setString(6, "Đã thuê");
 				
 				if(pr.executeUpdate() >= 0) {
 					result = true;
