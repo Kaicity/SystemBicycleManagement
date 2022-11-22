@@ -39,4 +39,8 @@ public class CustomerBLL {
 		return "failed";
 	}
 	
+	public Boolean checkCCCD(String cccd) {
+		return cusDAL.checkCccd(cccd);
+	}
+	
 }

@@ -194,7 +194,7 @@ public class QuanLyDAL {
 		public Vector<Rent> getHoaDonListByCccd(String id) {
 			Vector<Rent> list = new Vector<Rent>();
 			if(DB.openConection()) {
-				String query = "SELECT * FROM `hoadon` WHERE `cccd` = ?" ;
+				String query = "SELECT * FROM `hoadon` WHERE `cccd` LIKE ? " ;
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(query);
 					pr.setString(1, id);
@@ -266,7 +266,7 @@ public class QuanLyDAL {
 			return result;
 		}
 		
-		//lay bikeID tu hoa don
+		//lay bike tu hoa don
 		public Bicycle SeachBicycleByHdid(String hdid) {
 			Boolean result = false;
 			Bicycle bike = new Bicycle();
@@ -293,16 +293,16 @@ public class QuanLyDAL {
 			return bike;
 		}
 		
-		//set lai tinh trang xe dap
-		public boolean editBicycleStatus(Bicycle bike, String status) {
+		//set lai tinh trang xe dap = da tra
+		public boolean editBicycleStatus(String bike) {
 			boolean result = false;
 			if(DB.openConection()) {
 				String sql = "UPDATE xedap SET status =? WHERE bikeid = ? ";
 				try {
 					PreparedStatement pr = DB.con.prepareStatement(sql);
-					pr.setString(1, status);
+					pr.setString(1, "Chưa Thuê");
 					//where
-					pr.setString(2, bike.getId());
+					pr.setString(2, bike);
 					if(pr.executeUpdate() >= 0) {
 						result = true;
 					}

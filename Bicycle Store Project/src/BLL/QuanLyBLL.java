@@ -3,6 +3,7 @@ package src.BLL;
 import java.util.Vector;
 
 import src.DAL.QuanLyDAL;
+import src.DTO.Bicycle;
 import src.DTO.Rent;
 
 public class QuanLyBLL {
@@ -55,6 +56,15 @@ public class QuanLyBLL {
 		}
 		else
 			return "fail";
+	}
+	
+	public String returnBike(String bike) {
+		if(quanlyDal.editBicycleStatus(bike)) {
+			return "success";
+		}
+		else
+			return "fail";
+		
 	}
 	
 	
